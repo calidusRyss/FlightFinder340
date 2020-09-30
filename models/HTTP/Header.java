@@ -1,28 +1,28 @@
 package main.java.models.HTTP;
 
 /**
- * A class that represents a header used in HTTP requests
+ * A class that represents a header used in HTTP requests.
+ *
  * @author Teegan Krieger
+ * @LastUpdate 9/29/2020
  */
 public class Header {
-    
+
     private final String name;
     private final String value;
-    
-    public Header(String _name, String _value)
-    {
+
+    public Header(String _name, String _value) {
         this.name = _name;
         this.value = _value;
     }
-    
-    //=================  GETTERS ===============
 
+    //=================  GETTERS ===============
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getValue() {
-        return value;
+        return this.value;
     }
-    
+
 }

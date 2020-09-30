@@ -1,27 +1,27 @@
 package main.java.models.HTTP;
 
 /**
- * A class that represents a Query used in HTTP requests
+ * A class that represents a Query used in HTTP requests.
+ *
  * @author Teegan Krieger
+ * @LastUpdate 9/29/2020
  */
 public class Query {
-    
+
     private final String name;
     private final String value;
-    
-    public Query(String _name, String _value)
-    {
+
+    public Query(String _name, String _value) {
         this.name = _name;
         this.value = _value;
     }
-    
-    //=================  GETTERS ===============
 
+    //=================  GETTERS ===============
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getValue() {
-        return value;
+        return this.value;
     }
 }
