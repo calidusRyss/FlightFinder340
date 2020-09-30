@@ -8,9 +8,9 @@ import main.java.models.HTTP.Request;
  * @author Teegan Krieger
  * @LastUpdate 9/29/2020
  */
-public class InvalidRequestException extends RuntimeException {
+public class InvalidUrlException extends RuntimeException {
 
-    public InvalidRequestException(String _errorMessage, Request _request) {
+    public InvalidUrlException(String _errorMessage, Request _request) {
         super(_errorMessage);
     }
 }

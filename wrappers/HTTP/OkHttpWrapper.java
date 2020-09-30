@@ -2,7 +2,7 @@ package main.java.wrappers.HTTP;
 
 import java.io.IOException;
 import main.java.exceptions.HTTP.ConnectionFailedException;
-import main.java.exceptions.HTTP.InvalidRequestException;
+import main.java.exceptions.HTTP.InvalidUrlException;
 import main.java.models.HTTP.Header;
 import main.java.models.HTTP.Query;
 import okhttp3.HttpUrl;
@@ -30,16 +30,16 @@ public class OkHttpWrapper implements IHttpWrapper {
      *
      * @param _request The request to make.
      * @return A response object with a response code and body.
-     * @throws InvalidRequestException Thrown if the provided request is not valid.
+     * @throws InvalidUrlException Thrown if the provided request is not valid.
      */
     @Override
-    public main.java.models.HTTP.Response callRequest(main.java.models.HTTP.Request _request) throws InvalidRequestException, ConnectionFailedException {
+    public main.java.models.HTTP.Response callRequest(main.java.models.HTTP.Request _request) throws InvalidUrlException, ConnectionFailedException {
 
         Request okhttpRequest;
         try {
             okhttpRequest = buildRequest(_request);
         } catch (NullPointerException e) {
-            throw new InvalidRequestException("The request failed due to an invalid url!", _request);
+            throw new InvalidUrlException("The request failed due to an invalid url!", _request);
         }
 
         Response response;
