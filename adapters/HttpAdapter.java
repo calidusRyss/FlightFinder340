@@ -1,5 +1,7 @@
 package main.java.adapters;
 
+import main.java.models.HTTP.Request;
+import main.java.models.HTTP.Response;
 import main.java.wrappers.HTTP.IHttpWrapper;
 import main.java.wrappers.HTTP.OkHttpWrapper;
 
@@ -13,4 +15,14 @@ import main.java.wrappers.HTTP.OkHttpWrapper;
 public class HttpAdapter {
 
     public static final IHttpWrapper httpWrapper = new OkHttpWrapper();
+
+    /**
+     * Make an HTTP request using the currently selected wrapper.
+     * @param _request The request to make.
+     * @return A response object with a response code and body.
+     */
+    public static Response callRequest(Request _request)
+    {
+        return httpWrapper.callRequest(_request);
+    }
 }
