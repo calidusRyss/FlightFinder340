@@ -1,5 +1,7 @@
 package main.java.adapters;
 
+import main.java.exceptions.HTTP.ConnectionFailedException;
+import main.java.exceptions.HTTP.InvalidUrlException;
 import main.java.models.HTTP.Request;
 import main.java.models.HTTP.Response;
 import main.java.wrappers.HTTP.IHttpWrapper;
@@ -21,7 +23,7 @@ public class HttpAdapter {
      * @param _request The request to make.
      * @return A response object with a response code and body.
      */
-    public static Response callRequest(Request _request)
+    public static Response callRequest(Request _request) throws InvalidUrlException, ConnectionFailedException
     {
         return httpWrapper.callRequest(_request);
     }
