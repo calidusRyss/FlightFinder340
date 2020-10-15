@@ -1,8 +1,12 @@
+package main.java.FlightFinder340.controllers;
 
+
+import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import main.java.models.flightapi.structures.QuoteStruct;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -77,6 +81,22 @@ public class StandardSearchController {
         }
         
         flightResuts = results;
+    }
+    
+    private static property[] ConvertQouteToProperty(QuoteStruct qs)
+    {
+         property[] parr = new  property[7];
+        
+        parr[0] = new property("Origin",qs.origin);
+        parr[1] = new property("originDepartureTime",qs.originDepartureTime);
+        parr[2] = new property("originFlightCarrier",qs.originFlightCarrier);
+        parr[3] = new property("destination",qs.destination);
+        parr[4] = new property("inboundDepartureTime",qs.inboundDepartureTime);
+        parr[5] = new property("inboundFlightCarrier",qs.inboundFlightCarrier);
+        parr[6] = new property("price",qs.price);
+        
+        return parr;
+        
     }
 }
 

@@ -1,3 +1,5 @@
+package flightfinder3.main.java.FlightFinder340.models.flightapi.structures;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
