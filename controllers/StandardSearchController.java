@@ -1,8 +1,10 @@
-package main.java.FlightFinder340.controllers;
+package flightfinder3.main.java.FlightFinder340.controllers;
 
 
 import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
+import flightfinder3.main.java.FlightPlannerTests.QouteStructBulider;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,10 +22,9 @@ import main.java.models.flightapi.structures.QuoteStruct;
  */
 public class StandardSearchController {
     
-    
-    //public static int fightProps = 1;
-    public static int resultsPerpage =4;
+        
     private static int currentfilghtIndex = 0; 
+    private static boolean inilized = false;
     
     public static property[][] flightResuts;
     
@@ -42,7 +43,7 @@ public class StandardSearchController {
                 for ( property p : props )
                 {
                     
-                    if (s.equals(p.name ))
+                    if (s.toLowerCase().equals(p.name.toLowerCase() ))
                     {
                         j.setText(p.content);
                     }  
@@ -53,8 +54,20 @@ public class StandardSearchController {
         
     }
     
-    public static void setAllFlightBoxs()
+    
+    
+    public static void setAllFlightBoxsNext()
     {
+     
+        if (inilized == false)
+            {inilized = true;}
+        else
+        {
+            currentfilghtIndex += flightBoxs.length;
+            if (currentfilghtIndex > flightResuts.length - flightBoxs.length)
+                currentfilghtIndex = flightResuts.length - flightBoxs.length;
+        }
+        
         for (int box=0; box < flightBoxs.length; box++)
         {            
             
@@ -64,18 +77,39 @@ public class StandardSearchController {
     }
     
     
+    public static void setAllFlightBoxsBack()
+    {
+     
+        if (inilized == false)
+            {inilized = true;}
+        else
+        {
+            currentfilghtIndex -= flightBoxs.length;
+            if (currentfilghtIndex < 0)
+                currentfilghtIndex = 0;
+        }
+        
+        for (int box=0; box < flightBoxs.length; box++)
+        {            
+            
+          setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
+            
+        }
+    }
+        
+    
     public static void setRandomFlightResults(int numofflights,String[] propnames)
     {
         property[][] results = new  property[numofflights] [propnames.length];
         
+        ArrayList<QuoteStruct> qsarr = QouteStructBulider.getArrList(numofflights);
+        
         for (int i = 0; i < numofflights; i++)
         {
-            property[] props = new  property[propnames.length];
+            QuoteStruct qs = qsarr.get(i);
             
-            for (int j = 0; j < propnames.length; j++)
-            {
-                props[j] = new property(propnames[j], " " + i + j);
-            }
+            property[] props = ConvertQuoteToPropertyArr(qs) ;           
+            
             
             results[i] = props;
         }
@@ -83,7 +117,7 @@ public class StandardSearchController {
         flightResuts = results;
     }
     
-    private static property[] ConvertQouteToProperty(QuoteStruct qs)
+    private static property[] ConvertQuoteToPropertyArr(QuoteStruct qs)
     {
          property[] parr = new  property[7];
         

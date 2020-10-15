@@ -11,10 +11,10 @@ package flightfinder3.main.java.FlightFinder340.models.flightapi.structures;
  * @author Callidus
  */
 public class property {
-    public String name;
-    public String content;
+    public final String name;
+    public final String content;
     
-    property(String n, String c)
+    public property(String n, String c)
     {
         name = n.toLowerCase();
         content = c;
