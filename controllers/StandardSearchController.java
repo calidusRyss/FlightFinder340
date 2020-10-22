@@ -5,6 +5,7 @@ import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.prope
 import flightfinder3.main.java.FlightPlannerTests.QouteStructBulider;
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -35,15 +36,16 @@ public class StandardSearchController {
         
         for( Component c : ParentPanel.getComponents())        
         {
-           JLabel j =(JLabel) c;
-           String s = j.getName();
-            
-            if (c instanceof JLabel && s != null)
+                       
+            if (c instanceof JLabel && c.getName()  != null)
             {
+                JLabel j =(JLabel) c;
+          
+                
                 for ( property p : props )
                 {
                     
-                    if (s.toLowerCase().equals(p.name.toLowerCase() ))
+                    if (c.getName().toLowerCase().equals(p.name.toLowerCase() ))
                     {
                         j.setText(p.content);
                     }  
@@ -58,7 +60,9 @@ public class StandardSearchController {
     
     public static void setAllFlightBoxsNext()
     {
-     
+        if (flightResuts == null)
+            return;      
+        
         if (inilized == false)
             {inilized = true;}
         else
@@ -70,6 +74,10 @@ public class StandardSearchController {
         
         for (int box=0; box < flightBoxs.length; box++)
         {            
+            if (flightBoxs[box].getBorder() == null)
+            {
+                flightBoxs[box].setBorder(BorderFactory.createEtchedBorder(1));
+            }
             
           setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
             
@@ -79,6 +87,8 @@ public class StandardSearchController {
     
     public static void setAllFlightBoxsBack()
     {
+        if (flightResuts == null)
+            return;        
      
         if (inilized == false)
             {inilized = true;}
@@ -98,9 +108,9 @@ public class StandardSearchController {
     }
         
     
-    public static void setRandomFlightResults(int numofflights,String[] propnames)
+    public static void setRandomFlightResults(int numofflights)
     {
-        property[][] results = new  property[numofflights] [propnames.length];
+        property[][] results = new  property[numofflights] [8];
         
         ArrayList<QuoteStruct> qsarr = QouteStructBulider.getArrList(numofflights);
         
@@ -108,8 +118,10 @@ public class StandardSearchController {
         {
             QuoteStruct qs = qsarr.get(i);
             
-            property[] props = ConvertQuoteToPropertyArr(qs) ;           
+            property[] props = ConvertQuoteToPropertyArr(qs) ;
             
+            property index = new property("index","" +i);
+            props[7] = index;
             
             results[i] = props;
         }
@@ -119,7 +131,7 @@ public class StandardSearchController {
     
     private static property[] ConvertQuoteToPropertyArr(QuoteStruct qs)
     {
-         property[] parr = new  property[7];
+         property[] parr = new  property[8];
         
         parr[0] = new property("Origin",qs.origin);
         parr[1] = new property("originDepartureTime",qs.originDepartureTime);
