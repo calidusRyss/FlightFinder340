@@ -6,22 +6,18 @@ package main.java.models.flightapi.structures;
  */
 public class Location {
 
-    private String country;
-    private String city;
-    private String airport;
+    private final String country;
+    private final String city;
+    private final String airport;
 
-    public Location(Country _country)
-    {
-        throw new UnsupportedOperationException();
-    }
-
-    public Location(Country _country, Place _place, boolean useAirport)
-    {
-        throw new UnsupportedOperationException();
+    public Location(String _country, String _city, String _airport) {
+        this.country = _country;
+        this.city = _city;
+        this.airport = _airport;
     }
 
     //=================  GETTERS ===============
-    
+
     public String getCountry() {
         return country;
     }
@@ -33,7 +29,7 @@ public class Location {
     public String getAirport() {
         return airport;
     }
-    
+
     public String getMostAccurateLocation()
     {
         if (airport != null)
@@ -42,5 +38,5 @@ public class Location {
             return city;
         return country;
     }
-    
+
 }

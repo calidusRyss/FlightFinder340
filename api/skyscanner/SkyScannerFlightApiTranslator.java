@@ -5,12 +5,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import main.java.adapters.HttpAdapter;
 import main.java.api.interfaces.IFlightApiTranslator;
+import main.java.api.skyscanner.models.factorys.UniversalQuoteFactory;
+import main.java.api.skyscanner.models.parsers.CarriersParser;
 import main.java.exceptions.HTTP.ConnectionFailedException;
 import main.java.exceptions.HTTP.InvalidUrlException;
 import main.java.models.HTTP.Header;
 import main.java.models.HTTP.Request;
 import main.java.models.HTTP.RequestMethod;
 import main.java.models.HTTP.Response;
+import main.java.api.skyscanner.models.parsers.CurrencyParser;
+import main.java.api.skyscanner.models.parsers.QuotePlaceParser;
+import main.java.api.skyscanner.models.parsers.QuotesParser;
+import main.java.api.skyscanner.models.structures.Carrier;
+import main.java.api.skyscanner.models.structures.Quote;
 import main.java.models.flightapi.structures.Country;
 import main.java.models.flightapi.structures.Currency;
 import main.java.models.flightapi.structures.Location;
@@ -20,10 +27,11 @@ import main.java.models.flightapi.responses.CurrenciesResponse;
 import main.java.models.flightapi.responses.PlacesResponse;
 import main.java.models.flightapi.responses.QuotesResponse;
 import main.java.models.flightapi.responses.RoutesResponse;
-import main.java.models.flightapi.structures.Carrier;
-import main.java.models.flightapi.structures.Place;
-import main.java.models.flightapi.structures.Quote;
+import main.java.api.skyscanner.models.structures.QuotePlace;
+import main.java.models.flightapi.structures.UniversalQuote;
 import main.java.models.flightapi.structures.Route;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * A translator used for making calls to and parsing data from the SkyScanner API
@@ -71,7 +79,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         //Parse and Organize data since Country Request succeeded
 
         //Since the parsers are not complete yet, a stub country will exist in their place
-        Country stub = new Country();
+        Country stub = new Country("NR", "Not Real");
 
         CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[]{ stub });
         return finalResponse;
@@ -97,12 +105,19 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         }
 
         //Parse and Organize data since Currency Request succeeded
+        try {
+            JSONObject currencyJson = new JSONObject(currencyResponse.getBody());
+            JSONArray currencyArray = currencyJson.getJSONArray("Currencies");
+            Currency[] currencies = CurrencyParser.createCurrencyArrayFromJsonArray(currencyArray);
 
-        //Since the parsers are not complete yet, a stub currency will exist in their place
-        Currency stub = new Currency();
-
-        CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, new Currency[]{ stub });
-        return finalResponse;
+            CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, currencies);
+            return finalResponse;
+        }
+        catch (Exception e) //Json Parsing Failed
+        {
+            CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, new Currency[] { new Currency("FAIL", "FF", ",", ".", true, false, 0, 2) });
+            return finalResponse;
+        }
     }
 
     /**
@@ -117,7 +132,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public PlacesResponse FetchAvaliablePlaces(Country _country, Currency _currency, String _query) {
 
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchPlacesEndpoint, _country.toString(), _currency.toString(), _query);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchPlacesEndpoint, _country.getCountryCode(), _currency.getCode(), _query);
 
         //Make request
         Request placesRequest = new Request(formattedEndpoint, RequestMethod.GET);
@@ -126,18 +141,28 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
         if (!placesResponse.isSuccessful())
         {
-            PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[0]);
+            PlacesResponse finalResponse = new PlacesResponse(placesResponse, new QuotePlace[0]);
             return finalResponse;
         }
 
         //Parse and Organize data since Places Request succeeded
 
-        //Since the parsers are not complete yet, a stub place will exist in their place
-        Place stub = new Place();
+        try {
+            JSONObject placesJson = new JSONObject(placesResponse.getBody());
+            System.out.println("1");
+            JSONArray placesArray = placesJson.getJSONArray("Places");
+            System.out.println("2");
+            QuotePlace[] places = QuotePlaceParser.createPlacesArrayFromJsonArray(placesArray);
+            System.out.println("3");
 
-        PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[]{ stub });
-        return finalResponse;
-
+            PlacesResponse finalResponse = new PlacesResponse(placesResponse, places);
+            System.out.println("4");
+            return finalResponse;
+        }
+        catch (Exception e) {
+            PlacesResponse finalResponse = new PlacesResponse(placesResponse, new QuotePlace[0]);
+            return finalResponse;
+        }
     }
 
     /**
@@ -151,7 +176,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A routes response object with a response code, message and route objects
      */
     @Override
-    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime) {
+    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime) {
 
         return FetchRoutes(_country, _currency, _origin, _destination, _outboundTime, null);
     }
@@ -168,7 +193,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A routes response object with a response code, message and route objects
      */
     @Override
-    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime) {
+    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime, LocalDate _inboundTime) {
 
         //Format time strings
         String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -209,7 +234,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A quotes response object with a response code, message and quote objects
      */
     @Override
-    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime) {
+    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime) {
 
         return FetchQuotes(_country, _currency, _origin, _destination, _outboundTime, null);
     }
@@ -226,14 +251,14 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A quotes response object with a response code, message and quote objects
      */
     @Override
-    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime) {
+    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime, LocalDate _inboundTime) {
 
         //Format time strings
-        String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchQuotesEndpoint, _country.toString(), _currency.toString(), _origin.toString(), _destination.toString(), outboundTimeString, inboundTimeString);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchQuotesEndpoint, _country.getCountryCode(), _currency.getCode(), _origin.getMostAccurateLocation(), _destination.getMostAccurateLocation(), outboundTimeString, inboundTimeString);
 
         //Make request
         Request quoteRequest = new Request(formattedEndpoint, RequestMethod.GET);
@@ -243,17 +268,33 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         if (!quoteResponse.isSuccessful())
         {
             //Quote Request failed. Pass back an empty quote response with error code
-            QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new Quote[0]);
+            QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new UniversalQuote[0]);
             return finalResponse;
         }
 
         //Parse and Organize data since Quote Request succeeded
+        try {
+            JSONObject quotesJson = new JSONObject(quoteResponse.getBody());
 
-        //Since the parsers are not complete yet, a stub quote will exist in their place
-        Quote stub = new Quote(LocalDate.now(), 250, _currency, new Carrier[0], new Carrier[0], _origin, _destination, true);
+            JSONArray quotesArray = quotesJson.getJSONArray("Quotes");
+            JSONArray placesArray = quotesJson.getJSONArray("Places");
+            JSONArray currenciesArray = quotesJson.getJSONArray("Currencies");
+            JSONArray carriersArray = quotesJson.getJSONArray("Carriers");
 
-        QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new Quote[] { stub });
-        return finalResponse;
+            Quote[] quotes = QuotesParser.createQuotesArrayFromJsonArray(quotesArray);
+            QuotePlace[] places = QuotePlaceParser.createPlacesArrayFromJsonArray(placesArray);
+            Currency[] currencies = CurrencyParser.createCurrencyArrayFromJsonArray(currenciesArray);
+            Carrier[] carriers = CarriersParser.createCarrierArrayFromJsonArray(carriersArray);
+
+            UniversalQuote[] universalQuotes = UniversalQuoteFactory.createUniversalQuotes(quotes, places, carriers, currencies);
+
+            QuotesResponse finalResponse = new QuotesResponse(quoteResponse, universalQuotes);
+            return finalResponse;
+        }
+        catch (Exception e) {
+            QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new UniversalQuote[0]);
+            return finalResponse;
+        }
     }
 
     /**

@@ -1,4 +1,5 @@
 package main.java.api.interfaces;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import main.java.models.flightapi.structures.Location;
 import main.java.models.flightapi.structures.Currency;
@@ -20,10 +21,10 @@ public interface IFlightApiTranslator {
 
     public PlacesResponse FetchAvaliablePlaces(Country _country, Currency _currency, String _query);
 
-    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime);
-    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime);
+    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime);
+    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime, LocalDate _inboundTime);
 
-    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime);
-    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime);
+    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime);
+    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime, LocalDate _inboundTime);
 
 }

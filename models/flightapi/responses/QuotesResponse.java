@@ -2,7 +2,7 @@ package main.java.models.flightapi.responses;
 
 import main.java.models.HTTP.Response;
 import main.java.models.HTTP.ResponseCode;
-import main.java.models.flightapi.structures.Quote;
+import main.java.models.flightapi.structures.UniversalQuote;
 
 /**
  * A class containing response data from a quotes request
@@ -15,9 +15,9 @@ public class QuotesResponse {
     private final ResponseCode responseCode;
     private final String httpResponseMessage;
 
-    private final Quote[] quotes;
+    private final UniversalQuote[] quotes;
 
-    public QuotesResponse(Response _httpResponse, Quote[] _parsedData) {
+    public QuotesResponse(Response _httpResponse, UniversalQuote[] _parsedData) {
         this.responseCode = ResponseCode.getResponseCode(_httpResponse.getResponseCode());
         this.httpResponseMessage = _httpResponse.getHttpMessage();
         this.quotes = _parsedData;
@@ -32,7 +32,7 @@ public class QuotesResponse {
         return httpResponseMessage;
     }
 
-    public Quote[] getQuotes() {
+    public UniversalQuote[] getQuotes() {
         return quotes;
     }
 

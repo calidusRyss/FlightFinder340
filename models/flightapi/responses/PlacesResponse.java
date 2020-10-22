@@ -2,7 +2,7 @@ package main.java.models.flightapi.responses;
 
 import main.java.models.HTTP.Response;
 import main.java.models.HTTP.ResponseCode;
-import main.java.models.flightapi.structures.Place;
+import main.java.api.skyscanner.models.structures.QuotePlace;
 
 /**
  * A class containing response data from a places request
@@ -14,9 +14,9 @@ public class PlacesResponse {
 
     private final ResponseCode responseCode;
     private final String httpResponseMessage;
-    private final Place[] places;
+    private final QuotePlace[] places;
 
-    public PlacesResponse(Response _httpResponse, Place[] _parsedData) {
+    public PlacesResponse(Response _httpResponse, QuotePlace[] _parsedData) {
         this.responseCode = ResponseCode.getResponseCode(_httpResponse.getResponseCode());
         this.httpResponseMessage = _httpResponse.getHttpMessage();
         this.places = _parsedData;
@@ -31,7 +31,7 @@ public class PlacesResponse {
         return httpResponseMessage;
     }
 
-    public Place[] getPlaces() {
+    public QuotePlace[] getPlaces() {
         return places;
     }
 
