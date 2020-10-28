@@ -15,7 +15,7 @@ public class Carriers {
 
 
     /**
-     * Construct a Currency object
+     * Construct a Carrier object
      * @param _CarrierId The Carrier ID Example: "29"
      * @param _Name The Name of the carrier. Example: 'Mombasa Air Safari'
    

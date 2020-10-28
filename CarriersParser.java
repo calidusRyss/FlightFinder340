@@ -28,9 +28,9 @@ public class CarriersParser {
     }
 
     /**
-     * Parse a Currency object from a JSONObject
+     * Parse a Carrier object from a JSONObject
      * @param _jsonObject The JSONObject to parse
-     * @return A Currency object parsed from the JSONObject
+     * @return A Carrier object parsed from the JSONObject
      * @throws JSONException
      */
     public static Carriers createCarriersFromJsonObject(JSONObject _jsonObject) throws JSONException {
