@@ -1,7 +1,6 @@
 package main.java.api.skyscanner;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import main.java.adapters.HttpAdapter;
 import main.java.api.interfaces.IFlightApiTranslator;
@@ -39,7 +38,7 @@ import org.json.JSONObject;
  * https://skyscanner.github.io/slate/#api-documentation   ENTERPRISE VERSION (Useful documentation but not all features are available in the free version)
  *
  * @author Teegan Krieger
- * @LastUpdate 10/15/2020
+ * @LastUpdate 10/22/2020
  */
 public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
@@ -199,8 +198,10 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
+        String destinationString = _destination == null ? "Anywhere" : _destination.toString();
+
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchRoutesEndpoint, _country.toString(), _currency.toString(), _origin.toString(), _destination.toString(), outboundTimeString, inboundTimeString);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchRoutesEndpoint, _country.toString(), _currency.toString(), _origin.toString(), destinationString, outboundTimeString, inboundTimeString);
 
         //Make request
         Request routeRequest = new Request(formattedEndpoint, RequestMethod.GET);

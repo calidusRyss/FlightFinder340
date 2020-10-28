@@ -1,8 +1,10 @@
 package main.java.models.flightapi.structures;
 
 /**
- * A class holding location data
+ * A class holding location data with varying accuracy
+ *
  * @author Teegan Krieger
+ * @LastUpdated 10/22/2020
  */
 public class Location {
 
@@ -37,6 +39,11 @@ public class Location {
         if (city != null)
             return city;
         return country;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" + "country=" + country + ", city=" + city + ", airport=" + airport + '}';
     }
 
 }

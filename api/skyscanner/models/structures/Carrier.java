@@ -1,12 +1,13 @@
 package main.java.api.skyscanner.models.structures;
 
 /**
+ * A class representing carrier information
  *
- * @author STUB
+ * @author Teegan Krieger
  */
 public class Carrier {
-    private int carrierID;
-    private String carrierName;
+    private final int carrierID;
+    private final String carrierName;
 
     public Carrier(int carrierID, String carrierName) {
         this.carrierID = carrierID;

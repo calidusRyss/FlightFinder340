@@ -18,6 +18,14 @@ import main.java.models.flightapi.structures.UniversalQuote;
  */
 public class UniversalQuoteFactory {
 
+    /**
+     * Convert an array of Quotes, Carriers, Places and Currencies into an array of UniversalQuotes
+     * @param _quotes The quotes array
+     * @param _quotePlaces The QuotePlaces array
+     * @param _carriers The carriers array
+     * @param _currencies The currencies array
+     * @return An array of UniversalQuote objects
+     */
     public static UniversalQuote[] createUniversalQuotes(Quote[] _quotes, QuotePlace[] _quotePlaces, Carrier[] _carriers, Currency[] _currencies) {
         HashMap<Integer, QuotePlace> placesHashMap = new HashMap<Integer, QuotePlace>();
         HashMap<Integer, Carrier> carriersHashMap = new HashMap<Integer, Carrier>();
@@ -48,6 +56,13 @@ public class UniversalQuoteFactory {
         return universalQuotes;
     }
 
+    /**
+     * Construct inbound and outbound JourneyLeg objects from a quote, QuotePlaces and Carriers
+     * @param _quote The quote to construct the JourneyLegs from
+     * @param _placesHashMap A HashMap with all QuotePlaces
+     * @param _carriersHashMap A HashMap with all Carriers
+     * @return An array of JourneyLegs, always length of 2 with the first item being the outbound leg and the second item being the inbound leg (If an inbound leg exists)
+     */
     private static UniversalJourneyLeg[] constructUniversalJourneyLegs(Quote _quote, HashMap<Integer, QuotePlace> _placesHashMap, HashMap<Integer, Carrier> _carriersHashMap) {
         UniversalJourneyLeg[] inboundOutboundJourneyLegs = new UniversalJourneyLeg[2];
 

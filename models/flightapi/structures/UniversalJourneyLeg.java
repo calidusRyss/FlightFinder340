@@ -3,8 +3,11 @@ package main.java.models.flightapi.structures;
 import java.time.LocalDateTime;
 
 /**
+ * A class that represents a Journey Leg. I.E. Point A to Point B
+ * Contains origin and destination locations, as well as carrier names and departure time
  *
  * @author Teegan Krieger
+ * @LastUpdate 10/22/2020
  */
 public class UniversalJourneyLeg {
 
@@ -22,6 +25,13 @@ public class UniversalJourneyLeg {
         this.departureDateTime = _departureDateTime;
     }
 
+    @Override
+    public String toString() {
+        return "UniversalJourneyLeg{" + "carrierNames=" + carrierNames + ", originLocation=" + originLocation + ", destinationLocation=" + destinationLocation + ", departureDateTime=" + departureDateTime + '}';
+    }
+
+    //=================  GETTERS ===============
+
     public String[] getCarrierNames() {
         return carrierNames;
     }
@@ -36,11 +46,6 @@ public class UniversalJourneyLeg {
 
     public LocalDateTime getDepartureDateTime() {
         return departureDateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "UniversalJourneyLeg{" + "carrierNames=" + carrierNames + ", originLocation=" + originLocation + ", destinationLocation=" + destinationLocation + ", departureDateTime=" + departureDateTime + '}';
     }
 
 }

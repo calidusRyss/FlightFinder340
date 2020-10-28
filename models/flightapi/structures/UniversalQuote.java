@@ -1,7 +1,7 @@
 package main.java.models.flightapi.structures;
 
 /**
- * A class representing quote data
+ * A class representing quote data not relying on any specific API
  *
  * @author Teegan Krieger
  * @LastUpdate 10/22/2020
@@ -56,5 +56,5 @@ public class UniversalQuote {
     public String toString() {
         return "UniversalQuote{" + "price=" + price + ", currency=" + currency + ", outboundLeg=" + outboundLeg + ", inboundLeg=" + inboundLeg + ", directFlight=" + directFlight + '}';
     }
-    
+
 }
