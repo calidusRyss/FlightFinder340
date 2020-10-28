@@ -6,7 +6,10 @@ package flightfinder3.main.java.FlightFinder340.Views;
  * and open the template in the editor.
  */
 
+import flightfinder3.main.java.FlightFinder340.controllers.SearchRetrieverWrapper;
+import flightfinder3.main.java.FlightFinder340.controllers.StandardSearchCollector;
 import flightfinder3.main.java.FlightFinder340.controllers.StandardSearchController;
+import flightfinder3.main.java.FlightPlannerTests.TestMain;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -770,17 +773,17 @@ public class StandardSearch extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        StandardSearchController.setAllFlightBoxsBack();
+        Controller.setAllFlightBoxsBack();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        StandardSearchController.setAllFlightBoxsNext();
+        Controller.setAllFlightBoxsNext();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // SearchButton
-        StandardSearchController.setRandomFlightResults(12);
-        StandardSearchController.setAllFlightBoxsNext();
+        Controller.setFlightResults(Retriever);
+        Controller.setAllFlightBoxsNext();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -818,19 +821,17 @@ public class StandardSearch extends javax.swing.JFrame {
                 ss.setVisible(true);
             }
         });
+       
+        ss.inilize();
+    }
+    
+    public  void inilize()
+    {
+        StandardSearchCollector ssc = new StandardSearchCollector( jTextField1,jTextField3,datePicker2,datePicker3, timePicker1, timePicker3 );
+        Controller = new StandardSearchController(ssc);
         
-        //ss.jLabel1.setName("time");
-        //ss.jLabel2.setName("duration");
-        //ss.jLabel3.setName("airline");
-        //ss.jLabel4.setName("cost");
-        
-        setLableNames(ss.jPanel3);
-        
-        //String[] s = {"time","1:00", "duration","1.4hr","airline","united","cost","$1000"};
-        
-        //property[] props = property.createProperty(s);
-        
-        //StandardSearchController.setFlightbox(ss.jPanel1, props );
+        setLableNames(this.jPanel3);       
+        Retriever = new TestMain();   
         
         String[] propnames = {"Origin",
             "originDepartureTime",
@@ -840,25 +841,18 @@ public class StandardSearch extends javax.swing.JFrame {
             "inboundFlightCarrier",
             "price"};
         
-        //JPanel[] flightboxes = {ss.jPanel1};       
-                
-
+        
+        
        
         JPanel[] flightboxes;
-        flightboxes = getPanelChildren(ss.jPanel3);
+        flightboxes = getPanelChildren(this.jPanel3);
+        Controller.setFlightboxPanels(flightboxes);
+        
         for(  JPanel jp :  flightboxes)
         {
             jp.setBorder(null);
-        }
-        
-        StandardSearchController.flightBoxs = flightboxes;
-        
-        
-        
-        
-        
-        //ss.jLabel3.setText("hi");
-        
+        }  
+       
     }
     
     public static void setLableNames( JPanel jp)
@@ -927,8 +921,9 @@ public class StandardSearch extends javax.swing.JFrame {
     }
     
     
+    private SearchRetrieverWrapper Retriever;
+    private StandardSearchController Controller;
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.DatePicker datePicker2;
     private com.github.lgooddatepicker.components.DatePicker datePicker3;

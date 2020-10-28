@@ -24,15 +24,19 @@ import main.java.models.flightapi.structures.QuoteStruct;
 public class StandardSearchController {
     
         
-    private static int currentfilghtIndex = 0; 
-    private static boolean inilized = false;
+    private  int currentfilghtIndex = 0; 
+    private  boolean inilized = false;
     
-    public static property[][] flightResuts;
-    
-    public static JPanel[] flightBoxs;    
-    
+    public  property[][] flightResuts;
+    public  property[] searchFields;
+    public  StandardSearchCollector searchCollector;
+    private JPanel[] flightBoxs;    
+
+    public StandardSearchController(StandardSearchCollector coll) {
+        searchCollector = coll;
+    }   
         
-    public static void setFlightbox(JPanel ParentPanel, property[] props ) {
+    private void setFlightbox(JPanel ParentPanel, property[] props ) {
         
         for( Component c : ParentPanel.getComponents())        
         {
@@ -56,9 +60,38 @@ public class StandardSearchController {
         
     }
     
+    public void setFlightResults(SearchRetrieverWrapper retrieve)
+    {
+       
+        
+        ArrayList<QuoteStruct> qsarr = retrieve.getStandardResults(searchFields);
+         property[][] results = new  property[qsarr.size()] [8];
+        
+        
+        
+        for (int i = 0; i < qsarr.size(); i++)
+        {
+            QuoteStruct qs = qsarr.get(i);
+            
+            property[] props = ConvertQuoteToPropertyArr(qs) ;
+            
+            property index = new property("index","" +i);
+            props[7] = index;
+            
+            results[i] = props;
+        }
+        
+        flightResuts = results;
+    }
     
     
-    public static void setAllFlightBoxsNext()
+    public void  setFlightboxPanels(JPanel[] flightBoxPanels)
+    {
+        flightBoxs = flightBoxPanels;
+    }
+    
+    
+    public void setAllFlightBoxsNext()
     {
         if (flightResuts == null)
             return;      
@@ -85,7 +118,7 @@ public class StandardSearchController {
     }
     
     
-    public static void setAllFlightBoxsBack()
+    public void setAllFlightBoxsBack()
     {
         if (flightResuts == null)
             return;        
@@ -108,28 +141,9 @@ public class StandardSearchController {
     }
         
     
-    public static void setRandomFlightResults(int numofflights)
-    {
-        property[][] results = new  property[numofflights] [8];
-        
-        ArrayList<QuoteStruct> qsarr = QouteStructBulider.getArrList(numofflights);
-        
-        for (int i = 0; i < numofflights; i++)
-        {
-            QuoteStruct qs = qsarr.get(i);
-            
-            property[] props = ConvertQuoteToPropertyArr(qs) ;
-            
-            property index = new property("index","" +i);
-            props[7] = index;
-            
-            results[i] = props;
-        }
-        
-        flightResuts = results;
-    }
     
-    private static property[] ConvertQuoteToPropertyArr(QuoteStruct qs)
+    
+    public property[] ConvertQuoteToPropertyArr(QuoteStruct qs)
     {
          property[] parr = new  property[8];
         
