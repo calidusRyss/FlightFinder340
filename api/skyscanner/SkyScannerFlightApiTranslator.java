@@ -1,6 +1,6 @@
 package main.java.api.skyscanner;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import main.java.adapters.HttpAdapter;
 import main.java.api.interfaces.IFlightApiTranslator;
@@ -78,9 +78,10 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         //Parse and Organize data since Country Request succeeded
 
         //Since the parsers are not complete yet, a stub country will exist in their place
-        Country stub = new Country("NR", "Not Real");
+        Country stub = new Country("USA", "United States of America");
+        Country stub2 = new Country("UK", "United Kingdom");
 
-        CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[]{ stub });
+        CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[]{ stub, stub2 });
         return finalResponse;
     }
 
@@ -175,7 +176,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A routes response object with a response code, message and route objects
      */
     @Override
-    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime) {
+    public RoutesResponse FetchRoutes(String _country, String _currency, String _origin, String _destination, LocalDateTime _outboundTime) {
 
         return FetchRoutes(_country, _currency, _origin, _destination, _outboundTime, null);
     }
@@ -192,16 +193,16 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A routes response object with a response code, message and route objects
      */
     @Override
-    public RoutesResponse FetchRoutes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime, LocalDate _inboundTime) {
+    public RoutesResponse FetchRoutes(String _country, String _currency, String _origin, String _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime) {
 
         //Format time strings
         String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
-        String destinationString = _destination == null ? "Anywhere" : _destination.toString();
+        String destinationString = _destination == null ? "Anywhere" : _destination;
 
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchRoutesEndpoint, _country.toString(), _currency.toString(), _origin.toString(), destinationString, outboundTimeString, inboundTimeString);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchRoutesEndpoint, _country, _currency, _origin, destinationString, outboundTimeString, inboundTimeString);
 
         //Make request
         Request routeRequest = new Request(formattedEndpoint, RequestMethod.GET);
@@ -235,7 +236,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A quotes response object with a response code, message and quote objects
      */
     @Override
-    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime) {
+    public QuotesResponse FetchQuotes(String _country, String _currency, String _origin, String _destination, LocalDateTime _outboundTime) {
 
         return FetchQuotes(_country, _currency, _origin, _destination, _outboundTime, null);
     }
@@ -252,14 +253,14 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
      * @return A quotes response object with a response code, message and quote objects
      */
     @Override
-    public QuotesResponse FetchQuotes(Country _country, Currency _currency, Location _origin, Location _destination, LocalDate _outboundTime, LocalDate _inboundTime) {
+    public QuotesResponse FetchQuotes(String _country, String _currency, String _origin, String _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime) {
 
         //Format time strings
         String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
         String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchQuotesEndpoint, _country.getCountryCode(), _currency.getCode(), _origin.getMostAccurateLocation(), _destination.getMostAccurateLocation(), outboundTimeString, inboundTimeString);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchQuotesEndpoint, _country, _currency, _origin, _destination, outboundTimeString, inboundTimeString);
 
         //Make request
         Request quoteRequest = new Request(formattedEndpoint, RequestMethod.GET);

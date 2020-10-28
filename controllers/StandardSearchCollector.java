@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package flightfinder3.main.java.FlightFinder340.controllers;
 
 import com.github.lgooddatepicker.components.DatePicker;
@@ -15,9 +16,10 @@ import javax.swing.JTextField;
  *
  * @author Callidus
  */
+
 public class StandardSearchCollector implements SearchFieldCollector{
-    
-    
+
+
     private JTextField origin;
     private JTextField destination;
     private DatePicker departing;
@@ -32,11 +34,11 @@ public class StandardSearchCollector implements SearchFieldCollector{
         this.returning = returning;
         this.returnTime = returnTime;
     }
-   
-    
-    
-    
-    
+
+
+
+
+
     public property[] getFields()
     {
         property[] result = new property[4];
@@ -44,8 +46,8 @@ public class StandardSearchCollector implements SearchFieldCollector{
         result[1] = new property( "destination",destination.getText());
         result[2] = new property( "departing",departing.getText() + " " + departTime.getText());
         result[3] = new property( "returning",returning.getText() + " " + returnTime.getText());
-        
-        return result; 
+
+        return result;
     }
-    
+
 }

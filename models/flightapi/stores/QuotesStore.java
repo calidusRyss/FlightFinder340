@@ -169,13 +169,13 @@ public class QuotesStore implements IStore {
      * Get an array of sorted QuoteStructs
      * @return A sorted array of QuoteStructs
      */
-    public QuoteStruct[] getSortedQuoteStructs()
+    public ArrayList<QuoteStruct> getSortedQuoteStructs()
     {
-        QuoteStruct[] quoteStructs = new QuoteStruct[sortedQuotes.size()];
+        ArrayList<QuoteStruct> quoteStructs = new ArrayList<QuoteStruct>(sortedQuotes.size());
 
         for (int i = 0; i < sortedQuotes.size(); i++)
         {
-            quoteStructs[i] = convertQuoteToStruct(sortedQuotes.get(i));
+            quoteStructs.add(i, convertQuoteToStruct(sortedQuotes.get(i)));
         }
 
         return quoteStructs;
@@ -204,11 +204,17 @@ public class QuotesStore implements IStore {
         String outboundDepartureTime = outboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
         String[] outboundCarrierNames = outboundLeg.getCarrierNames();
 
-        String inboundOrigin = inboundLeg.getOriginLocation().getMostAccurateLocation();
-        String inboundDestination = inboundLeg.getDestinationLocation().getMostAccurateLocation();
-        String inboundDepartureTime = inboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
-        String[] inboundCarrierNames = inboundLeg.getCarrierNames();
+        String inboundOrigin = "";
+        String inboundDestination = "";
+        String inboundDepartureTime = "";
+        String[] inboundCarrierNames = new String[0];
 
+        if (inboundLeg != null){
+            inboundOrigin = inboundLeg.getOriginLocation().getMostAccurateLocation();
+            inboundDestination = inboundLeg.getDestinationLocation().getMostAccurateLocation();
+            inboundDepartureTime = inboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
+            inboundCarrierNames = inboundLeg.getCarrierNames();
+        }
         //Format Price
         String price = _quote.getPriceFormatted();
 

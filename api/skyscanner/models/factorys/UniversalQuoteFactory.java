@@ -96,13 +96,13 @@ public class UniversalQuoteFactory {
 
         switch (outboundDestination.getType()) {
             case "Country":
-                originLocation = new Location(outboundDestination.getName(), null, null);
+                destinationLocation = new Location(outboundDestination.getName(), null, null);
                 break;
             case "City":
-                originLocation = new Location(null, outboundDestination.getName(), null);
+                destinationLocation = new Location(null, outboundDestination.getName(), null);
                 break;
             case "Airport":
-                originLocation = new Location(null, null, outboundDestination.getName());
+                destinationLocation = new Location(null, null, outboundDestination.getName());
                 break;
         }
 
