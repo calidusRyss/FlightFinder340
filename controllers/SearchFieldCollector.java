@@ -5,7 +5,8 @@
  */
 package flightfinder3.main.java.FlightFinder340.controllers;
 
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
+import main.java.models.flightapi.structures.Property;
+
 
 /**
  *
@@ -13,7 +14,7 @@ import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.prope
  */
 public interface SearchFieldCollector {
     
-    public property[] getFields();
+    public Property[] getFields();
     
     
     

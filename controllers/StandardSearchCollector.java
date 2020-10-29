@@ -8,10 +8,9 @@ package flightfinder3.main.java.FlightFinder340.controllers;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
-import main.java.FlightFinder340.models.flightapi.structures.property;
 import java.awt.Component;
 import javax.swing.JTextField;
-
+import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.Property;
 /**
  *
  * @author Callidus
@@ -39,13 +38,14 @@ public class StandardSearchCollector implements SearchFieldCollector{
 
 
 
-    public property[] getFields()
+    @Override
+    public Property[] getFields()
     {
-        property[] result = new property[4];
-        result[0] = new property( "origin",origin.getText());
-        result[1] = new property( "destination",destination.getText());
-        result[2] = new property( "departing",departing.getText() + " " + departTime.getText());
-        result[3] = new property( "returning",returning.getText() + " " + returnTime.getText());
+        Property[] result = new Property[4];
+        result[0] = new Property( "origin",origin.getText());
+        result[1] = new Property( "destination",destination.getText());
+        result[2] = new Property( "departing",departing.getText() + " " + departTime.getText());
+        result[3] = new Property( "returning",returning.getText() + " " + returnTime.getText());
 
         return result;
     }

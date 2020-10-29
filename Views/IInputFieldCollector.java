@@ -5,7 +5,7 @@ This is an interface for getting data from from some source. Itended use is inpu
 Contributors-Michael
 */
 
-import main.java.FlightFinder340.models.flightapi.structures.property;
+import main.java.models.flightapi.structures.Property;
 
 /**
  *
@@ -13,6 +13,6 @@ import main.java.FlightFinder340.models.flightapi.structures.property;
  */
 public interface IInputFieldCollector {
     
-    public property[] getFields();   
+    public Property[] getFields();   
     
 }
