@@ -8,7 +8,7 @@ package flightfinder3.main.java.FlightFinder340.controllers;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
+import main.java.FlightFinder340.models.flightapi.structures.property;
 import java.awt.Component;
 import javax.swing.JTextField;
 
