@@ -8,6 +8,10 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JTextField;
 
 /**
@@ -34,16 +38,39 @@ public class StandardSearchCollector implements IInputFieldCollector{
     }
    
     
-    
+    public String getISO_LOCAL_DATE_TIME(DatePicker _DatePicker ,TimePicker _TPick)
+    {
+        
+      LocalDate d = _DatePicker.getDate();
+      if (d == null)
+          d = LocalDate.now();
+      
+      LocalTime t =  _TPick.getTime();   
+      if (t == null)
+          t = LocalTime.now();
+      
+      LocalDateTime ldt = LocalDateTime.of(
+              d.getYear(),
+              d.getMonth(),
+              d.getDayOfMonth(),
+              t.getHour(),
+              t.getMinute());
+        
+        return ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        
+    }
     
     
     public property[] getFields()
-    {
-        property[] result = new property[4];
+    {       
+               
+        property[] result = new property[6];
         result[0] = new property( "origin",this.origin.getText());
         result[1] = new property( "destination",this.destination.getText());
-        result[2] = new property( "departing",this.departing.getText() + " " + this.departTime.getText());
-        result[3] = new property( "returning",this.returning.getText() + " " + this.returnTime.getText());
+        result[2] = new property( "departing", getISO_LOCAL_DATE_TIME(this.departing,this.departTime));
+        result[3] = new property( "returning",getISO_LOCAL_DATE_TIME(this.returning,this.returnTime));
+        result[4] = new property( "currencycode","USD");
+        result[5] = new property( "countrycode","US");
         
         return result; 
     }

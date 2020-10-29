@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import main.java.controllers.QuoteSearchController;
 import main.java.models.flightapi.structures.QuoteStruct;
 
 /*
@@ -37,12 +38,12 @@ public class StandardSearchView {
     public  StandardSearchCollector searchCollector;
     private JPanel[] flightBoxs;    
     private JPanel flightBoxPanel;
-    private SearchRetrieverWrapper retriever;
+    private QuoteSearchController retriever;
 
     
     public StandardSearchView(StandardSearchCollector _collector, JPanel _fBoxPanel) {
         
-        this.retriever = new TestMain();
+        this.retriever = new QuoteSearchController();
         this.searchCollector = _collector;
         this.flightBoxPanel = _fBoxPanel;
         
@@ -154,7 +155,7 @@ public class StandardSearchView {
     {
        
         
-        ArrayList<QuoteStruct> qsarr = retriever.getStandardResults(searchCollector.getFields());
+        ArrayList<QuoteStruct> qsarr = retriever.searchQuotes(searchCollector.getFields());
          property[][] results = new  property[qsarr.size()] [8];
         
         
@@ -172,6 +173,10 @@ public class StandardSearchView {
         }
         
         flightResuts = results;
+        currentfilghtIndex = 0;
+        inilized = false;
+        setAllFlightBoxsNext();
+        
     } 
     
     public void setAllFlightBoxsNext()
@@ -195,7 +200,8 @@ public class StandardSearchView {
                 flightBoxs[box].setBorder(BorderFactory.createEtchedBorder(1));
             }
             
-          setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
+            if (flightResuts.length != 0 && currentfilghtIndex + box < flightResuts.length)
+                setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
             
         }
     }
@@ -230,12 +236,16 @@ public class StandardSearchView {
     {
          property[] parr = new  property[8];
         
-        parr[0] = new property("Origin",qs.origin);
-        parr[1] = new property("originDepartureTime",qs.originDepartureTime);
-        parr[2] = new property("originFlightCarrier",qs.originFlightCarrier);
-        parr[3] = new property("destination",qs.destination);
+        parr[0] = new property("Origin",qs.outboundOrigin);
+        parr[1] = new property("originDepartureTime",qs.outboundDepartureTime);
+        parr[2] = new property("originFlightCarrier",qs.outboundFlightCarriers[0]);
+        parr[3] = new property("destination",qs.outboundDestination);
         parr[4] = new property("inboundDepartureTime",qs.inboundDepartureTime);
-        parr[5] = new property("inboundFlightCarrier",qs.inboundFlightCarrier);
+        
+        String s = "";
+        if( qs.inboundFlightCarriers.length > 0)
+            s = qs.inboundFlightCarriers[0];
+        parr[5] = new property("inboundFlightCarrier",s);
         parr[6] = new property("price",qs.price);
         
         return parr;
