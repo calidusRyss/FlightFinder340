@@ -1,6 +1,7 @@
 package main.java.api.skyscanner.models.factorys;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import main.java.api.skyscanner.models.structures.Quote;
 import main.java.api.skyscanner.models.structures.QuotePlace;
@@ -106,8 +107,9 @@ public class UniversalQuoteFactory {
                 break;
         }
 
-        //Note: Add date time when data time formatter is working
-        inboundOutboundJourneyLegs[0] = new UniversalJourneyLeg(outboundCarriers, originLocation, destinationLocation, LocalDateTime.MIN);
+        LocalDateTime outboundDateTime = LocalDateTime.parse(outboundLeg.getDepartureTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        inboundOutboundJourneyLegs[0] = new UniversalJourneyLeg(outboundCarriers, originLocation, destinationLocation, outboundDateTime);
 
         //If the inbound leg exists, parse it
         if (_quote.getInboundLeg() != null) {
@@ -151,7 +153,9 @@ public class UniversalQuoteFactory {
                     break;
             }
 
-            inboundOutboundJourneyLegs[1] = new UniversalJourneyLeg(inboundCarriers, inboundOriginLocation, inboundDestinationLocation, LocalDateTime.MIN);
+            LocalDateTime inboundDateTime = LocalDateTime.parse(inboundLeg.getDepartureTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+            inboundOutboundJourneyLegs[1] = new UniversalJourneyLeg(inboundCarriers, inboundOriginLocation, inboundDestinationLocation, inboundDateTime);
         }
 
         return inboundOutboundJourneyLegs;

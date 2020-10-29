@@ -19,7 +19,6 @@ import main.java.api.skyscanner.models.structures.Carrier;
 import main.java.api.skyscanner.models.structures.Quote;
 import main.java.models.flightapi.structures.Country;
 import main.java.models.flightapi.structures.Currency;
-import main.java.models.flightapi.structures.Location;
 
 import main.java.models.flightapi.responses.CountriesResponse;
 import main.java.models.flightapi.responses.CurrenciesResponse;
