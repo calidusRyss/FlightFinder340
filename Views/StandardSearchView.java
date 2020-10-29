@@ -6,7 +6,7 @@ The main feature is updateing a Fligtbox panel. with search results.
 Contributors-Michael
 */
 import flightfinder3.main.java.FlightFinder340.controllers.SearchRetrieverWrapper;
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.Property;
+import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
 import flightfinder3.main.java.FlightPlannerTests.QouteStructBulider;
 import flightfinder3.main.java.FlightPlannerTests.TestMain;
 import java.awt.Component;
@@ -32,8 +32,8 @@ public class StandardSearchView {
     private  int currentfilghtIndex = 0; 
     private  boolean inilized = false;
     
-    public  Property[][] flightResuts;
-    public  Property[] searchFields;
+    public  property[][] flightResuts;
+    public  property[] searchFields;
     public  StandardSearchCollector searchCollector;
     private JPanel[] flightBoxs;    
     private JPanel flightBoxPanel;
@@ -126,7 +126,7 @@ public class StandardSearchView {
     
     
         
-    private void setFlightbox(JPanel ParentPanel, Property[] props ) {
+    private void setFlightbox(JPanel ParentPanel, property[] props ) {
         
         for( Component c : ParentPanel.getComponents())        
         {
@@ -136,7 +136,7 @@ public class StandardSearchView {
                 JLabel j =(JLabel) c;
           
                 
-                for ( Property p : props )
+                for ( property p : props )
                 {
                     
                     if (c.getName().toLowerCase().equals(p.name.toLowerCase() ))
@@ -155,7 +155,7 @@ public class StandardSearchView {
        
         
         ArrayList<QuoteStruct> qsarr = retriever.getStandardResults(searchCollector.getFields());
-         Property[][] results = new  Property[qsarr.size()] [8];
+         property[][] results = new  property[qsarr.size()] [8];
         
         
         
@@ -163,9 +163,9 @@ public class StandardSearchView {
         {
             QuoteStruct qs = qsarr.get(i);
             
-            Property[] props = ConvertQuoteToPropertyArr(qs) ;
+            property[] props = ConvertQuoteToPropertyArr(qs) ;
             
-            Property index = new Property("index","" +i);
+            property index = new property("index","" +i);
             props[7] = index;
             
             results[i] = props;
@@ -226,17 +226,17 @@ public class StandardSearchView {
     
     
     
-    public Property[] ConvertQuoteToPropertyArr(QuoteStruct qs)
+    public property[] ConvertQuoteToPropertyArr(QuoteStruct qs)
     {
-         Property[] parr = new  Property[8];
+         property[] parr = new  property[8];
         
-        parr[0] = new Property("Origin",qs.origin);
-        parr[1] = new Property("originDepartureTime",qs.originDepartureTime);
-        parr[2] = new Property("originFlightCarrier",qs.originFlightCarrier);
-        parr[3] = new Property("destination",qs.destination);
-        parr[4] = new Property("inboundDepartureTime",qs.inboundDepartureTime);
-        parr[5] = new Property("inboundFlightCarrier",qs.inboundFlightCarrier);
-        parr[6] = new Property("price",qs.price);
+        parr[0] = new property("Origin",qs.origin);
+        parr[1] = new property("originDepartureTime",qs.originDepartureTime);
+        parr[2] = new property("originFlightCarrier",qs.originFlightCarrier);
+        parr[3] = new property("destination",qs.destination);
+        parr[4] = new property("inboundDepartureTime",qs.inboundDepartureTime);
+        parr[5] = new property("inboundFlightCarrier",qs.inboundFlightCarrier);
+        parr[6] = new property("price",qs.price);
         
         return parr;
         

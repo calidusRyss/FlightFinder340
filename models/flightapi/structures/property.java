@@ -15,17 +15,17 @@ Contributors-Michael
  *
  * @author Callidus
  */
-public class Property {
+public class property {
     public final String name;
     public final String content;
     
-    public Property(String n, String c)
+    public property(String n, String c)
     {
         name = n.toLowerCase();
         content = c;
     }
     
-    public static Property[] createProperty(String[] s)
+    public static property[] createProperty(String[] s)
     {
         Property[] output = new Property[s.length/2];
         

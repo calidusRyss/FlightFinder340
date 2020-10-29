@@ -6,7 +6,7 @@ Contributors-Michael
 */
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.Property;
+import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
 import java.awt.Component;
 import javax.swing.JTextField;
 
@@ -37,13 +37,13 @@ public class StandardSearchCollector implements IInputFieldCollector{
     
     
     
-    public Property[] getFields()
+    public property[] getFields()
     {
-        Property[] result = new Property[4];
-        result[0] = new Property( "origin",this.origin.getText());
-        result[1] = new Property( "destination",this.destination.getText());
-        result[2] = new Property( "departing",this.departing.getText() + " " + this.departTime.getText());
-        result[3] = new Property( "returning",this.returning.getText() + " " + this.returnTime.getText());
+        property[] result = new property[4];
+        result[0] = new property( "origin",this.origin.getText());
+        result[1] = new property( "destination",this.destination.getText());
+        result[2] = new property( "departing",this.departing.getText() + " " + this.departTime.getText());
+        result[3] = new property( "returning",this.returning.getText() + " " + this.returnTime.getText());
         
         return result; 
     }
