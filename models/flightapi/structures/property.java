@@ -1,9 +1,12 @@
 package flightfinder3.main.java.FlightFinder340.models.flightapi.structures;
+<<<<<<< HEAD
 /*
 Last updated 10-28-2020.
 This is simple 'struct' like class for Properties.
 Contributors-Michael
 */
+=======
+>>>>>>> master
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,11 +30,19 @@ public class property {
     
     public static property[] createProperty(String[] s)
     {
+<<<<<<< HEAD
         Property[] output = new Property[s.length/2];
         
         for (int i = 0; i < s.length; i+=2)
         {
             Property p = new Property(s[i],s[i+1]);
+=======
+        property[] output = new property[s.length/2];
+        
+        for (int i = 0; i < s.length; i+=2)
+        {
+            property p = new property(s[i],s[i+1]);
+>>>>>>> master
             
             output[i/2] = p;
         }
