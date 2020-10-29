@@ -12,3 +12,4 @@
 
 > <a href="https://repo1.maven.org/maven2/org/json/json/20140107/json-20140107.jar" target="">**Org.Json 20140107**</a>
 
+> <a href="https://github.com/LGoodDatePicker/LGoodDatePicker/releases/download/v11.1.0-Standard/LGoodDatePicker-11.1.0.jar" target="">**LGood Date Picker 11.1.0**</a>
