@@ -10,7 +10,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import java.awt.Component;
 import javax.swing.JTextField;
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.Property;
+import main.java.models.flightapi.structures.Property;
 /**
  *
  * @author Callidus
