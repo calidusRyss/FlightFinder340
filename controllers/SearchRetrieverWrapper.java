@@ -1,11 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package flightfinder3.main.java.FlightFinder340.controllers;
+/*
+Last updated 10-28-2020.
+This is an interface to retrieve Search results from some source. 
+Contributors-Michael
+*/
 
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
+import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.Property;
 import java.util.ArrayList;
 import main.java.models.flightapi.structures.QuoteStruct;
 
@@ -15,6 +15,6 @@ import main.java.models.flightapi.structures.QuoteStruct;
  */
 public interface SearchRetrieverWrapper {
     
-    public ArrayList<QuoteStruct> getStandardResults(property[] searchFields);
+    public ArrayList<QuoteStruct> getStandardResults(Property[] searchFields);
     
 }

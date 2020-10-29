@@ -1,4 +1,9 @@
 package flightfinder3.main.java.FlightFinder340.Views;
+/*
+Last updated 10-28-2020.
+This is 99% auto generated JFrame for a standard flight search application.
+Contributors-Michael
+*/
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,32 +11,17 @@ package flightfinder3.main.java.FlightFinder340.Views;
  * and open the template in the editor.
  */
 
-import flightfinder3.main.java.FlightFinder340.controllers.SearchRetrieverWrapper;
-import flightfinder3.main.java.FlightFinder340.controllers.StandardSearchCollector;
-import flightfinder3.main.java.FlightFinder340.controllers.StandardSearchController;
-import flightfinder3.main.java.FlightPlannerTests.TestMain;
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.util.*;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-import org.jdatepicker.*;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
  * @author Callidus
  */
-public class StandardSearch extends javax.swing.JFrame {
+public class StandardSearchJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form StandardSearch
      */
-    public StandardSearch() {
+    public StandardSearchJFrame() {
         initComponents();
     }
 
@@ -731,16 +721,13 @@ public class StandardSearch extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(209, 209, 209)
-                                .addComponent(jButton3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(jButton3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel50)
@@ -773,17 +760,17 @@ public class StandardSearch extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Controller.setAllFlightBoxsBack();
+        this.controller.setAllFlightBoxsBack();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Controller.setAllFlightBoxsNext();
+        this.controller.setAllFlightBoxsNext();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // SearchButton
-        Controller.setFlightResults(Retriever);
-        Controller.setAllFlightBoxsNext();
+        this.controller.setFlightResults();
+        this.controller.setAllFlightBoxsNext();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -803,17 +790,18 @@ public class StandardSearch extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StandardSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StandardSearchJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StandardSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StandardSearchJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StandardSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StandardSearchJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StandardSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StandardSearchJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-         StandardSearch ss = new StandardSearch();
+         StandardSearchJFrame ss = new StandardSearchJFrame();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -823,106 +811,24 @@ public class StandardSearch extends javax.swing.JFrame {
         });
        
         ss.inilize();
+       
     }
     
     public  void inilize()
     {
-        StandardSearchCollector ssc = new StandardSearchCollector( jTextField1,jTextField3,datePicker2,datePicker3, timePicker1, timePicker3 );
-        Controller = new StandardSearchController(ssc);
-        
-        setLableNames(this.jPanel3);       
-        Retriever = new TestMain();   
-        
-        String[] propnames = {"Origin",
-            "originDepartureTime",
-            "originFlightCarrier",
-            "destination",
-            "inboundDepartureTime",
-            "inboundFlightCarrier",
-            "price"};
-        
-        
-        
-       
-        JPanel[] flightboxes;
-        flightboxes = getPanelChildren(this.jPanel3);
-        Controller.setFlightboxPanels(flightboxes);
-        
-        for(  JPanel jp :  flightboxes)
-        {
-            jp.setBorder(null);
-        }  
-       
-    }
+       // This helper method is used because the componets passed below can not be referenced from a static context.
+       StandardSearchCollector ssc = new StandardSearchCollector( 
+               this.jTextField1,
+               this.jTextField3,
+               this.datePicker2,
+               this.datePicker3,
+               this.timePicker1,
+               this.timePicker3);
+       this.controller = new StandardSearchView(ssc,this.jPanel3);      
+    }   
     
-    public static void setLableNames( JPanel jp)
-    {                
-        for( Component c : jp.getComponents())        
-        {
-            JPanel box = (JPanel)c;
-                                    
-            
-           for( Component c2 : box.getComponents())        
-           {
-                if (c2 instanceof JLabel)
-                {
-                    JLabel j =(JLabel) c2;
-                    String s = j.getText();
-
-                    if (s != null )
-                    {
-                        j.setName(j.getText());
-                        j.setText("");
-
-                    }  
-                }   
-           }      
-        }    
-    }
-    
-    public static JPanel[] getPanelChildren(JPanel jp)
-    {
-        int num =0;
-        
-        for( Component c : jp.getComponents())        
-        {
-            if (c instanceof JPanel)
-                num++;
-        }
-        
-        
-        ArrayList<JPanel> List = new ArrayList<>();
-        JPanel[] result = new JPanel[num];
-        
-        for( Component c : jp.getComponents())        
-        {
-            if (c instanceof JPanel)
-            {
-                JPanel j = (JPanel) c;
-                 List.add(j);
-            }
-        }   
-        
-        while (List.size() > 0)
-        {
-            JPanel max = List.get(0);
-            for (int i = 1; i < List.size(); i++)
-            {
-                if (max.getY() < List.get(i).getY())
-                    max = List.get(i);
-            }
-            
-            result[--num] = max;
-            
-            List.remove(max);
-            
-        }            
-        return result;
-    }
-    
-    
-    private SearchRetrieverWrapper Retriever;
-    private StandardSearchController Controller;
+   
+    private StandardSearchView controller;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.DatePicker datePicker2;
