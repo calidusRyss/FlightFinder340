@@ -15,6 +15,11 @@ public class PlaceSuggestionsController {
 
     public PlaceSuggestionsController(CountryController _countryController, CurrencyController _currencyController)
     {
+        if (_countryController == null)
+            throw new IllegalArgumentException("Country controller cannot be null!");
+        if (_currencyController == null)
+             throw new IllegalArgumentException("Currency controller cannot be null!");
+
         placeSuggester = new PlaceSuggester(_countryController, _currencyController);
     }
 
