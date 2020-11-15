@@ -1,6 +1,6 @@
 package main.java.controllers;
 
-import flightfinder3.main.java.FlightFinder340.models.flightapi.structures.property;
+import main.java.models.flightapi.structures.Property;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,10 +19,12 @@ import main.java.models.flightapi.structures.QuoteStruct;
 public class QuoteSearchController {
 
     private final QuotesStore quotesStore;
+    private final PlaceSuggestionsController placeSuggestionsController;
 
-    public QuoteSearchController()
+    public QuoteSearchController(PlaceSuggestionsController _placeSuggestionsController)
     {
         quotesStore = new QuotesStore();
+        placeSuggestionsController = _placeSuggestionsController;
     }
 
     /**
@@ -30,7 +32,7 @@ public class QuoteSearchController {
      * @param _searchFields The properties to search with
      * @return An array list of QuoteStructs
      */
-    public ArrayList<QuoteStruct> searchQuotes(property[] _searchFields)
+    public ArrayList<QuoteStruct> searchQuotes(Property[] _searchFields)
     {
         String currencyCode = "";
         String countryCode = "";
@@ -39,7 +41,7 @@ public class QuoteSearchController {
         LocalDateTime originDepartureDate = LocalDateTime.now();
         LocalDateTime destinationDepartureDate = null;
 
-        for (property p : _searchFields)
+        for (Property p : _searchFields)
         {
             switch (p.name)
             {
@@ -64,7 +66,17 @@ public class QuoteSearchController {
             }
         }
 
-        QuotesResponse response = FlightAPIAdapter.flightAPI.FetchQuotes(countryCode, currencyCode, originString, destinationString, originDepartureDate, destinationDepartureDate);
+        //Convert Query in Code
+        placeSuggestionsController.setQuery(originString);
+        placeSuggestionsController.refreshSuggestions();
+        originString = placeSuggestionsController.getSuggestionCode(originString);
+
+        placeSuggestionsController.setQuery(destinationString);
+        placeSuggestionsController.refreshSuggestions();
+        destinationString = placeSuggestionsController.getSuggestionCode(destinationString);
+
+        //Run the request
+        QuotesResponse response = FlightAPIAdapter.flightAPI.fetchQuotes(countryCode, currencyCode, originString, destinationString, originDepartureDate, destinationDepartureDate);
 
         switch(response.getResponseCode())
         {

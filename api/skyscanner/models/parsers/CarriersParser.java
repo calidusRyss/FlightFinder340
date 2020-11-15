@@ -5,43 +5,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 /**
- * A simple JSON parser designed to parse Carrier objects
  *
- * @author Teegan Krieger
+ * @author Willie Holmes
  */
 public class CarriersParser {
 
-    /**
-     * Parse a JSONArray object into an array of Carriers
-     * @param _carriersArray The JSONArray to parse
-     * @return An array of Carrier objects
-     * @throws JSONException
-     */
-    public static Carrier[] createCarrierArrayFromJsonArray(JSONArray _carriersArray) throws JSONException {
-
+        public static Carrier [] createCarriersArrayFromJsonArray(JSONArray _carriersArray) throws JSONException {
         Carrier[] results = new Carrier[_carriersArray.length()];
 
         for (int i = 0; i < _carriersArray.length(); i++) {
-            JSONObject carrierObject = _carriersArray.getJSONObject(i);
-            results[i] = createCarrierFromJsonObject(carrierObject);
+            JSONObject carriersObject = _carriersArray.getJSONObject(i);
+            results[i] = createCarriersFromJsonObject(carriersObject);
         }
 
         return results;
     }
 
     /**
-     * Parse a JSONObject into a singular Carrier object
+     * Parse a Carrier object from a JSONObject
      * @param _jsonObject The JSONObject to parse
-     * @return A singular Carrier object
+     * @return A Carrier object parsed from the JSONObject
      * @throws JSONException
      */
-    public static Carrier createCarrierFromJsonObject(JSONObject _jsonObject) throws JSONException {
+    public static Carrier createCarriersFromJsonObject(JSONObject _jsonObject) throws JSONException {
+        //Parse fields
+        int carriersCarrierId = _jsonObject.getInt("CarrierId");
+        String carriersName = _jsonObject.getString("Name");
 
-        int carrierID = _jsonObject.getInt("CarrierId");
-        String carrierName = _jsonObject.getString("Name");
 
-        Carrier result = new Carrier(carrierID, carrierName);
+        //Construct result
+        Carrier result = new Carrier (carriersCarrierId, carriersName);
 
         return result;
     }
