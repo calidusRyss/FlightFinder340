@@ -23,7 +23,7 @@ public class CountryController {
      * Load all currencies into the selector
      */
     public void loadCountries() {
-        CountriesResponse currencyResponse = FlightAPIAdapter.flightAPI.FetchAvaliableCountries();
+        CountriesResponse currencyResponse = FlightAPIAdapter.flightAPI.fetchAvaliableCountries();
 
         switch (currencyResponse.getResponseCode()) {
             case OK:

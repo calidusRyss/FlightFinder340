@@ -19,10 +19,12 @@ import main.java.models.flightapi.structures.QuoteStruct;
 public class QuoteSearchController {
 
     private final QuotesStore quotesStore;
+    private final PlaceSuggestionsController placeSuggestionsController;
 
-    public QuoteSearchController()
+    public QuoteSearchController(PlaceSuggestionsController _placeSuggestionsController)
     {
         quotesStore = new QuotesStore();
+        placeSuggestionsController = _placeSuggestionsController;
     }
 
     /**
@@ -64,7 +66,17 @@ public class QuoteSearchController {
             }
         }
 
-        QuotesResponse response = FlightAPIAdapter.flightAPI.FetchQuotes(countryCode, currencyCode, originString, destinationString, originDepartureDate, destinationDepartureDate);
+        //Convert Query in Code
+        placeSuggestionsController.setQuery(originString);
+        placeSuggestionsController.refreshSuggestions();
+        originString = placeSuggestionsController.getSuggestionCode(originString);
+
+        placeSuggestionsController.setQuery(destinationString);
+        placeSuggestionsController.refreshSuggestions();
+        destinationString = placeSuggestionsController.getSuggestionCode(destinationString);
+
+        //Run the request
+        QuotesResponse response = FlightAPIAdapter.flightAPI.fetchQuotes(countryCode, currencyCode, originString, destinationString, originDepartureDate, destinationDepartureDate);
 
         switch(response.getResponseCode())
         {
