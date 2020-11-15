@@ -22,6 +22,7 @@ public class UniversalQuoteFactory {
 
     /**
      * Convert an array of Quotes, Carriers, Places and Currencies into an array of UniversalQuotes.
+     *
      * @param _quotes The quotes array.
      * @param _quotePlaces The QuotePlaces array.
      * @param _carriers The carriers array.
@@ -60,6 +61,7 @@ public class UniversalQuoteFactory {
 
     /**
      * Construct inbound and outbound JourneyLeg objects from a quote, QuotePlaces and Carriers
+     *
      * @param _quote The quote to construct the JourneyLegs from
      * @param _placesHashMap A HashMap with all QuotePlaces
      * @param _carriersHashMap A HashMap with all Carriers
@@ -94,6 +96,7 @@ public class UniversalQuoteFactory {
                 originLocation = new Location(null, outboundOrigin.getName(), null);
                 break;
             case "Airport":
+            case "Station":
                 originLocation = new Location(null, null, outboundOrigin.getName());
                 break;
         }
@@ -108,6 +111,7 @@ public class UniversalQuoteFactory {
                 destinationLocation = new Location(null, outboundDestination.getName(), null);
                 break;
             case "Airport":
+            case "Station":
                 destinationLocation = new Location(null, null, outboundDestination.getName());
                 break;
         }
@@ -143,6 +147,7 @@ public class UniversalQuoteFactory {
                     inboundOriginLocation = new Location(null, inboundOrigin.getName(), null);
                     break;
                 case "Airport":
+                case "Station":
                     inboundOriginLocation = new Location(null, null, inboundOrigin.getName());
                     break;
             }
@@ -157,6 +162,7 @@ public class UniversalQuoteFactory {
                     inboundDestinationLocation = new Location(null, inboundDestination.getName(), null);
                     break;
                 case "Airport":
+                case "Station":
                     inboundDestinationLocation = new Location(null, null, inboundDestination.getName());
                     break;
             }
