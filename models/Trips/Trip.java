@@ -108,7 +108,8 @@ public class Trip {
             newQuotes[i] = quotes[i];
         }
 
-        totalPrice -= quotes[_index].getPrice();
+        if (quotes[_index] != null)
+            totalPrice -= quotes[_index].getPrice();
 
         quotes = newQuotes;
     }
