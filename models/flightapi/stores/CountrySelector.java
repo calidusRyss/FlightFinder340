@@ -56,7 +56,7 @@ public class CountrySelector {
     public ArrayList<String> getAllCountryCodes() {
         ArrayList<String> codes = new ArrayList<String>(allCountries.size());
 
-        for (int i = 0; i < codes.size(); i++) {
+        for (int i = 0; i < allCountries.size(); i++) {
             codes.add(i, allCountries.get(i).getCode());
         }
 
@@ -71,7 +71,7 @@ public class CountrySelector {
     public ArrayList<String> getAllCountryNames() {
         ArrayList<String> names = new ArrayList<String>(allCountries.size());
 
-        for (int i = 0; i < names.size(); i++) {
+        for (int i = 0; i < allCountries.size(); i++) {
             names.add(i, allCountries.get(i).getName());
         }
 
