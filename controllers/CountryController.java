@@ -2,6 +2,7 @@ package main.java.controllers;
 
 import java.util.ArrayList;
 import main.java.adapters.FlightAPIAdapter;
+import main.java.exceptions.controllers.ApiFailedToLoadException;
 import main.java.models.flightapi.responses.CountriesResponse;
 import main.java.models.flightapi.stores.CountrySelector;
 
@@ -15,7 +16,7 @@ public class CountryController {
 
     private CountrySelector countrySelector;
 
-    public CountryController() {
+    public CountryController() throws ApiFailedToLoadException {
         countrySelector = new CountrySelector();
         loadCountries();
     }
@@ -23,7 +24,7 @@ public class CountryController {
     /**
      * Load all currencies into the selector
      */
-    private void loadCountries() {
+    private void loadCountries() throws ApiFailedToLoadException {
         CountriesResponse currencyResponse = FlightAPIAdapter.flightAPI.fetchAvaliableCountries();
 
         switch (currencyResponse.getResponseCode()) {
@@ -35,7 +36,7 @@ public class CountryController {
                 //This means an error occured while trying to fetch the currencies. The program cannot run without these, so I suggest having the view retry 3-5 times then display
                 //An error message to the user saying the there must be an issue with their connection, as either that, or a change in the api itself would be the only reasons
                 //This fails
-                break;
+                throw new ApiFailedToLoadException("The api call to load all country data has failed. Consider retrying or aborting the program");
         }
     }
 

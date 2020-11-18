@@ -97,6 +97,15 @@ public class CurrencySelector {
     }
 
     /**
+    * Get the selected Currency object
+    * @return The selected currency object
+    */
+    public Currency getSelectedCurrency()
+    {
+        return selectedCurrency;
+    }
+
+    /**
      * Get the index of either a currency symbol or currency code
      * @param _currencySymbolOrCode The currency symbol or code
      * @return The index of this currency within the selector. Returns -1 if the currency or code was not found

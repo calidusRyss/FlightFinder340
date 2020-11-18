@@ -2,6 +2,7 @@ package main.java.controllers;
 
 import java.util.ArrayList;
 import main.java.adapters.FlightAPIAdapter;
+import main.java.exceptions.controllers.ApiFailedToLoadException;
 import main.java.models.flightapi.responses.CurrenciesResponse;
 import main.java.models.flightapi.stores.CurrencySelector;
 
@@ -15,7 +16,7 @@ public class CurrencyController {
 
     private CurrencySelector currencySelector;
 
-    public CurrencyController() {
+    public CurrencyController() throws ApiFailedToLoadException {
         currencySelector = new CurrencySelector();
         loadCurrencies();
     }
@@ -23,7 +24,7 @@ public class CurrencyController {
     /**
      * Load all currencies into the selector
      */
-    private void loadCurrencies() {
+    private void loadCurrencies() throws ApiFailedToLoadException {
         CurrenciesResponse currencyResponse = FlightAPIAdapter.flightAPI.fetchAvaliableCurrencies();
 
         switch (currencyResponse.getResponseCode()) {
@@ -35,7 +36,7 @@ public class CurrencyController {
                 //This means an error occured while trying to fetch the currencies. The program cannot run without these, so I suggest having the view retry 3-5 times then display
                 //An error message to the user saying the there must be an issue with their connection, as either that, or a change in the api itself would be the only reasons
                 //This fails
-                break;
+                throw new ApiFailedToLoadException("The api call to load all currency data has failed. Consider retrying or aborting the program");
         }
     }
 
@@ -83,6 +84,11 @@ public class CurrencyController {
      */
     public String getSelectedCurrencySymbol() {
         return currencySelector.getSelectedCurrencySymbol();
+    }
+
+    public CurrencySelector getCurrencySelector()
+    {
+        return currencySelector;
     }
 
     /**
