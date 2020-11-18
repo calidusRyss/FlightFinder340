@@ -160,7 +160,7 @@ public class PlaceSuggester {
                 return suggestions[i].code;
             }
         }
-        return "";
+        return (suggestions.length > 0 ? suggestions[0].code : "");
     }
 
     /**

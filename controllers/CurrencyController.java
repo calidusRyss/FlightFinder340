@@ -84,4 +84,9 @@ public class CurrencyController {
         return currencySelector.getSelectedCurrencySymbol();
     }
 
+    public CurrencySelector getCurrencySelector()
+    {
+        return currencySelector;
+    }
+
 }
