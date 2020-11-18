@@ -30,4 +30,11 @@ public class QuoteStruct {
         this.inboundFlightCarriers = inboundFlightCarriers;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "QuoteStruct{" + "outboundOrigin=" + outboundOrigin + ", outboundDestination=" + outboundDestination + ", outboundDepartureTime=" + outboundDepartureTime + ", outboundFlightCarriers=" + outboundFlightCarriers + ", inboundOrigin=" + inboundOrigin + ", inboundDestination=" + inboundDestination + ", inboundDepartureTime=" + inboundDepartureTime + ", inboundFlightCarriers=" + inboundFlightCarriers + ", price=" + price + '}';
+    }
+
+    
 }

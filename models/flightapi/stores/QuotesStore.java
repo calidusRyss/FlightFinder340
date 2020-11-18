@@ -1,8 +1,8 @@
 package main.java.models.flightapi.stores;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import main.java.models.flightapi.QuoteStructConverter;
 import main.java.models.flightapi.comparators.QuoteAlphabeticalComparator;
 import main.java.models.flightapi.comparators.QuoteCheapestComparator;
 import main.java.models.flightapi.comparators.QuoteEarliestOutboundDateComparator;
@@ -14,7 +14,6 @@ import main.java.models.flightapi.enums.StoreSortMode;
 import main.java.models.flightapi.structures.UniversalQuote;
 import main.java.models.flightapi.interfaces.IStore;
 import main.java.models.flightapi.structures.QuoteStruct;
-import main.java.models.flightapi.structures.UniversalJourneyLeg;
 
 /**
  * A data store designed to hold and sort quotes
@@ -23,8 +22,6 @@ import main.java.models.flightapi.structures.UniversalJourneyLeg;
  * @LastUpdate 10/22/2020
  */
 public class QuotesStore implements IStore {
-
-    private static final DateTimeFormatter universalDateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     private static final QuoteAlphabeticalComparator quoteAlphabeticalComparator = new QuoteAlphabeticalComparator();
     private static final QuoteCheapestComparator quoteCheapestComparator = new QuoteCheapestComparator();
@@ -175,53 +172,9 @@ public class QuotesStore implements IStore {
 
         for (int i = 0; i < sortedQuotes.size(); i++)
         {
-            quoteStructs.add(i, convertQuoteToStruct(sortedQuotes.get(i)));
+            quoteStructs.add(i, QuoteStructConverter.convertQuoteToStruct(sortedQuotes.get(i)));
         }
 
         return quoteStructs;
     }
-
-    //NOTE: Move this into its own class
-
-    /**
-     * Helper method that converts a Quote object into a QuoteStruct object and formats strings
-     *
-     * @param _quote The Quote object to convert
-     * @return A QuoteStruct object containing formatted strings to represent all relevant quote data
-     */
-    private QuoteStruct convertQuoteToStruct(UniversalQuote _quote)
-    {
-        //Note: This method will change based on Willie's handling of the Quote object
-
-        if (_quote == null)
-            throw new IllegalArgumentException("The provided quote object was null.");
-
-        UniversalJourneyLeg outboundLeg = _quote.getOutboundLeg();
-        UniversalJourneyLeg inboundLeg = _quote.getInboundLeg();
-
-        String outboundOrigin = outboundLeg.getOriginLocation().getMostAccurateLocation();
-        String outboundDestination = outboundLeg.getDestinationLocation().getMostAccurateLocation();
-        String outboundDepartureTime = outboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
-        String[] outboundCarrierNames = outboundLeg.getCarrierNames();
-
-        String inboundOrigin = "";
-        String inboundDestination = "";
-        String inboundDepartureTime = "";
-        String[] inboundCarrierNames = new String[0];
-
-        if (inboundLeg != null){
-            inboundOrigin = inboundLeg.getOriginLocation().getMostAccurateLocation();
-            inboundDestination = inboundLeg.getDestinationLocation().getMostAccurateLocation();
-            inboundDepartureTime = inboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
-            inboundCarrierNames = inboundLeg.getCarrierNames();
-        }
-        //Format Price
-        String price = _quote.getPriceFormatted();
-
-        //Construct QuoteStruct
-        QuoteStruct quoteStruct = new QuoteStruct(outboundOrigin, outboundDestination, outboundDepartureTime, outboundCarrierNames, inboundOrigin, inboundDestination, inboundDepartureTime, inboundCarrierNames, price);
-
-        return quoteStruct;
-    }
-
 }

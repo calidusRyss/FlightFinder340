@@ -91,7 +91,7 @@ public class QuoteSearchController {
                 break;
 
             default:
-                System.out.println("Params:\n" + "Country Code: " + countryCode + "\nCurrency Code: " + currencyCode + "\nOrigin: " + originString + "\nDestination: " + destinationString + "\nDepartureTime: " + originDepartureDate.toString() + "\nReturningTime: " + destinationDepartureDate.toString());
+                System.out.println("Params:\n" + "Country Code: " + countryCode + "\nCurrency Code: " + currencyCode + "\nOrigin: " + originString + "\nDestination: " + destinationString + "\nDepartureTime: " + originDepartureDate.toString()); //"\nReturningTime: " + destinationDepartureDate.toString()
                 System.out.println("MISC. ERROR: " + response.getResponseCode().toString() + "\n" + response.getHttpResponseMessage());
                 //Any other http response code should tell the view to show an error message
                 break;
@@ -109,6 +109,11 @@ public class QuoteSearchController {
     public ArrayList<QuoteStruct> getSortedQuotes()
     {
         return quotesStore.getSortedQuoteStructs();
+    }
+
+    public QuotesStore getQuoteStore()
+    {
+        return quotesStore;
     }
 
 }

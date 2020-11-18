@@ -96,4 +96,13 @@ public class CurrencySelector {
         return selectedCurrency.getSymbol();
     }
 
+    /**
+     * Get the selected Currency object
+     * @return The selected currency object
+     */
+    public Currency getSelectedCurrency()
+    {
+        return selectedCurrency;
+    }
+
 }
