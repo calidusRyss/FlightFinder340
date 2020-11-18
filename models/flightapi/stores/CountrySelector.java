@@ -96,4 +96,20 @@ public class CountrySelector {
         return selectedCountry.getName();
     }
 
+    /**
+     * Get the index of either a country name or country code
+     * @param _countryNameOrCode The country name or code
+     * @return The index of this country within the selector. Returns -1 if the country or code was not found
+     */
+    public int getIndexOf(String _countryNameOrCode)
+    {
+        for (int i = 0; i < allCountries.size(); i++)
+        {
+            Country c = allCountries.get(i);
+            if (c.getCode().equals(_countryNameOrCode) || c.getName().equals(_countryNameOrCode))
+                return i;
+        }
+        return -1;
+    }
+
 }

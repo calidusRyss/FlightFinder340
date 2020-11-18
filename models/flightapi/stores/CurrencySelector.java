@@ -56,7 +56,7 @@ public class CurrencySelector {
     public ArrayList<String> getAllCurrencyCodes() {
         ArrayList<String> codes = new ArrayList<String>(allCurrencies.size());
 
-        for (int i = 0; i < codes.size(); i++) {
+        for (int i = 0; i < allCurrencies.size(); i++) {
             codes.add(i, allCurrencies.get(i).getCode());
         }
 
@@ -71,7 +71,7 @@ public class CurrencySelector {
     public ArrayList<String> getAllCurrencySymbols() {
         ArrayList<String> symbols = new ArrayList<String>(allCurrencies.size());
 
-        for (int i = 0; i < symbols.size(); i++) {
+        for (int i = 0; i < allCurrencies.size(); i++) {
             symbols.add(i, allCurrencies.get(i).getSymbol());
         }
 
@@ -97,12 +97,27 @@ public class CurrencySelector {
     }
 
     /**
-     * Get the selected Currency object
-     * @return The selected currency object
-     */
+    * Get the selected Currency object
+    * @return The selected currency object
+    */
     public Currency getSelectedCurrency()
     {
         return selectedCurrency;
     }
 
+    /**
+     * Get the index of either a currency symbol or currency code
+     * @param _currencySymbolOrCode The currency symbol or code
+     * @return The index of this currency within the selector. Returns -1 if the currency or code was not found
+     */
+    public int getIndexOf(String _currencySymbolOrCode)
+    {
+        for (int i = 0; i < allCurrencies.size(); i++)
+        {
+            Currency c = allCurrencies.get(i);
+            if (c.getCode().equals(_currencySymbolOrCode) || c.getSymbol().equals(_currencySymbolOrCode))
+                return i;
+        }
+        return -1;
+    }
 }
