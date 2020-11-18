@@ -10,7 +10,7 @@ package main.java.models.flightapi.structures;
  *
  * @author Callidus
  */
-public class Property {
+public class Property{
     public final String name;
     public final String content;
 

@@ -120,5 +120,4 @@ public class CurrencySelector {
         }
         return -1;
     }
-
 }
