@@ -17,12 +17,13 @@ public class CountryController {
 
     public CountryController() {
         countrySelector = new CountrySelector();
+        loadCountries();
     }
 
     /**
      * Load all currencies into the selector
      */
-    public void loadCountries() {
+    private void loadCountries() {
         CountriesResponse currencyResponse = FlightAPIAdapter.flightAPI.fetchAvaliableCountries();
 
         switch (currencyResponse.getResponseCode()) {
@@ -82,6 +83,16 @@ public class CountryController {
      */
     public String getSelectedCountryName() {
         return countrySelector.getSelectedCountryName();
+    }
+
+    /**
+     * Get the index of either a country name or country code
+     * @param _countryNameOrCode The country name or code
+     * @return The index of this country within the selector. Returns -1 if the country or code was not found
+     */
+    public int getIndexOf(String _countryNameOrCode)
+    {
+        return countrySelector.getIndexOf(_countryNameOrCode);
     }
 
 }

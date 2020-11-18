@@ -17,12 +17,13 @@ public class CurrencyController {
 
     public CurrencyController() {
         currencySelector = new CurrencySelector();
+        loadCurrencies();
     }
 
     /**
      * Load all currencies into the selector
      */
-    public void loadCurrencies() {
+    private void loadCurrencies() {
         CurrenciesResponse currencyResponse = FlightAPIAdapter.flightAPI.fetchAvaliableCurrencies();
 
         switch (currencyResponse.getResponseCode()) {
@@ -82,6 +83,16 @@ public class CurrencyController {
      */
     public String getSelectedCurrencySymbol() {
         return currencySelector.getSelectedCurrencySymbol();
+    }
+
+    /**
+     * Get the index of either a currency symbol or currency code
+     * @param _currencySymbolOrCode The currency symbol or code
+     * @return The index of this currency within the selector. Returns -1 if the currency or code was not found
+     */
+    public int getIndexOf(String _currencySymbolOrCode)
+    {
+        return currencySelector.getIndexOf(_currencySymbolOrCode);
     }
 
 }
