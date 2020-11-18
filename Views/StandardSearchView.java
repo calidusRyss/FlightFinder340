@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import main.java.FlightFinder340.Views.MainView;
+import main.java.FlightFinder340.controllers.ControllerBox;
+import main.java.controllers.CountryController;
+import main.java.controllers.CurrencyController;
+import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;
 import main.java.models.flightapi.structures.Property;
 import main.java.models.flightapi.structures.QuoteStruct;
@@ -42,8 +46,8 @@ public class StandardSearchView {
 
     
     public StandardSearchView(StandardSearchCollector _collector, JPanel _fBoxPanel) {
-        
-        this.QuoteRetriever = new QuoteSearchController();
+                
+        this.QuoteRetriever = ControllerBox.getBox().getQuoteSearchCont();
         this.searchCollector = _collector;
         this.flightBoxPanel = _fBoxPanel;
         

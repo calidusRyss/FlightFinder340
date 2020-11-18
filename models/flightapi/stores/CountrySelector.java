@@ -69,9 +69,8 @@ public class CountrySelector {
      * @return An array list of all country names
      */
     public ArrayList<String> getAllCountryNames() {
-        ArrayList<String> names = new ArrayList<String>(allCountries.size());
-
-        for (int i = 0; i < names.size(); i++) {
+        ArrayList<String> names = new ArrayList<String>(allCountries.size());        
+        for (int i = 0; i < allCountries.size(); i++) {
             names.add(i, allCountries.get(i).getName());
         }
 
