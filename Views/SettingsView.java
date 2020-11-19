@@ -10,6 +10,7 @@ import java.util.Iterator;
 import javax.swing.JComboBox ;
 import main.java.FlightFinder340.controllers.ControllerBox;
 import main.java.controllers.CountryController;
+import main.java.controllers.CurrencyController;
 
 /**
  *
@@ -18,31 +19,51 @@ import main.java.controllers.CountryController;
 public class SettingsView {
     
     private CountryController countryCont;
-    private final JComboBox combo;
+    private CurrencyController CurrencyCont;
+    private final JComboBox comboCounty;
+    private final JComboBox comboCurrency;
     
-    public SettingsView(JComboBox _combo)
+    public SettingsView(JComboBox _comboCounty, JComboBox _comboCurrency)
     {
-        combo = _combo;
+        comboCounty = _comboCounty;
+        comboCounty.removeAllItems();
+        comboCurrency = _comboCurrency;
+        comboCurrency.removeAllItems();
         inilize();
     }
     
     public void inilize(){
         this.countryCont = ControllerBox.getBox().getCountryCont();
         
-        this.countryCont.loadCountries();
-        this.countryCont.selectCountry(0);
+        for (String s : this.countryCont.getAllCountryNames()) {           
+            comboCounty.addItem(s);
+        }  
         
-        combo.removeAllItems();
+        this.setCountry(countryCont.getIndexOf("US"));
         
-        ArrayList<String> a = this.countryCont.getAllCountryNames();
-        System.out.print("hey2");
         
-        for (String s : a) {
-            System.out.println(s);
-            combo.addItem(s);
+        this.CurrencyCont = ControllerBox.getBox().getCurrencyCont();     
+        
+        for (String s : this.CurrencyCont.getAllCurrencyCodes()) {
+            comboCurrency.addItem(s);
         }
         
+        this.setCurrency(CurrencyCont.getIndexOf("USD"));
         
+        
+    }    
+    
+    
+    public void setCountry(int index)
+    {
+        comboCounty.setSelectedIndex(index);
+        countryCont.selectCountry(index);
+    }
+    
+    public void setCurrency(int index)
+    {
+        comboCurrency.setSelectedIndex(index);
+        CurrencyCont.selectCurrency(index);
     }
     
     public String getCountyName()

@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import main.java.FlightFinder340.Views.MainView;
 import main.java.FlightFinder340.controllers.ControllerBox;
@@ -34,6 +35,7 @@ import main.java.models.flightapi.structures.QuoteStruct;
  */
 public class StandardSearchView {    
         
+    private final int numberOfProps = 8;
     private  int currentfilghtIndex = 0; 
     private  boolean inilized = false;
     
@@ -61,8 +63,23 @@ public class StandardSearchView {
         {
             jp.setBorder(null);
         }  
+        
+       test();
+       setFlightResults();
     }   
     
+    
+    public void test()
+    {
+        Property[] arr = new Property[1];
+        arr[0] = new Property("price","100");
+        setFlightbox(flightBoxs[0],arr);
+    }
+    
+    public void updateSugjustions(JList list,String text)
+    {
+        
+    }
     
     public static void setLableNames( JPanel _jp)
     {                
@@ -89,11 +106,11 @@ public class StandardSearchView {
         }    
     }
     
-    public static JPanel[] getPanelChildren(JPanel jp)
+    public static JPanel[] getPanelChildren(JPanel _jp)
     {
         int num =0;
         
-        for( Component c : jp.getComponents())        
+        for( Component c : _jp.getComponents())        
         {
             if (c instanceof JPanel)
                 num++;
@@ -103,7 +120,7 @@ public class StandardSearchView {
         ArrayList<JPanel> List = new ArrayList<>();
         JPanel[] result = new JPanel[num];
         
-        for( Component c : jp.getComponents())        
+        for( Component c : _jp.getComponents())        
         {
             if (c instanceof JPanel)
             {
@@ -131,7 +148,10 @@ public class StandardSearchView {
     
     
         
-    private void setFlightbox(JPanel ParentPanel, Property[] props ) {
+    private void setFlightbox(JPanel ParentPanel, Property[] _props ) {
+        
+        
+        Component[] arr = ParentPanel.getComponents();
         
         for( Component c : ParentPanel.getComponents())        
         {
@@ -139,15 +159,21 @@ public class StandardSearchView {
             if (c instanceof JLabel && c.getName()  != null)
             {
                 JLabel j =(JLabel) c;
+                String cn = c.getName().toLowerCase();  
           
                 
-                for ( Property p : props )
+                for ( Property p : _props )
                 {
-                    
-                    if (c.getName().toLowerCase().equals(p.name.toLowerCase() ))
+                    if (p != null)
                     {
-                        j.setText(p.content);
-                    }  
+                        String pn = p.name.toLowerCase();
+                    
+                        if (cn.equals(pn))
+                        {
+                            j.setText(p.content);
+                        }  
+                    }
+                   
                 }   
             }
     
@@ -157,10 +183,11 @@ public class StandardSearchView {
     
     public void setFlightResults()
     {
-       
+       System.out.println(ControllerBox.getBox().getCurrencyCont().getSelectedCurrencySymbol());
+       System.out.println(ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
         
         ArrayList<QuoteStruct> qsarr = QuoteRetriever.searchQuotes(searchCollector.getFields());
-         Property[][] results = new  Property[qsarr.size()] [8];
+         Property[][] results = new  Property[qsarr.size()] [numberOfProps +1];
         
         
         
@@ -168,12 +195,14 @@ public class StandardSearchView {
         {
             QuoteStruct qs = qsarr.get(i);
             
-            Property[] props = ConvertQuoteToPropertyArr(qs) ;
+            Property[] quoteProps = ConvertQuoteToPropertyArr(qs) ;
+            
+            
             
             Property index = new Property("index","" +i);
-            props[7] = index;
+            quoteProps[numberOfProps] = index;
             
-            results[i] = props;
+            results[i] = quoteProps;
         }
         
         flightResuts = results;
@@ -241,7 +270,7 @@ public class StandardSearchView {
         LocalDateTime outldt = LocalDateTime.parse(qs.outboundDepartureTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String outDepartureTime = outldt.format(DateTimeFormatter.ISO_DATE) + " " + outldt.format(DateTimeFormatter.ofPattern("HH:MM"));       
         
-         Property[] parr = new  Property[8];
+         Property[] parr = new  Property[numberOfProps+1];
         
         parr[0] = new Property("Origin",qs.outboundOrigin);
         parr[1] = new Property("originDepartureTime",outDepartureTime);
