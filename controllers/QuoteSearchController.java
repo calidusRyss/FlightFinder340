@@ -116,4 +116,13 @@ public class QuoteSearchController {
         return quotesStore;
     }
 
+    /**
+     * Get the current sort mode of the QuoteStore
+     * @return The current sort mode of the QuoteStore
+     */
+    public StoreSortMode getCurrentSortMode()
+    {
+        return quotesStore.getCurrentSortMode();
+    }
+
 }
