@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import main.java.adapters.FlightAPIAdapter;
+import main.java.exceptions.controllers.QuoteRequestException;
 import main.java.models.flightapi.enums.StoreSortMode;
 import main.java.models.flightapi.responses.QuotesResponse;
 import main.java.models.flightapi.stores.QuotesStore;
@@ -32,7 +33,7 @@ public class QuoteSearchController {
      * @param _searchFields The properties to search with
      * @return An array list of QuoteStructs
      */
-    public ArrayList<QuoteStruct> searchQuotes(Property[] _searchFields)
+    public ArrayList<QuoteStruct> searchQuotes(Property[] _searchFields) throws QuoteRequestException
     {
         String currencyCode = "";
         String countryCode = "";
@@ -75,6 +76,9 @@ public class QuoteSearchController {
         placeSuggestionsController.refreshSuggestions();
         destinationString = placeSuggestionsController.getSuggestionCode(destinationString);
 
+        if (destinationString.equals(""))
+            destinationString = "Anywhere";
+
         //Run the request
         QuotesResponse response = FlightAPIAdapter.flightAPI.fetchQuotes(countryCode, currencyCode, originString, destinationString, originDepartureDate, destinationDepartureDate);
 
@@ -84,17 +88,10 @@ public class QuoteSearchController {
                 quotesStore.clear();
                 quotesStore.addCollection(response.getQuotes());
                 break;
-
-            case Bad_Request:
-                System.out.println("BAD REQUEST!");
-                //This is called if the user input is bad. Tell the view to do something...
-                break;
-
             default:
-                System.out.println("Params:\n" + "Country Code: " + countryCode + "\nCurrency Code: " + currencyCode + "\nOrigin: " + originString + "\nDestination: " + destinationString + "\nDepartureTime: " + originDepartureDate.toString()); //"\nReturningTime: " + destinationDepartureDate.toString()
-                System.out.println("MISC. ERROR: " + response.getResponseCode().toString() + "\n" + response.getHttpResponseMessage());
-                //Any other http response code should tell the view to show an error message
-                break;
+                //System.out.println("Params:\n" + "Country Code: " + countryCode + "\nCurrency Code: " + currencyCode + "\nOrigin: " + originString + "\nDestination: " + destinationString + "\nDepartureTime: " + originDepartureDate.toString()); //"\nReturningTime: " + destinationDepartureDate.toString()
+                //System.out.println("MISC. ERROR: " + response.getResponseCode().toString() + "\n" + response.getHttpResponseMessage());
+                throw new QuoteRequestException(response.getResponseCode().toString());
         }
 
         return getSortedQuotes();
