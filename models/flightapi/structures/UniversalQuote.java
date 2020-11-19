@@ -48,8 +48,7 @@ public class UniversalQuote {
 
     public String getPriceFormatted()
     {
-        //Make call to Currency.FormatValue();
-        return "$" + price;
+        return currency.getFormattedValue(price);
     }
 
     @Override

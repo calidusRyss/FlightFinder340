@@ -57,7 +57,7 @@ public class Currency {
     //=================  GETTERS ===============
 
     /**
-     * 
+     *
      * @return The Currency Code
      */
     public String getCode() {
@@ -65,7 +65,7 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return The Currency Symbol
      */
     public String getSymbol() {
@@ -73,7 +73,7 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return The Thousands Separator String
      */
     public String getThousandsSeparator() {
@@ -81,7 +81,7 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return The Decimal Separator String
      */
     public String getDecimalSeparator() {
@@ -89,7 +89,7 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return Whether the currency symbol should be displayed on the left or right
      */
     public boolean isSymbolOnLeft() {
@@ -97,7 +97,7 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return Whether to include a space between the currency symbol and currency value
      */
     public boolean isSpaceBetweenAmountAndSymbol() {
@@ -105,7 +105,7 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return The coefficient used to round the currency value
      */
     public int getRoundingCoefficient() {
@@ -113,11 +113,36 @@ public class Currency {
     }
 
     /**
-     * 
+     *
      * @return The number of digits allowed after the decimal place
      */
     public int getDecimalDigits() {
         return decimalDigits;
+    }
+
+    /**
+     * Formats a value using this currency's formatting.
+     * @param dollarValue The value to format
+     * @return A formatted string of the dollarValue
+     */
+    public String getFormattedValue(int dollarValue)
+    {
+        String tempThousands = dollarValue + "";
+        String formatted = "";
+
+        for (int i = tempThousands.length() - 1, j = 1; i > -1; i--, j++)
+        {
+            formatted = tempThousands.charAt(i) + formatted;
+            if (j%3 == 0 && i - 1 > -1)
+            {
+                formatted = thousandsSeparator + formatted;
+            }
+
+        }
+
+        if (symbolOnLeft)
+            return symbol + (spaceBetweenAmountAndSymbol ? " " : "") + formatted;
+        return formatted + (spaceBetweenAmountAndSymbol ? " " : "") + symbol;
     }
 
 }
