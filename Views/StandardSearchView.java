@@ -75,18 +75,23 @@ public class StandardSearchView {
         
     }
     
-    public void loadSortModes(JComboBox _combo)
+    public void loadSortModes(JComboBox _combo, StoreSortMode _defaultMode)
     {
         _combo.removeAllItems();
+        
         
         int index = 0;
         int count =0;
         for (StoreSortMode mode : StoreSortMode.values())
         {
-            count++;
+            
             _combo.addItem(mode.toString());
-            if (ControllerBox.getBox().getQuoteSearchCont().getCurrentSortMode() == mode)
+            if (_defaultMode == mode)
+            {
                 index = count;
+            }
+            count++;
+                
         }    
         
         _combo.setSelectedIndex(index);

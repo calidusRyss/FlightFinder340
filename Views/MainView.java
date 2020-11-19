@@ -30,8 +30,8 @@ public class MainView {
         LoadedViews = new ArrayList<JPanel>();
         frame = _frame;        
        
-        load(new LoadingJPanel());
-        setView(LoadingJPanel.class);
+        //load(new LoadingJPanel());
+        //setView(LoadingJPanel.class);
         
         for (JPanel p : _viewPanels)
         {
