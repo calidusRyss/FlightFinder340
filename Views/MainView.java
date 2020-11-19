@@ -25,16 +25,20 @@ public class MainView {
     private final JFrame frame;
         
     
-    public MainView(JFrame _frame)
+    public MainView(JFrame _frame, JPanel[] _viewPanels)
     {
         LoadedViews = new ArrayList<JPanel>();
         frame = _frame;        
        
-        load(new SettingsJPanel());
-        load(new StandardSearchJPanel());       
+        load(new LoadingJPanel());
+        setView(LoadingJPanel.class);
         
+        for (JPanel p : _viewPanels)
+        {
+            load(p);
+        }
         
-        
+        setView(_viewPanels[0].getClass());        
     }
        
     
@@ -44,6 +48,7 @@ public class MainView {
     {
         JPanel p = (JPanel) GetLoadedPanel(_view);
         
+        p.setSize(frame.getSize());
         frame.setContentPane(p);   
         frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
         frame.revalidate();   
@@ -67,7 +72,7 @@ public class MainView {
     private void load(JPanel _p)
     {
         LoadedViews.add(_p);
-        _p.setSize(frame.getSize());
+        
         frame.add(_p); 
     }
 }

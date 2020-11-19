@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -20,6 +21,7 @@ import main.java.controllers.CountryController;
 import main.java.controllers.CurrencyController;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;
+import main.java.models.flightapi.enums.StoreSortMode;
 import main.java.models.flightapi.structures.Property;
 import main.java.models.flightapi.structures.QuoteStruct;
 
@@ -49,36 +51,52 @@ public class StandardSearchView {
     
     public StandardSearchView(StandardSearchCollector _collector, JPanel _fBoxPanel) {
                 
+       
+        
         this.QuoteRetriever = ControllerBox.getBox().getQuoteSearchCont();
         this.searchCollector = _collector;
-        this.flightBoxPanel = _fBoxPanel;
+        this.flightBoxPanel = _fBoxPanel;       
         
         setLableNames(this.flightBoxPanel);   
         
-        this.flightBoxs = getPanelChildren(this.flightBoxPanel);
+        this.flightBoxs = getPanelChildren(this.flightBoxPanel);        
 
         // This just sets the boders of each flight box to null so the don't look out of place
         // before being populated.
         for(  JPanel jp :  this.flightBoxs)
         {
-            jp.setBorder(null);
-        }  
-        
-       test();
-       setFlightResults();
-    }   
+            jp.setVisible(false);            
+        } 
+    }       
     
-    
-    public void test()
-    {
-        Property[] arr = new Property[1];
-        arr[0] = new Property("price","100");
-        setFlightbox(flightBoxs[0],arr);
-    }
-    
+     
     public void updateSugjustions(JList list,String text)
     {
         
+    }
+    
+    public void loadSortModes(JComboBox _combo)
+    {
+        _combo.removeAllItems();
+        
+        int index = 0;
+        int count =0;
+        for (StoreSortMode mode : StoreSortMode.values())
+        {
+            count++;
+            _combo.addItem(mode.toString());
+            if (ControllerBox.getBox().getQuoteSearchCont().getCurrentSortMode() == mode)
+                index = count;
+        }    
+        
+        _combo.setSelectedIndex(index);
+        
+    }
+    
+    public void setSortMode(int _index)
+    {
+        if (_index >= 0)
+            ControllerBox.getBox().getQuoteSearchCont().sortQuotesBy(StoreSortMode.values()[_index]);
     }
     
     public static void setLableNames( JPanel _jp)
@@ -134,7 +152,7 @@ public class StandardSearchView {
             JPanel max = List.get(0);
             for (int i = 1; i < List.size(); i++)
             {
-                if (max.getY() < List.get(i).getY())
+                if (max.getY() < List.get(i).getY() )
                     max = List.get(i);
             }
             
@@ -150,6 +168,7 @@ public class StandardSearchView {
         
     private void setFlightbox(JPanel ParentPanel, Property[] _props ) {
         
+        ParentPanel.setVisible(true);
         
         Component[] arr = ParentPanel.getComponents();
         
@@ -183,6 +202,8 @@ public class StandardSearchView {
     
     public void setFlightResults()
     {
+       this.flightBoxs = getPanelChildren(this.flightBoxPanel);   
+        
        System.out.println(ControllerBox.getBox().getCurrencyCont().getSelectedCurrencySymbol());
        System.out.println(ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
         
@@ -199,7 +220,7 @@ public class StandardSearchView {
             
             
             
-            Property index = new Property("index","" +i);
+            Property index = new Property("index","" +(i+1) );
             quoteProps[numberOfProps] = index;
             
             results[i] = quoteProps;
@@ -227,12 +248,8 @@ public class StandardSearchView {
         }
         
         for (int box=0; box < flightBoxs.length; box++)
-        {            
-            if (flightBoxs[box].getBorder() == null)
-            {
-                flightBoxs[box].setBorder(BorderFactory.createEtchedBorder(1));
-            }
-            
+        {           
+           
             if (flightResuts.length != 0 && currentfilghtIndex + box < flightResuts.length)
                 setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
             
