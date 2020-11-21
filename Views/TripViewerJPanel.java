@@ -5,7 +5,6 @@
  */
 package main.java.FlightFinder340.Views;
 
-import flightfinder3.main.java.FlightFinder340.Views.StandardSearchCollector;
 import flightfinder3.main.java.FlightFinder340.Views.StandardSearchView;
 
 /**

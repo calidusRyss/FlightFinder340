@@ -1,4 +1,4 @@
-package flightfinder3.main.java.FlightFinder340.Views;
+package main.java.FlightFinder340.Views;
 /*
 Last updated 10-28-2020.
 This is an implementation of a input Collector for the standard search view.  
@@ -6,6 +6,7 @@ Contributors-Michael
 */
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
+import flightfinder3.main.java.FlightFinder340.Views.IInputFieldCollector;
 import main.java.models.flightapi.structures.Property;
 import java.awt.Component;
 import java.time.LocalDate;
@@ -22,12 +23,12 @@ import main.java.FlightFinder340.controllers.ControllerBox;
 public class StandardSearchCollector implements IInputFieldCollector{
     
     
-    private JTextField origin;
-    private JTextField destination;
-    private DatePicker departing;
-    private DatePicker returning;
-    private TimePicker departTime;
-    private TimePicker returnTime;
+    protected  JTextField origin;
+    protected  JTextField destination;
+    protected  DatePicker departing;
+    protected  DatePicker returning;
+    protected  TimePicker departTime;
+    protected  TimePicker returnTime;
 
     public StandardSearchCollector(JTextField _origin, JTextField _destination, DatePicker _departing, DatePicker _returning, TimePicker _departTime, TimePicker _returnTime) {
         this.origin = _origin;
@@ -66,8 +67,7 @@ public class StandardSearchCollector implements IInputFieldCollector{
         return ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         
     }
-    
-    
+        
     public Property[] getFields()
     {       
                

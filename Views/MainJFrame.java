@@ -167,31 +167,25 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        MainJFrame main = new MainJFrame();
+        MainJFrame mainF = new MainJFrame();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                       main.setVisible(true);
+                       mainF.setVisible(true);
             }
         });
         
-        main.inilize();
+        mainF.inilize();
     }
 
     public void inilize()
     {   
-        JPanel[] viewPanels = 
-        {
-            new StandardSearchJPanel(),
-            new CheapestToAnywhereSearchJPanel(),
-            new SettingsJPanel(),
-            new TripViewerJPanel()
-        };
+      
                 
         
-        mv = new MainView(this,viewPanels);       
+        mv = new MainView(this);       
     }
     
    private MainView mv;

@@ -5,7 +5,7 @@
  */
 package main.java.FlightFinder340.Views;
 
-import flightfinder3.main.java.FlightFinder340.Views.StandardSearchCollector;
+import flightfinder3.main.java.FlightFinder340.Views.IInputFieldCollector;
 import flightfinder3.main.java.FlightFinder340.Views.StandardSearchView;
 
 /**
@@ -34,12 +34,11 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jLabel52 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jpanel10 = new javax.swing.JPanel();
         jLabel131 = new javax.swing.JLabel();
@@ -106,67 +105,57 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
         jLabel53 = new javax.swing.JLabel();
         timePicker3 = new com.github.lgooddatepicker.components.TimePicker();
         datePicker3 = new com.github.lgooddatepicker.components.DatePicker();
+        jButton3 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
         jPopupMenu1.add(jMenuItem1);
 
-        jButton3.setText("Search");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTextField1.setText("CLT");
+        jTextField1.setName("FLYINGFROM"); // NOI18N
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
             }
         });
-
-        jTextField3.setText("anywhere");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
             }
         });
 
         jLabel52.setText("Flying from");
 
-        jLabel51.setText("Flying To");
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextField1)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(82, 82, 82)
                 .addComponent(jLabel52)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addComponent(jLabel51)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel52)
-                    .addComponent(jLabel51))
+                .addComponent(jLabel52)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel3.setPreferredSize(new java.awt.Dimension(559, 834));
         jPanel3.setEnabled(false);
         jPanel3.setOpaque(false);
@@ -176,7 +165,7 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
 
         jLabel131.setText("Origin");
         jLabel131.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jpanel10.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 90, -1));
+        jpanel10.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 150, -1));
 
         jLabel132.setText("originDepartureTime");
         jLabel132.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -223,7 +212,7 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
 
         jLabel119.setText("Origin");
         jLabel119.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jpanel9.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 90, -1));
+        jpanel9.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 190, -1));
 
         jLabel120.setText("originDepartureTime");
         jLabel120.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -270,7 +259,7 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
 
         jLabel143.setText("Origin");
         jLabel143.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jpanel11.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 90, -1));
+        jpanel11.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 150, -1));
 
         jLabel144.setText("originDepartureTime");
         jLabel144.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -317,7 +306,7 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
 
         jLabel155.setText("Origin");
         jLabel155.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jpanel12.add(jLabel155, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 90, -1));
+        jpanel12.add(jLabel155, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 38, 150, -1));
 
         jLabel156.setText("originDepartureTime");
         jLabel156.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -486,6 +475,13 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
                 .addComponent(timePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -496,6 +492,10 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -503,7 +503,8 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jButton3))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -517,21 +518,19 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 11, Short.MAX_VALUE)
+                                .addComponent(jLabel50)
+                                .addGap(77, 77, 77))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel50)
-                                        .addGap(77, 77, 77))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton3)
-                                        .addGap(182, 182, 182)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -542,10 +541,8 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel50)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -568,26 +565,31 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
         this.view.setAllFlightBoxsBack();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         // TODO add your handling code here:
         //jPopupMenu1.show(this, jTextField1.getBaseline(), HEIGHT) , jTextField1.getY());
     }//GEN-LAST:event_jTextField1FocusGained
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        jTextField1.setText(
+                jList1.getModel().getElementAt(jList1.getSelectedIndex())
+        );   
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+         view.updateSugjustions(jList1, jTextField1.getText(),jTextField1.getName());
+    }//GEN-LAST:event_jTextField1KeyTyped
+
      public  void inilize()
     {
        // This helper method is used because the componets passed below can not be referenced from a static context.
-       StandardSearchCollector ssc = new StandardSearchCollector( 
-               this.jTextField1,
-               this.jTextField3,
+       ToAnyWhereCollector taw = new ToAnyWhereCollector( 
+               this.jTextField1,               
                this.datePicker2,
                this.datePicker3,
                this.timePicker1,
                this.timePicker3);
-       this.view = new StandardSearchView(ssc,this.jPanel3);  
+       this.view = new StandardSearchView(taw,this.jPanel3);  
        
     }   
     
@@ -651,9 +653,9 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel165;
     private javax.swing.JLabel jLabel166;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -662,8 +664,8 @@ public class CheapestToAnywhereSearchJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel jpanel10;
     private javax.swing.JPanel jpanel11;
     private javax.swing.JPanel jpanel12;

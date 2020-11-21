@@ -7,18 +7,18 @@ Contributors-Michael
 */
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import main.java.FlightFinder340.Views.MainView;
+import main.java.FlightFinder340.Views.KeyInputUpdater;
 import main.java.FlightFinder340.controllers.ControllerBox;
-import main.java.controllers.CountryController;
-import main.java.controllers.CurrencyController;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;
 import main.java.models.flightapi.enums.StoreSortMode;
@@ -37,21 +37,25 @@ import main.java.models.flightapi.structures.QuoteStruct;
  */
 public class StandardSearchView {    
         
+    
+    
     private final int numberOfProps = 8;
     private  int currentfilghtIndex = 0; 
     private  boolean inilized = false;
     
     private  Property[][] flightResuts;
     private  Property[] searchFields;
-    private  StandardSearchCollector searchCollector;
+    private  IInputFieldCollector searchCollector;
     private JPanel[] flightBoxs;    
     private JPanel flightBoxPanel;
     private QuoteSearchController QuoteRetriever;
+    private ArrayList<KeyInputUpdater> kIUpdaterList;
+   
 
     
-    public StandardSearchView(StandardSearchCollector _collector, JPanel _fBoxPanel) {
-                
-       
+    public StandardSearchView(IInputFieldCollector _collector, JPanel _fBoxPanel) {
+               
+        kIUpdaterList = new ArrayList<KeyInputUpdater>();
         
         this.QuoteRetriever = ControllerBox.getBox().getQuoteSearchCont();
         this.searchCollector = _collector;
@@ -67,11 +71,27 @@ public class StandardSearchView {
         {
             jp.setVisible(false);            
         } 
-    }       
+    } 
     
+    public void updateSugjustions(JList _jList, String _inputFieldText, String _lable)
+    {   
      
-    public void updateSugjustions(JList list,String text)
-    {
+        boolean kiuExsists = false;
+        
+        for (KeyInputUpdater kiu : kIUpdaterList)
+        {
+            if (_lable.equals(kiu.getLable()))
+            {
+                kiu.updateInput(_inputFieldText);
+                kiuExsists = true;
+            }
+        }
+        
+        if (kiuExsists == false)
+        {
+            kIUpdaterList.add(new KeyInputUpdater(_jList,_inputFieldText,_lable));           
+        }
+        
         
     }
     

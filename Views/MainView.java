@@ -23,25 +23,57 @@ public class MainView {
     
     private ArrayList<JPanel> LoadedViews;
     private final JFrame frame;
+    
+    private  JPanel[] viewPanels;
         
     
-    public MainView(JFrame _frame, JPanel[] _viewPanels)
+    public MainView(JFrame _frame)
     {
         LoadedViews = new ArrayList<JPanel>();
-        frame = _frame;        
+        frame = _frame;   
+        
+        try
+        {
+            loadJPanels();
+        }            
+        catch  (main.java.exceptions.controllers.ApiFailedToLoadException  e)
+        {
+           int userChoice = JOptionPane.showConfirmDialog(frame, "Api Failed To Load would you like to  retry?","error", JOptionPane.YES_NO_OPTION);
+
+           if (userChoice == 1)
+           {
+               loadJPanels();                   
+           }
+           else
+           {
+               System.exit(0);
+           } 
+
+        }
+        
+        
+            
        
         //load(new LoadingJPanel());
         //setView(LoadingJPanel.class);
         
-        for (JPanel p : _viewPanels)
+        for (int i = 0; i < viewPanels.length; i++)
         {
-            load(p);
+           load(viewPanels[i]);
         }
         
-        setView(_viewPanels[0].getClass());        
+        setView(viewPanels[0].getClass());        
     }
        
-    
+    private void loadJPanels()
+    {
+       viewPanels = new JPanel[] {
+            new StandardSearchJPanel(),
+            new CheapestToAnywhereSearchJPanel(),
+            new SettingsJPanel(),
+            new TripViewerJPanel()
+        };
+    }
     
     
     public void setView(Class<?> _view)

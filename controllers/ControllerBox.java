@@ -56,12 +56,16 @@ public class ControllerBox {
     {
         if (singleton == null)
         {
+            
             currencyCont = new CurrencyController();
             countryCont = new CountryController();        
             placeSuggestionsCont = new PlaceSuggestionsController(countryCont,currencyCont);
             quoteSearchCont = new QuoteSearchController(placeSuggestionsCont);
-            
+
             singleton = this;
+            
+            
+                
         }
     }
     
