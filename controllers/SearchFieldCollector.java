@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package flightfinder3.main.java.FlightFinder340.controllers;
+package main.java.controllers;
 
 import main.java.models.flightapi.structures.Property;
 

@@ -1,5 +1,5 @@
 
-package main.java.FlightFinder340.controllers;
+package main.java.controllers;
 /*
 Last updated 10-28-2020.
 This is an interface to retrieve Search results from some source. 

@@ -8,7 +8,7 @@ package main.java.FlightFinder340.Views;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JComboBox ;
-import main.java.FlightFinder340.controllers.ControllerBox;
+import main.java.controllers.ControllerBox;
 import main.java.controllers.CountryController;
 import main.java.controllers.CurrencyController;
 

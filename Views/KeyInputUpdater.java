@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.Timer;
-import main.java.FlightFinder340.controllers.ControllerBox;
+import main.java.controllers.ControllerBox;
 import main.java.controllers.PlaceSuggestionsController;
 
 /**
@@ -80,8 +80,14 @@ public class KeyInputUpdater {
                 listModel.addElement(suggestions[i]);
             }
         }
+        listModel.addElement(" ");
         
-        list.setModel(listModel);
+        try{
+            list.setModel(listModel);
+        } catch (ArrayIndexOutOfBoundsException e)
+        {
+            System.out.print("hey");
+        }
         
     }
     

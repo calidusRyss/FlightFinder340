@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JTextField;
-import main.java.FlightFinder340.controllers.ControllerBox;
+import main.java.controllers.ControllerBox;
 
 /**
  *

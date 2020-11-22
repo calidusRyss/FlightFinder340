@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.FlightFinder340.controllers;
+package main.java.controllers;
 
 import main.java.controllers.CountryController;
 import main.java.controllers.CurrencyController;
@@ -23,6 +23,9 @@ public class ControllerBox {
     private CountryController countryCont;
     private PlaceSuggestionsController placeSuggestionsCont;
     private QuoteSearchController quoteSearchCont;
+    private TripController tripCont;
+    private TripEditorController tripEditCont;
+            
     
     public static ControllerBox getBox()
     {
@@ -51,6 +54,14 @@ public class ControllerBox {
     public QuoteSearchController getQuoteSearchCont() {
         return quoteSearchCont;
     }
+
+    public TripController getTripCont() {
+        return tripCont;
+    }
+
+    public TripEditorController getTripEditCont() {
+        return tripEditCont;
+    }
     
     public ControllerBox()
     {
@@ -61,6 +72,8 @@ public class ControllerBox {
             countryCont = new CountryController();        
             placeSuggestionsCont = new PlaceSuggestionsController(countryCont,currencyCont);
             quoteSearchCont = new QuoteSearchController(placeSuggestionsCont);
+            tripCont = new TripController(quoteSearchCont,currencyCont);
+            tripEditCont = new TripEditorController(quoteSearchCont,tripCont);
 
             singleton = this;
             

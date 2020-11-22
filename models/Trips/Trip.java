@@ -1,5 +1,6 @@
 package main.java.models.Trips;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import main.java.models.flightapi.QuoteStructConverter;
 import main.java.models.flightapi.structures.Currency;
@@ -140,13 +141,13 @@ public class Trip {
      * Get all Quotes converted into QuoteStructs
      * @return An array of QuoteStructs
      */
-    public QuoteStruct[] getQuoteStructArray()
+    public ArrayList<QuoteStruct> getQuoteStructArrayList()
     {
-        QuoteStruct[] arr = new QuoteStruct[quotes.length];
+        ArrayList<QuoteStruct> arr = new  ArrayList<QuoteStruct>();
 
         for (int i = 0; i < quotes.length; i++)
         {
-            arr[i] = QuoteStructConverter.convertQuoteToStruct(quotes[i]);
+            arr.add( QuoteStructConverter.convertQuoteToStruct(quotes[i]));
         }
 
         return arr;

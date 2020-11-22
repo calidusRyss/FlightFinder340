@@ -1,4 +1,4 @@
-package flightfinder3.main.java.FlightFinder340.Views;
+package main.java.FlightFinder340.Views;
 /*
 Last updated 10-28-2020.
 This is the main View file for Standard Search function it is passed the needed components from a JFrame in its constructor.
@@ -18,9 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import main.java.FlightFinder340.Views.KeyInputUpdater;
-import main.java.FlightFinder340.controllers.ControllerBox;
+import main.java.controllers.ControllerBox;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;
+import main.java.models.Trips.Trip;
 import main.java.models.flightapi.enums.StoreSortMode;
 import main.java.models.flightapi.structures.Property;
 import main.java.models.flightapi.structures.QuoteStruct;
@@ -38,7 +39,7 @@ import main.java.models.flightapi.structures.QuoteStruct;
 public class StandardSearchView {    
         
     
-    
+    private final int numberOfFlightBoxes = 4;
     private final int numberOfProps = 8;
     private  int currentfilghtIndex = 0; 
     private  boolean inilized = false;
@@ -56,6 +57,15 @@ public class StandardSearchView {
     public StandardSearchView(IInputFieldCollector _collector, JPanel _fBoxPanel) {
                
         kIUpdaterList = new ArrayList<KeyInputUpdater>();
+        flightBoxs = new JPanel[numberOfFlightBoxes];
+        
+        for (int i = 0; i < numberOfFlightBoxes; i++)
+        {
+            JPanel fbox = new FlightBoxJPanel();
+             _fBoxPanel.add(fbox);
+             flightBoxs[i] = fbox;
+             
+        }
         
         this.QuoteRetriever = ControllerBox.getBox().getQuoteSearchCont();
         this.searchCollector = _collector;
@@ -63,7 +73,7 @@ public class StandardSearchView {
         
         setLableNames(this.flightBoxPanel);   
         
-        this.flightBoxs = getPanelChildren(this.flightBoxPanel);        
+        //this.flightBoxs = getPanelChildren(this.flightBoxPanel);        
 
         // This just sets the boders of each flight box to null so the don't look out of place
         // before being populated.
@@ -71,6 +81,8 @@ public class StandardSearchView {
         {
             jp.setVisible(false);            
         } 
+        
+        
     } 
     
     public void updateSugjustions(JList _jList, String _inputFieldText, String _lable)
@@ -149,6 +161,7 @@ public class StandardSearchView {
         }    
     }
     
+    /**
     public static JPanel[] getPanelChildren(JPanel _jp)
     {
         int num =0;
@@ -177,7 +190,7 @@ public class StandardSearchView {
             JPanel max = List.get(0);
             for (int i = 1; i < List.size(); i++)
             {
-                if (max.getY() < List.get(i).getY() )
+                if (max.getY() > List.get(i).getY() )
                     max = List.get(i);
             }
             
@@ -187,19 +200,30 @@ public class StandardSearchView {
             
         }            
         return result;
-    }          
+    }   
+    **/
     
     
         
-    private void setFlightbox(JPanel ParentPanel, Property[] _props ) {
+    private void setFlightbox(JPanel _parentPanel, Property[] _props ) {
         
-        ParentPanel.setVisible(true);
+        _parentPanel.setVisible(true);
         
-        Component[] arr = ParentPanel.getComponents();
-        
-        for( Component c : ParentPanel.getComponents())        
+        Component[] arr = _parentPanel.getComponents();      
+                
+        for( Component c : _parentPanel.getComponents())        
         {
-                       
+               
+            if (c instanceof JComboBox)
+            {
+                ((JComboBox) c).removeAllItems();
+                
+                for (Trip t : ControllerBox.getBox().getTripCont().getAllTrips())
+                {
+                    ((JComboBox) c).addItem(t.getName());
+                }
+            }
+            
             if (c instanceof JLabel && c.getName()  != null)
             {
                 JLabel j =(JLabel) c;
@@ -227,19 +251,19 @@ public class StandardSearchView {
     
     public void setFlightResults()
     {
-       this.flightBoxs = getPanelChildren(this.flightBoxPanel);   
+        setFlightResults(QuoteRetriever.searchQuotes(searchCollector.getFields()));
+    }
+    
+    public void setFlightResults(ArrayList<QuoteStruct> _qsarr)
+    {
+       
+        Property[][] results = new  Property[_qsarr.size()] [numberOfProps +1];
         
-       System.out.println(ControllerBox.getBox().getCurrencyCont().getSelectedCurrencySymbol());
-       System.out.println(ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
-        
-        ArrayList<QuoteStruct> qsarr = QuoteRetriever.searchQuotes(searchCollector.getFields());
-         Property[][] results = new  Property[qsarr.size()] [numberOfProps +1];
         
         
-        
-        for (int i = 0; i < qsarr.size(); i++)
+        for (int i = 0; i < _qsarr.size(); i++)
         {
-            QuoteStruct qs = qsarr.get(i);
+            QuoteStruct qs = _qsarr.get(i);
             
             Property[] quoteProps = ConvertQuoteToPropertyArr(qs) ;
             
@@ -260,9 +284,7 @@ public class StandardSearchView {
     
     public void setAllFlightBoxsNext()
     {
-        if (flightResuts == null)
-            return;      
-        
+         
         if (inilized == false)
             {inilized = true;}
         else
@@ -275,8 +297,20 @@ public class StandardSearchView {
         for (int box=0; box < flightBoxs.length; box++)
         {           
            
-            if (flightResuts.length != 0 && currentfilghtIndex + box < flightResuts.length)
-                setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
+            if (flightResuts.length != 0 )
+            {
+                if ( currentfilghtIndex + box < flightResuts.length)
+                {
+                    flightBoxs[box].setVisible(true);
+                    setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]); 
+                }else
+                {
+                    flightBoxs[box].setVisible(false);
+                }
+            }else
+            {
+                 flightBoxs[box].setVisible(false);
+            }
             
         }
     }
@@ -296,12 +330,26 @@ public class StandardSearchView {
                 currentfilghtIndex = 0;
         }
         
+        
         for (int box=0; box < flightBoxs.length; box++)
-        {            
+        {           
+           
+            if (flightResuts.length != 0 )
+            {
+                if ( currentfilghtIndex + box < flightResuts.length)
+                {
+                    flightBoxs[box].setVisible(true);
+                    setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]); 
+                }else
+                {
+                    flightBoxs[box].setVisible(false);
+                }
+            }else
+            {
+                 flightBoxs[box].setVisible(false);
+            }
             
-          setFlightbox(flightBoxs[box],flightResuts[currentfilghtIndex + box]);            
-            
-        }
+        }        
     }
         
     

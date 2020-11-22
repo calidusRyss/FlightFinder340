@@ -38,6 +38,21 @@ public class TripsStore {
 
         sort(currentSortMode);
     }
+    
+     /**
+     * Adds 1 Trips to the Store and Give it a free Name by appending a number if needed.
+     * @param _t the tip.
+     * @pram _tripName the name to use. 
+     */
+    public void addCollection(Trip _t, String _tripName) {
+        
+        _t.setName( this.getNextFreeName(_tripName));
+        
+        this.sortedTrips.add(_t);
+        
+
+        this.sort(this.currentSortMode);
+    }
 
     /**
      * Deletes a Trip at the give index.
@@ -95,6 +110,40 @@ public class TripsStore {
         }
 
         return allTrips;
+    }
+    
+    /**
+     * get a string that is not currently a tripName by appending a number or Incrementing a number at the end.
+     * @param _tripName The new name for the trip.
+     * @return a string that is not currently a tripName.
+     */
+    public String getNextFreeName( String _tripName)
+    {
+         ArrayList<String> namesList = new ArrayList<String>();        
+        
+        if(_tripName.trim().equals(""))
+            _tripName = "New Trip";
+         
+        for (Trip t : this.sortedTrips)
+        {
+            namesList.add(t.getName());
+        }
+        
+        while (namesList.contains(_tripName))
+        {
+            if (_tripName.contains("-"))
+            {
+                String[] a = _tripName.split("-", -2);
+            
+                int newNumber = Integer.parseInt(a[1]) + 1;
+                _tripName = a[0] + "-" + newNumber;
+            }
+            else
+                _tripName += "-1";
+            
+        }
+        
+        return _tripName;
     }
 
 }
