@@ -9,10 +9,7 @@ package main.java.models.flightapi.enums;
 public enum StoreSortMode {
     EARLIEST_OUTBOUND_DATE,
     LATEST_OUTBOUND_DATE,
-    EARLIEST_INBOUND_DATE,
-    LATEST_INBOUND_DATE,
     CHEAPEST,
     EXPENSIVE,
-    ALPHABETICALLY,
 
 }

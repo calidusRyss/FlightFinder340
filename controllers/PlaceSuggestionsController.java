@@ -77,12 +77,4 @@ public class PlaceSuggestionsController {
         placeSuggester.refreshSuggestions();
     }
 
-    /**
-     * Call this when the place suggester is done being used to cleanup.
-     */
-    public void close()
-    {
-        placeSuggester.close();
-    }
-
 }

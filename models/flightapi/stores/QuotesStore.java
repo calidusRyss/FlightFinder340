@@ -73,20 +73,11 @@ public class QuotesStore implements IStore {
     @Override
     public void sort(StoreSortMode _sortMode) {
         switch (_sortMode) {
-            case ALPHABETICALLY:
-                sortAlphabetically();
-                break;
             case CHEAPEST:
                 sortCheapest();
                 break;
             case EXPENSIVE:
                 sortExpensive();
-                break;
-            case EARLIEST_INBOUND_DATE:
-                sortEarliestInboundDate();
-                break;
-            case LATEST_INBOUND_DATE:
-                sortLatestInboundDate();
                 break;
             case EARLIEST_OUTBOUND_DATE:
                 sortEarliestOutboundDate();

@@ -23,6 +23,11 @@ public class Currency {
     private int roundingCoefficient;
     private int decimalDigits;
 
+    public Currency()
+    {
+        
+    }
+
     /**
      * Construct a Currency object
      * @param _code The Currency Code. Example: "USD"

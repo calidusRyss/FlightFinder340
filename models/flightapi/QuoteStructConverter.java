@@ -1,6 +1,5 @@
 package main.java.models.flightapi;
 
-import java.time.format.DateTimeFormatter;
 import main.java.models.flightapi.structures.QuoteStruct;
 import main.java.models.flightapi.structures.UniversalJourneyLeg;
 import main.java.models.flightapi.structures.UniversalQuote;
@@ -12,7 +11,7 @@ import main.java.models.flightapi.structures.UniversalQuote;
  */
 public class QuoteStructConverter {
 
-    private static final DateTimeFormatter universalDateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
 
     /**
      * Helper method that converts a Quote object into a QuoteStruct object and formats strings
@@ -32,7 +31,7 @@ public class QuoteStructConverter {
 
         String outboundOrigin = outboundLeg.getOriginLocation().getMostAccurateLocation();
         String outboundDestination = outboundLeg.getDestinationLocation().getMostAccurateLocation();
-        String outboundDepartureTime = outboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
+        String outboundDepartureTime = outboundLeg.getDepartureDateTime();
         String[] outboundCarrierNames = outboundLeg.getCarrierNames();
 
         String inboundOrigin = "";
@@ -43,7 +42,7 @@ public class QuoteStructConverter {
         if (inboundLeg != null) {
             inboundOrigin = inboundLeg.getOriginLocation().getMostAccurateLocation();
             inboundDestination = inboundLeg.getDestinationLocation().getMostAccurateLocation();
-            inboundDepartureTime = inboundLeg.getDepartureDateTime().format(universalDateTimeFormatter);
+            inboundDepartureTime = inboundLeg.getDepartureDateTime();
             inboundCarrierNames = inboundLeg.getCarrierNames();
         }
         //Format Price

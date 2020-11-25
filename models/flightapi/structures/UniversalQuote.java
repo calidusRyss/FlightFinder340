@@ -8,13 +8,18 @@ package main.java.models.flightapi.structures;
  */
 public class UniversalQuote {
 
-    private final int price;
-    private final Currency currency;
+    private int price;
+    private Currency currency;
 
-    private final UniversalJourneyLeg outboundLeg;
-    private final UniversalJourneyLeg inboundLeg;
+    private UniversalJourneyLeg outboundLeg;
+    private UniversalJourneyLeg inboundLeg;
 
-    private final boolean directFlight;
+    private boolean directFlight;
+
+    public UniversalQuote()
+    {
+        
+    }
 
     public UniversalQuote(int _price, Currency _currency, UniversalJourneyLeg _outboundLeg, UniversalJourneyLeg _inboundLeg, boolean _directFlight) {
         this.price = _price;

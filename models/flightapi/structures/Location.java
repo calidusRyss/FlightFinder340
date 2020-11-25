@@ -8,9 +8,14 @@ package main.java.models.flightapi.structures;
  */
 public class Location {
 
-    private final String country;
-    private final String city;
-    private final String airport;
+    private String country;
+    private String city;
+    private String airport;
+
+    public Location()
+    {
+        
+    }
 
     public Location(String _country, String _city, String _airport) {
         this.country = _country;

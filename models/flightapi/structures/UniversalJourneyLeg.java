@@ -1,6 +1,7 @@
 package main.java.models.flightapi.structures;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A class that represents a Journey Leg. I.E. Point A to Point B
@@ -11,18 +12,25 @@ import java.time.LocalDateTime;
  */
 public class UniversalJourneyLeg {
 
-    private final String[] carrierNames;
+    private static final DateTimeFormatter universalDateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-    private final Location originLocation;
-    private final Location destinationLocation;
+    private String[] carrierNames;
 
-    private final LocalDateTime departureDateTime;
+    private Location originLocation;
+    private Location destinationLocation;
+
+    private String departureDateTime;
+
+    public UniversalJourneyLeg()
+    {
+
+    }
 
     public UniversalJourneyLeg(String[] _carrierNames, Location _originLocation, Location _destinationLocation, LocalDateTime _departureDateTime) {
         this.carrierNames = _carrierNames;
         this.originLocation = _originLocation;
         this.destinationLocation = _destinationLocation;
-        this.departureDateTime = _departureDateTime;
+        this.departureDateTime = _departureDateTime.format(universalDateTimeFormatter);
     }
 
     @Override
@@ -44,7 +52,7 @@ public class UniversalJourneyLeg {
         return destinationLocation;
     }
 
-    public LocalDateTime getDepartureDateTime() {
+    public String getDepartureDateTime() {
         return departureDateTime;
     }
 

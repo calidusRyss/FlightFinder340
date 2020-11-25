@@ -15,11 +15,16 @@ public class Trip {
 
     private UniversalQuote[] quotes;
 
-    private final Currency currency;
+    private Currency currency;
 
     private int totalPrice;
 
     private String name;
+
+    public Trip()
+    {
+        currency = null;
+    }
 
     public Trip(Currency _currency)
     {
@@ -170,14 +175,27 @@ public class Trip {
         return currency;
     }
 
+    /**
+     * Set the name of this Trip
+     * @param _newName The new name for the Trip
+     */
     public void setName(String _newName)
     {
         name = _newName;
     }
 
+    /**
+     * Get the name of this Trip
+     * @return The name of this Trip
+     */
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" + "quotes=" + quotes + ", currency=" + currency + ", totalPrice=" + totalPrice + ", name=" + name + '}';
     }
 
 }

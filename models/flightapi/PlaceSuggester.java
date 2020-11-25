@@ -1,7 +1,5 @@
 package main.java.models.flightapi;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import main.java.adapters.FlightAPIAdapter;
 import main.java.api.skyscanner.models.structures.Place;
 import main.java.controllers.CountryController;
@@ -13,7 +11,7 @@ import main.java.models.flightapi.responses.PlacesResponse;
  * A class that helps make suggestions about places based on user input
  *
  * @author Teegan Krieger
- * @LastUpdate 11/4/2020
+ * @LastUpdate 11/25/2020
  */
 public class PlaceSuggester {
 
@@ -21,9 +19,6 @@ public class PlaceSuggester {
 
     private String queryString = "";
     private Suggestion[] suggestions;
-    private int countdownToRefresh;
-
-    private final Timer timer;
 
     private final CountryController countryController;
     private final CurrencyController currencyController;
@@ -34,18 +29,6 @@ public class PlaceSuggester {
         currencyController = _currencyController;
 
         suggestions = new Suggestion[0];
-        countdownToRefresh = -1;
-
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                timerExecution();
-            }
-        };
-
-        timer = new Timer();
-        //Schedule the task to occur every half second.
-        timer.schedule(task, 0, 500);
     }
 
     /**
@@ -76,31 +59,10 @@ public class PlaceSuggester {
         }
     }
 
-    /**
-     * Close the Place Suggester. This should be called when the place suggester is done being used!
-     */
-    public void close() {
-        timer.cancel();
-    }
-
-    /**
-     * Called whenever the time executes. Decrements the countdown and then calls refresh when the countdown equals 0
-     */
-    private void timerExecution() {
-        if (countdownToRefresh > -1) {
-            synchronized (suggestions) {
-                countdownToRefresh--;
-            }
-        }
-        if (countdownToRefresh == 0) {
-            refreshSuggestions();
-        }
-    }
-
     //=================  SETTERS ===============
-
     /**
      * Set the query
+     *
      * @param _value The new string to set the query to
      */
     public void setQuery(String _value) {
@@ -108,9 +70,6 @@ public class PlaceSuggester {
             throw new IllegalArgumentException("Query value cannot be null!");
         }
 
-        synchronized (suggestions) {
-            countdownToRefresh = countdownRefreshTiming;
-        }
         queryString = _value;
     }
 
@@ -118,17 +77,14 @@ public class PlaceSuggester {
      * Clear the query, reset the countdown and clear all suggestions
      */
     public void clearQuery() {
-        synchronized (suggestions) {
-            countdownToRefresh = -1;
-            queryString = "";
-            suggestions = new Suggestion[0];
-        }
+        queryString = "";
+        suggestions = new Suggestion[0];
     }
 
     //=================  GETTERS ===============
-
     /**
      * Get the current value of the query
+     *
      * @return
      */
     public String getQuery() {
@@ -137,6 +93,7 @@ public class PlaceSuggester {
 
     /**
      * Get an array of strings with all current suggestions
+     *
      * @return An array of strings
      */
     public String[] getSuggestions() {
@@ -151,6 +108,7 @@ public class PlaceSuggester {
 
     /**
      * Get the suggestion code for a specific suggestion.
+     *
      * @param _suggestionString The suggestion to find the code for
      * @return A string representing a suggestion code. If the suggestion isn't found, returns a blank string
      */
