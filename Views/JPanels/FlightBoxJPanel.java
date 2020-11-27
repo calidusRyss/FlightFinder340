@@ -1,4 +1,4 @@
-package main.java.FlightFinder340.Views.JPanels;
+package main.java.Views.JPanels;
 /*
 Last updated 11-27-2020.
 Contributors-Michael

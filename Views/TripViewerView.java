@@ -1,4 +1,4 @@
-package main.java.FlightFinder340.Views;
+package main.java.Views;
 /*
 Last updated 11-27-2020.
 Contributors-Michael
@@ -6,7 +6,7 @@ This is the main View file for Trip viewer.
 The main feature is updateing a Fligtbox panel. with saved search results.
 */
 
-import main.java.FlightFinder340.Views.JPanels.TripFlightBoxJPanel;
+import main.java.Views.JPanels.TripFlightBoxJPanel;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;

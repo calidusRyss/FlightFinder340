@@ -1,4 +1,4 @@
-package main.java.FlightFinder340.Views.JPanels;
+package main.java.Views.JPanels;
 /*
 Last updated 10-28-2020.
 Contributors-Michael
@@ -7,7 +7,7 @@ Using the design tab in Netbeans to make changes is recommended.
 */
 
 import javax.swing.JFrame;
-import main.java.FlightFinder340.Views.SettingsView;
+import main.java.Views.SettingsView;
 
 /**
  *

@@ -1,14 +1,14 @@
-package main.java.FlightFinder340.Views;
+package main.java.Views;
 /*
 Last updated 11-27-2020.
 Contributors-Michael
 This is the Main view. Handdles Switching between sub views.
 */
 
-import main.java.FlightFinder340.Views.JPanels.CheapestToAnywhereSearchJPanel;
-import main.java.FlightFinder340.Views.JPanels.SettingsJPanel;
-import main.java.FlightFinder340.Views.JPanels.TripViewerJPanel;
-import main.java.FlightFinder340.Views.JPanels.StandardSearchJPanel;
+import main.java.Views.JPanels.CheapestToAnywhereSearchJPanel;
+import main.java.Views.JPanels.SettingsJPanel;
+import main.java.Views.JPanels.TripViewerJPanel;
+import main.java.Views.JPanels.StandardSearchJPanel;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import javax.swing.JFrame;

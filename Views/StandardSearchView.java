@@ -1,4 +1,4 @@
-package main.java.FlightFinder340.Views;
+package main.java.Views;
 /*
 Last updated 11-27-2020.
 Contributors-Michael
@@ -6,7 +6,7 @@ This is the main View file for Standard Search function it is passed the needed 
 The main feature is updateing a Fligtbox panel. with search results.
 */
 
-import main.java.FlightFinder340.Views.JPanels.FlightBoxJPanel;
+import main.java.Views.JPanels.FlightBoxJPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import main.java.FlightFinder340.Views.KeyInputUpdater;
+import main.java.Views.KeyInputUpdater;
 import main.java.controllers.ControllerBox;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;

@@ -1,4 +1,4 @@
-package main.java.FlightFinder340.Views;
+package main.java.Views;
 /*
 Last updated 11-27-2020.
 This is a class for Updateing a JList by passing the inpute from a input field to
