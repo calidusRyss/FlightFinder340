@@ -104,9 +104,9 @@ public class Trip {
             newQuotes[i] = quotes[i];
         }
 
-        for (int i = _index + 1; i < quotes.length - 1; i++)
+        for (int i = _index + 1; i < quotes.length ; i++)
         {
-            newQuotes[i] = quotes[i];
+            newQuotes[i-1] = quotes[i];
         }
 
         if (quotes[_index] != null)

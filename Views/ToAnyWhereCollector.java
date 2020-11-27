@@ -1,7 +1,7 @@
 package main.java.FlightFinder340.Views;
 /*
-Last updated 10-28-2020.
-This is an implementation of a input Collector for the standard search view.  
+Last updated 11-27-2020.
+This is an implementation of a input Collector for the standard search view.
 Contributors-Michael
 */
 import com.github.lgooddatepicker.components.DatePicker;
@@ -22,36 +22,26 @@ import main.java.controllers.ControllerBox;
 public class ToAnyWhereCollector extends StandardSearchCollector {
 
 
-    public ToAnyWhereCollector(JTextField _origin, DatePicker _departing, DatePicker _returning, TimePicker _departTime, TimePicker _returnTime) {
+    public ToAnyWhereCollector(JTextField _origin, DatePicker _departing, TimePicker _departTime) {
         super(
                 _origin,
                 null,
                 _departing,
-                _returning,
-                _departTime,
-                _returnTime
+                _departTime
                 );
     }
-        
-  
-    
-    /**
-     *
-     * @return
-     */
+ 
     @Override
-    public Property[] getFields()
-    {       
-               
-        Property[] result = new Property[6];
+    public Property[] getFields() {
+
+        Property[] result = new Property[numberofProperties];
         result[0] = new Property( "origin",this.origin.getText());
         result[1] = new Property( "destination","Anywhere");
         result[2] = new Property( "departing", this.getISO_LOCAL_DATE_TIME(this.departing,this.departTime));
-        result[3] = new Property( "returning",getISO_LOCAL_DATE_TIME(this.returning,this.returnTime));
-        result[4] = new Property( "currencycode",ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
-        result[5] = new Property( "countrycode",ControllerBox.getBox().getCountryCont().getSelectedCountryCode());
-        
-        return result; 
+        result[3] = new Property( "currencycode",ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
+        result[4] = new Property( "countrycode",ControllerBox.getBox().getCountryCont().getSelectedCountryCode());
+
+        return result;
     }
-    
+
 }

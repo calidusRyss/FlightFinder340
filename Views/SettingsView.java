@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.FlightFinder340.Views;
+/*
+Last updated 11-27-2020.
+Contributors-Michael
+This is the Settings view. Handdles getting Inputs to change settings.
+*/
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,59 +17,56 @@ import main.java.controllers.CurrencyController;
  * @author Callidus
  */
 public class SettingsView {
-    
+
     private CountryController countryCont;
     private CurrencyController CurrencyCont;
     private final JComboBox comboCounty;
     private final JComboBox comboCurrency;
-    
-    public SettingsView(JComboBox _comboCounty, JComboBox _comboCurrency)
-    {
+
+    public SettingsView(JComboBox _comboCounty, JComboBox _comboCurrency) {
         comboCounty = _comboCounty;
         comboCounty.removeAllItems();
         comboCurrency = _comboCurrency;
         comboCurrency.removeAllItems();
         inilize();
     }
-    
-    public void inilize(){
+
+    public void inilize() {
         this.countryCont = ControllerBox.getBox().getCountryCont();
-        
-        for (String s : this.countryCont.getAllCountryNames()) {           
+
+        for (String s : this.countryCont.getAllCountryNames()) {
             comboCounty.addItem(s);
-        }  
-        
+        }
+
         this.setCountry(countryCont.getIndexOf("US"));
-        
-        
-        this.CurrencyCont = ControllerBox.getBox().getCurrencyCont();     
-        
+
+
+        this.CurrencyCont = ControllerBox.getBox().getCurrencyCont();
+
         for (String s : this.CurrencyCont.getAllCurrencyCodes()) {
             comboCurrency.addItem(s);
         }
-        
+
         this.setCurrency(CurrencyCont.getIndexOf("USD"));
-        
-        
-    }    
-    
-    
-    public void setCountry(int index)
-    {
-        comboCounty.setSelectedIndex(index);
-        countryCont.selectCountry(index);
     }
-    
-    public void setCurrency(int index)
-    {
-        comboCurrency.setSelectedIndex(index);
-        CurrencyCont.selectCurrency(index);
-    }
-    
-    public String getCountyName()
-    {
+
+
+
+    //=================  GETTERS ===============
+    public String getCountyName() {
         return countryCont.getSelectedCountryName();
     }
-    
-    
+
+    //=================  SETTERS ===============
+    public void setCountry(int _index) {
+        comboCounty.setSelectedIndex(_index);
+        countryCont.selectCountry(_index);
+    }
+
+    public void setCurrency(int _index) {
+        comboCurrency.setSelectedIndex(_index);
+        CurrencyCont.selectCurrency(_index);
+    }
+
+
 }

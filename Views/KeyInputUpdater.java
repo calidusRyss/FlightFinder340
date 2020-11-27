@@ -1,9 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.FlightFinder340.Views;
+/*
+Last updated 11-27-2020.
+This is a class for Updateing a JList by passing the inpute from a input field to
+the PlaceSuggestionsController.
+Contributors-Michael
+*/
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,77 +19,65 @@ import main.java.controllers.PlaceSuggestionsController;
  * @author Callidus
  */
 public class KeyInputUpdater {
-    
+
     private final int updateDelaySeconds = 1;
     private final int maxSuguestions = 5;
     private final String lable;
-    
-    private final JList list;
     private String inputFieldText;
-    
+    private final JList list;
     private Timer timer;
-    
-    public String getLable()
-    {
-        return lable;
-    }
-    
-    
-    public KeyInputUpdater(JList _list,String _inputFieldText, String _lable)
+
+    public KeyInputUpdater(JList _list, String _inputFieldText, String _lable)
     {
         list =_list;
         inputFieldText = _inputFieldText;
         lable = _lable;
-        
+
         timer = new Timer(updateDelaySeconds *1000, new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent arg0) {            
+            public void actionPerformed(ActionEvent arg0) {
             updateSugjustions();
-            }        
-        });       
-        
+            }
+        } );
+
         timer.setRepeats(false);
         timer.start();
-        
-        
     }
-    
-    
-    
-    public void updateInput(String _inputFieldText)
-    {
+
+    public void updateInput(String _inputFieldText) {
         inputFieldText = _inputFieldText;
         timer.restart();
     }
-     
-    public void updateSugjustions()
-    {
+
+    private void updateSugjustions() {
         PlaceSuggestionsController placeSug = ControllerBox.getBox().getPlaceSuggestionsCont();
-        
+
         placeSug.setQuery(inputFieldText);
         placeSug.refreshSuggestions();
-        String[] suggestions = placeSug.getSuggestions();        
-        
+        String[] suggestions = placeSug.getSuggestions();
+
         DefaultListModel listModel = new DefaultListModel();
-        
-        
-        for (int i = 0 ; i < this.maxSuguestions; i++)
-        {
-            if (i < suggestions.length)
-            {
+
+
+        for (int i = 0 ; i < this.maxSuguestions; i++) {
+            if (i < suggestions.length) {
                 listModel.addElement(suggestions[i]);
             }
         }
         listModel.addElement(" ");
-        
-        try{
+
+        try {
             list.setModel(listModel);
-        } catch (ArrayIndexOutOfBoundsException e)
-        {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.print("hey");
         }
-        
+
     }
-    
+
+//=================  GETTERS ===============
+ public String getLable() {
+        return lable;
+    }
+
 }
