@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import main.java.controllers.ControllerBox;
-import main.java.models.Trips.Trip;
+import main.java.models.trips.collections.Trip;
 
 /**
  *

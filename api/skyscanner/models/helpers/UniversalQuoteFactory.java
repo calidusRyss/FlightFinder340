@@ -1,4 +1,4 @@
-package main.java.api.skyscanner.models.factorys;
+package main.java.api.skyscanner.models.helpers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

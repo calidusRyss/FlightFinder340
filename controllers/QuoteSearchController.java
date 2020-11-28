@@ -1,14 +1,14 @@
 package main.java.controllers;
 
-import main.java.models.flightapi.structures.Property;
+import main.java.models.general.Property;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import main.java.adapters.FlightAPIAdapter;
 import main.java.exceptions.controllers.QuoteRequestException;
-import main.java.models.flightapi.enums.StoreSortMode;
+import main.java.models.enums.SortMode;
 import main.java.models.flightapi.responses.QuotesResponse;
-import main.java.models.flightapi.stores.QuotesStore;
+import main.java.models.flightapi.collections.QuotesStore;
 import main.java.models.flightapi.structures.QuoteStruct;
 
 /**
@@ -97,7 +97,7 @@ public class QuoteSearchController {
         return getSortedQuotes();
     }
 
-    public ArrayList<QuoteStruct> sortQuotesBy(StoreSortMode _sortMode)
+    public ArrayList<QuoteStruct> sortQuotesBy(SortMode _sortMode)
     {
         quotesStore.sort(_sortMode);
         return getSortedQuotes();
@@ -117,7 +117,7 @@ public class QuoteSearchController {
      * Get the current sort mode of the QuoteStore
      * @return The current sort mode of the QuoteStore
      */
-    public StoreSortMode getCurrentSortMode()
+    public SortMode getCurrentSortMode()
     {
         return quotesStore.getCurrentSortMode();
     }

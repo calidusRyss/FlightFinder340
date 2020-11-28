@@ -10,7 +10,7 @@ import main.java.Views.IRefreshable;
 import main.java.Views.StandardSearchCollector;
 import main.java.Views.StandardSearchView;
 import main.java.Views.StandardSearchView;
-import main.java.models.flightapi.enums.StoreSortMode;
+import main.java.models.enums.SortMode;
 
 /**
  *
@@ -391,7 +391,7 @@ public class StandardSearchJPanel extends javax.swing.JPanel implements IRefresh
                null);
        this.view = new StandardSearchView(ssc,this.jPanel3);
 
-       view.loadSortModes(jComboBox1,StoreSortMode.CHEAPEST);
+       view.loadSortModes(jComboBox1,SortMode.CHEAPEST);
     }
 
 

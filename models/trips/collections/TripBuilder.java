@@ -1,6 +1,7 @@
-package main.java.models.Trips;
+package main.java.models.trips.collections;
 
-import main.java.models.flightapi.stores.QuotesStore;
+import main.java.models.trips.collections.Trip;
+import main.java.models.flightapi.collections.QuotesStore;
 import main.java.models.flightapi.structures.UniversalQuote;
 
 /**

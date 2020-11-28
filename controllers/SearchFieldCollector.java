@@ -5,7 +5,7 @@
  */
 package main.java.controllers;
 
-import main.java.models.flightapi.structures.Property;
+import main.java.models.general.Property;
 
 
 /**

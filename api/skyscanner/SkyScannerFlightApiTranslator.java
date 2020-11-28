@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import main.java.adapters.HttpAdapter;
 import main.java.api.interfaces.IFlightApiTranslator;
-import main.java.api.skyscanner.models.factorys.UniversalQuoteFactory;
+import main.java.api.skyscanner.models.helpers.UniversalQuoteFactory;
 import main.java.api.skyscanner.models.parsers.CarriersParser;
 import main.java.api.skyscanner.models.parsers.CountriesParser;
-import main.java.exceptions.HTTP.ConnectionFailedException;
-import main.java.exceptions.HTTP.InvalidUrlException;
-import main.java.models.HTTP.Header;
-import main.java.models.HTTP.Request;
-import main.java.models.HTTP.RequestMethod;
-import main.java.models.HTTP.Response;
+import main.java.exceptions.http.ConnectionFailedException;
+import main.java.exceptions.http.InvalidUrlException;
+import main.java.models.http.Header;
+import main.java.models.http.Request;
+import main.java.models.http.RequestMethod;
+import main.java.models.http.Response;
 import main.java.api.skyscanner.models.parsers.CurrencyParser;
 import main.java.api.skyscanner.models.parsers.PlaceParser;
 import main.java.api.skyscanner.models.parsers.QuotePlaceParser;
@@ -27,10 +27,8 @@ import main.java.models.flightapi.responses.CountriesResponse;
 import main.java.models.flightapi.responses.CurrenciesResponse;
 import main.java.models.flightapi.responses.PlacesResponse;
 import main.java.models.flightapi.responses.QuotesResponse;
-import main.java.models.flightapi.responses.RoutesResponse;
 import main.java.api.skyscanner.models.structures.QuotePlace;
 import main.java.models.flightapi.structures.UniversalQuote;
-import main.java.models.flightapi.structures.Route;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -166,66 +164,6 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[0]);
             return finalResponse;
         }
-    }
-
-    /**
-     * Make a call with the SkyScanner API to fetch all routes within the constraints provided
-     *
-     * @param _country The country the user is in
-     * @param _currency The currency the user wants values returned in
-     * @param _origin The origin location for the route(s) the user wants to lookup
-     * @param _destination The destination location for the route(s) the user wants to lookup. This value can be set to null to indicate "Anywhere"
-     * @param _outboundTime The time the user would like the outbound flight to occur. If this is just a date with no time, the request will find all flights on that date
-     * @return A routes response object with a response code, message and route objects
-     */
-    @Override
-    public RoutesResponse fetchRoutes(String _country, String _currency, String _origin, String _destination, LocalDateTime _outboundTime) {
-
-        return fetchRoutes(_country, _currency, _origin, _destination, _outboundTime, null);
-    }
-
-    /**
-     * Make a call with the SkyScanner API to fetch all routes within the constraints provided
-     *
-     * @param _country The country the user is in
-     * @param _currency The currency the user wants values returned in
-     * @param _origin The origin location for the route(s) the user wants to lookup
-     * @param _destination The destination location for the route(s) the user wants to lookup. This value can be set to null to indicate "Anywhere"
-     * @param _outboundTime The time the user would like the outbound flight to occur. If this is just a date with no time, the request will find all flights on that date
-     * @param _inboundTime The time the user would like the inbound flight to occur. If this is set to null, the request will assume the user is looking for a one way flight
-     * @return A routes response object with a response code, message and route objects
-     */
-    @Override
-    public RoutesResponse fetchRoutes(String _country, String _currency, String _origin, String _destination, LocalDateTime _outboundTime, LocalDateTime _inboundTime) {
-
-        //Format time strings
-        String outboundTimeString = _outboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-
-        String destinationString = _destination == null ? "Anywhere" : _destination;
-
-        //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchRoutesEndpoint, _country, _currency, _origin, destinationString, outboundTimeString, inboundTimeString);
-
-        //Make request
-        Request routeRequest = new Request(formattedEndpoint, RequestMethod.GET);
-
-        Response routeResponse = makeAPICall(routeRequest);
-
-        if (!routeResponse.isSuccessful())
-        {
-            //Route Request failed. Pass back an empty route response with error code
-            RoutesResponse finalResponse = new RoutesResponse(routeResponse, new Route[0]);
-            return finalResponse;
-        }
-
-        //Parse and Organize data since Route Request succeeded
-
-        //Since the parsers are not complete yet, a stub route will exist in their place
-        Route stub = new Route();
-
-        RoutesResponse finalResponse = new RoutesResponse(routeResponse, new Route[] { stub });
-        return finalResponse;
     }
 
     /**

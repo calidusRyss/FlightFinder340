@@ -5,7 +5,7 @@ This is an interface for getting data from from some source. Itended use is inpu
 Contributors-Michael
 */
 
-import main.java.models.flightapi.structures.Property;
+import main.java.models.general.Property;
 
 /**
  *

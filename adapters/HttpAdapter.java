@@ -1,9 +1,9 @@
 package main.java.adapters;
 
-import main.java.exceptions.HTTP.ConnectionFailedException;
-import main.java.exceptions.HTTP.InvalidUrlException;
-import main.java.models.HTTP.Request;
-import main.java.models.HTTP.Response;
+import main.java.exceptions.http.ConnectionFailedException;
+import main.java.exceptions.http.InvalidUrlException;
+import main.java.models.http.Request;
+import main.java.models.http.Response;
 import main.java.wrappers.HTTP.IHttpWrapper;
 import main.java.wrappers.HTTP.OkHttpWrapper;
 

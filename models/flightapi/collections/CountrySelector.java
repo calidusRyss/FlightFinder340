@@ -1,4 +1,4 @@
-package main.java.models.flightapi.stores;
+package main.java.models.flightapi.collections;
 
 import java.util.ArrayList;
 import main.java.models.flightapi.structures.Country;

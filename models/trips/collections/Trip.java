@@ -1,8 +1,8 @@
-package main.java.models.Trips;
+package main.java.models.trips.collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import main.java.models.flightapi.QuoteStructConverter;
+import main.java.models.flightapi.helpers.QuoteStructConverter;
 import main.java.models.flightapi.structures.Currency;
 import main.java.models.flightapi.structures.QuoteStruct;
 import main.java.models.flightapi.structures.UniversalQuote;

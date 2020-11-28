@@ -1,4 +1,4 @@
-package main.java.models.flightapi;
+package main.java.models.flightapi.helpers;
 
 import main.java.models.flightapi.structures.QuoteStruct;
 import main.java.models.flightapi.structures.UniversalJourneyLeg;

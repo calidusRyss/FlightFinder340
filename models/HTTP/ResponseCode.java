@@ -1,4 +1,4 @@
-package main.java.models.HTTP;
+package main.java.models.http;
 
 /**
  * An ENUM with all HTTP response codes

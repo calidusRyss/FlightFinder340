@@ -1,6 +1,6 @@
 package main.java.controllers;
 
-import main.java.models.flightapi.PlaceSuggester;
+import main.java.models.flightapi.collections.PlaceSuggester;
 
 /**
  * A controller that handles making place suggestions.

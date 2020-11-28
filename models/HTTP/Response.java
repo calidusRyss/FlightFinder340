@@ -1,4 +1,4 @@
-package main.java.models.HTTP;
+package main.java.models.http;
 
 /**
  * A class representing an HTTP response.

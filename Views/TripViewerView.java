@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import main.java.controllers.ControllerBox;
 import main.java.controllers.TripController;
-import main.java.models.Trips.Trip;
+import main.java.models.trips.collections.Trip;
 
 /**
  *

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import main.java.adapters.FlightAPIAdapter;
 import main.java.exceptions.controllers.ApiFailedToLoadException;
 import main.java.models.flightapi.responses.CurrenciesResponse;
-import main.java.models.flightapi.stores.CurrencySelector;
+import main.java.models.flightapi.collections.CurrencySelector;
 
 /**
  * A controller that handles loading currency data and selecting an active currency

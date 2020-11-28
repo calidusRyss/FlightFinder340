@@ -1,6 +1,6 @@
-package main.java.models.flightapi.interfaces;
+package main.java.models.interfaces;
 
-import main.java.models.flightapi.enums.StoreSortMode;
+import main.java.models.enums.SortMode;
 
 /**
  * An interface defining shared functionality between store objects
@@ -10,5 +10,5 @@ import main.java.models.flightapi.enums.StoreSortMode;
 public interface IStore {
     public void addCollection(Object... objects);
     public void clear();
-    public void sort(StoreSortMode sortMode);
+    public void sort(SortMode sortMode);
 }

@@ -1,8 +1,8 @@
 package main.java.controllers;
 
-import main.java.models.Trips.Trip;
-import main.java.models.Trips.TripBuilder;
-import main.java.models.Trips.stores.TripsStore;
+import main.java.models.trips.collections.Trip;
+import main.java.models.trips.collections.TripBuilder;
+import main.java.models.trips.collections.TripsStore;
 
 /**
  * A controller that handles modifying trips

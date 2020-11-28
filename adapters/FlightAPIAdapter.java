@@ -1,4 +1,5 @@
 package main.java.adapters;
+
 import main.java.api.interfaces.IFlightApiTranslator;
 import main.java.api.skyscanner.SkyScannerFlightApiTranslator;
 
@@ -8,6 +9,6 @@ import main.java.api.skyscanner.SkyScannerFlightApiTranslator;
  * @author Teegan Krieger
  */
 public class FlightAPIAdapter {
-    
+
     public static final IFlightApiTranslator flightAPI = new SkyScannerFlightApiTranslator();
 }

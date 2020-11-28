@@ -1,10 +1,10 @@
 package main.java.controllers;
 
-import main.java.models.Trips.Trip;
-import main.java.models.Trips.TripBuilder;
-import main.java.models.Trips.enums.TripSortMode;
-import main.java.models.Trips.stores.TripsStore;
-import main.java.models.flightapi.stores.CurrencySelector;
+import main.java.models.trips.collections.Trip;
+import main.java.models.trips.collections.TripBuilder;
+import main.java.models.trips.collections.TripsStore;
+import main.java.models.enums.SortMode;
+import main.java.models.flightapi.collections.CurrencySelector;
 
 /**
  * A controller that handles storing, sorting and viewing Trips
@@ -31,7 +31,7 @@ public class TripController {
     {
         tripsStore.addCollection(new Trip(currencySelector.getSelectedCurrency()),_tripName);
     }
-    
+
 
     /**
      * Delete a specified trip at the given index
@@ -46,7 +46,7 @@ public class TripController {
      * Sort the trips in the store using the given sorting mode
      * @param _sortMode The sorting mode
      */
-    public void sortTrips(TripSortMode _sortMode)
+    public void sortTrips(SortMode _sortMode)
     {
         tripsStore.sort(_sortMode);
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import main.java.adapters.FlightAPIAdapter;
 import main.java.exceptions.controllers.ApiFailedToLoadException;
 import main.java.models.flightapi.responses.CountriesResponse;
-import main.java.models.flightapi.stores.CountrySelector;
+import main.java.models.flightapi.collections.CountrySelector;
 
 /**
  * A controller that handles loading all country data and selecting an active country

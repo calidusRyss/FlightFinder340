@@ -1,4 +1,4 @@
-package main.java.models.flightapi.structures;
+package main.java.models.general;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

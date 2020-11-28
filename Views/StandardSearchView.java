@@ -22,9 +22,9 @@ import main.java.Views.KeyInputUpdater;
 import main.java.controllers.ControllerBox;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;
-import main.java.models.Trips.Trip;
-import main.java.models.flightapi.enums.StoreSortMode;
-import main.java.models.flightapi.structures.Property;
+import main.java.models.trips.collections.Trip;
+import main.java.models.enums.SortMode;
+import main.java.models.general.Property;
 import main.java.models.flightapi.structures.QuoteStruct;
 
 /*
@@ -92,12 +92,12 @@ public class StandardSearchView {
         }
     }
 
-    public void loadSortModes(JComboBox _combo, StoreSortMode _defaultMode) {
+    public void loadSortModes(JComboBox _combo, SortMode _defaultMode) {
         _combo.removeAllItems();
 
         int index = 0;
         int count =0;
-        for (StoreSortMode mode : StoreSortMode.values()) {
+        for (SortMode mode : SortMode.values()) {
 
             _combo.addItem(mode.toString());
             if (_defaultMode == mode) {
@@ -110,7 +110,7 @@ public class StandardSearchView {
 
     public void setSortMode(int _index) {
         if (_index >= 0)
-            ControllerBox.getBox().getQuoteSearchCont().sortQuotesBy(StoreSortMode.values()[_index]);
+            ControllerBox.getBox().getQuoteSearchCont().sortQuotesBy(SortMode.values()[_index]);
     }
 
     public static void setLableNames( JPanel _jp) {

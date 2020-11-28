@@ -1,4 +1,4 @@
-package main.java.models.flightapi.enums;
+package main.java.models.enums;
 
 /**
  * A simple ENUM that defines different bucket sort modes
@@ -6,9 +6,7 @@ package main.java.models.flightapi.enums;
  * @author Teegan Krieger
  * @LastUpdate 10/22/2020
  */
-public enum StoreSortMode {
-    EARLIEST_OUTBOUND_DATE,
-    LATEST_OUTBOUND_DATE,
+public enum SortMode {
     CHEAPEST,
     EXPENSIVE,
 

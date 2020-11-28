@@ -6,7 +6,7 @@ Contributors-Michael
 */
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
-import main.java.models.flightapi.structures.Property;
+import main.java.models.general.Property;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

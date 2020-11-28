@@ -1,8 +1,8 @@
 package main.java.models.flightapi.responses;
 
 import main.java.api.skyscanner.models.structures.Place;
-import main.java.models.HTTP.Response;
-import main.java.models.HTTP.ResponseCode;
+import main.java.models.http.Response;
+import main.java.models.http.ResponseCode;
 
 /**
  * A class containing response data from a places request

@@ -1,4 +1,4 @@
-package main.java.models.HTTP;
+package main.java.models.http;
 
 /**
  * An enum with all valid HTTP request methods.

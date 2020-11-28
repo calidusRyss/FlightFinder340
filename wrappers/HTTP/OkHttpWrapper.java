@@ -1,10 +1,10 @@
 package main.java.wrappers.HTTP;
 
 import java.io.IOException;
-import main.java.exceptions.HTTP.ConnectionFailedException;
-import main.java.exceptions.HTTP.InvalidUrlException;
-import main.java.models.HTTP.Header;
-import main.java.models.HTTP.Query;
+import main.java.exceptions.http.ConnectionFailedException;
+import main.java.exceptions.http.InvalidUrlException;
+import main.java.models.http.Header;
+import main.java.models.http.Query;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -33,7 +33,7 @@ public class OkHttpWrapper implements IHttpWrapper {
      * @throws InvalidUrlException Thrown if the provided request is not valid.
      */
     @Override
-    public main.java.models.HTTP.Response callRequest(main.java.models.HTTP.Request _request) throws InvalidUrlException, ConnectionFailedException {
+    public main.java.models.http.Response callRequest(main.java.models.http.Request _request) throws InvalidUrlException, ConnectionFailedException {
 
         Request okhttpRequest;
         try {
@@ -58,7 +58,7 @@ public class OkHttpWrapper implements IHttpWrapper {
      * @param _request The request to build into an OKHTTP request.
      * @return An OKHTTP RequestBody object.
      */
-    private RequestBody buildRequestBody(main.java.models.HTTP.Request _request) {
+    private RequestBody buildRequestBody(main.java.models.http.Request _request) {
         MediaType mediaType;
 
         switch (_request.getRequestBodyType()) {
@@ -82,7 +82,7 @@ public class OkHttpWrapper implements IHttpWrapper {
      * @param _request The request to convert into an OKHTTP request.
      * @return An OKHTTP request object.
      */
-    private Request buildRequest(main.java.models.HTTP.Request _request) {
+    private Request buildRequest(main.java.models.http.Request _request) {
         //Build Request URL
         HttpUrl.Builder urlBuilder = HttpUrl.parse(_request.getUrl()).newBuilder();
 
@@ -132,7 +132,7 @@ public class OkHttpWrapper implements IHttpWrapper {
      * @param _response The OKHTTP response object to convert into a generic response.
      * @return A generic response object.
      */
-    private main.java.models.HTTP.Response buildResponse(Response _response) {
+    private main.java.models.http.Response buildResponse(Response _response) {
 
         String body;
 
@@ -142,7 +142,7 @@ public class OkHttpWrapper implements IHttpWrapper {
             body = "";
         }
 
-        main.java.models.HTTP.Response resultResponse = new main.java.models.HTTP.Response(
+        main.java.models.http.Response resultResponse = new main.java.models.http.Response(
                 _response.isSuccessful(),
                 _response.code(),
                 _response.message(),

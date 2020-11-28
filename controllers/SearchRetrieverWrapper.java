@@ -7,7 +7,7 @@ Contributors-Michael
 */
 
 import java.util.ArrayList;
-import main.java.models.flightapi.structures.Property;
+import main.java.models.general.Property;
 import main.java.models.flightapi.structures.QuoteStruct;
 
 /**

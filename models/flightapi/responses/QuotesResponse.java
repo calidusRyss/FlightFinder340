@@ -1,7 +1,7 @@
 package main.java.models.flightapi.responses;
 
-import main.java.models.HTTP.Response;
-import main.java.models.HTTP.ResponseCode;
+import main.java.models.http.Response;
+import main.java.models.http.ResponseCode;
 import main.java.models.flightapi.structures.UniversalQuote;
 
 /**

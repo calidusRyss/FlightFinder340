@@ -1,4 +1,4 @@
-package main.java.exceptions.HTTP;
+package main.java.exceptions.http;
 
 /**
  * Exception that is thrown when an HTTP request fails due to a connectivity problem.

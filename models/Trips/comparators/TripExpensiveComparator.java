@@ -1,7 +1,7 @@
-package main.java.models.Trips.comparators;
+package main.java.models.trips.comparators;
 
 import java.util.Comparator;
-import main.java.models.Trips.Trip;
+import main.java.models.trips.collections.Trip;
 
 /**
  * A comparator used for sorting trips from most expensive to cheapest

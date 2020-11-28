@@ -1,6 +1,6 @@
-package main.java.exceptions.HTTP;
+package main.java.exceptions.http;
 
-import main.java.models.HTTP.Request;
+import main.java.models.http.Request;
 
 /**
  * Exception that is thrown when a Request is invalid.
