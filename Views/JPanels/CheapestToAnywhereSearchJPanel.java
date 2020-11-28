@@ -8,7 +8,6 @@ Using the design tab in Netbeans to make changes is recommended.
 
 import main.java.Views.IRefreshable;
 import main.java.Views.StandardSearchView;
-import main.java.Views.StandardSearchView;
 import main.java.Views.ToAnyWhereCollector;
 
 /**

@@ -31,25 +31,15 @@ public class MainView {
     private  IRefreshable CurrentRefreshablePanel;
 
 
+    /**
+     *  Public Constructor.
+     * @param _frame The JFrame that calls the methods in this view.
+     */
     public MainView(JFrame _frame) {
         LoadedViews = new ArrayList<JPanel>();
         frame = _frame;
 
-        try {
-            loadJPanels();
-        }
-        catch  (main.java.exceptions.controllers.ApiFailedToLoadException  e) {
-           int userChoice = JOptionPane.showConfirmDialog(frame, "Api Failed To Load would you like to  retry?","error", JOptionPane.YES_NO_OPTION);
-
-           if (userChoice == 1) {
-               loadJPanels();
-           }
-           else {
-               System.exit(0);
-           }
-        }
-        //load(new LoadingJPanel());
-        //setView(LoadingJPanel.class);
+        tryLoadPanelsWithDialogue();
 
         for (int i = 0; i < viewPanels.length; i++) {
            load(viewPanels[i]);
@@ -69,6 +59,30 @@ public class MainView {
         if (p instanceof IRefreshable) {
             CurrentRefreshablePanel = (IRefreshable) p;
             CurrentRefreshablePanel.refresh();
+        }
+    }
+
+    private void tryLoadPanelsWithDialogue()
+    {
+        boolean t = true;
+
+        try {
+            loadJPanels();
+
+            if (t) {
+                t = false;
+                throw  main.java.exceptions.controllers.ApiFailedToLoadException;
+            }
+        }
+        catch  (main.java.exceptions.controllers.ApiFailedToLoadException  e) {
+           int userChoice = JOptionPane.showConfirmDialog(frame, "Api Failed To Load would you like to  retry?","error", JOptionPane.YES_NO_OPTION);
+
+           if (userChoice == 1) {
+               tryLoadPanelsWithDialogue();
+           }
+           else {
+               System.exit(0);
+           }
         }
     }
 

@@ -76,19 +76,19 @@ public class StandardSearchView {
         }
     }
 
-    public void updateSugjustions(JList _jList, String _inputFieldText, String _lable) {
+    public void updateSugjustions(JList _jList, String _inputFieldText, String _identifier) {
 
         boolean kiuExsists = false;
 
         for (KeyInputUpdater kiu : kIUpdaterList) {
-            if (_lable.equals(kiu.getLable())) {
+            if (_identifier.equals(kiu.getIdentifier())) {
                 kiu.updateInput(_inputFieldText);
                 kiuExsists = true;
             }
         }
 
         if (kiuExsists == false) {
-            kIUpdaterList.add(new KeyInputUpdater(_jList, _inputFieldText, _lable));
+            kIUpdaterList.add(new KeyInputUpdater(_jList, _inputFieldText, _identifier));
         }
     }
 

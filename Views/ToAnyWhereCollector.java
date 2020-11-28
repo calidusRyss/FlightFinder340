@@ -30,14 +30,14 @@ public class ToAnyWhereCollector extends StandardSearchCollector {
                 _departTime
                 );
     }
- 
+
     @Override
     public Property[] getFields() {
 
         Property[] result = new Property[numberofProperties];
         result[0] = new Property( "origin",this.origin.getText());
         result[1] = new Property( "destination","Anywhere");
-        result[2] = new Property( "departing", this.getISO_LOCAL_DATE_TIME(this.departing,this.departTime));
+        result[2] = new Property( "departing", this.convertToIso_LocalL_Date_Time(this.departing,this.departTime));
         result[3] = new Property( "currencycode",ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
         result[4] = new Property( "countrycode",ControllerBox.getBox().getCountryCont().getSelectedCountryCode());
 

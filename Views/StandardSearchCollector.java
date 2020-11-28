@@ -37,7 +37,7 @@ public class StandardSearchCollector implements IInputFieldCollector{
     }
 
 
-    public String getISO_LOCAL_DATE_TIME(DatePicker _DatePicker , TimePicker _tPick) {
+    public String convertToIso_LocalL_Date_Time(DatePicker _DatePicker , TimePicker _tPick) {
 
       LocalDate d = _DatePicker.getDate();
       if (d == null)
@@ -67,7 +67,7 @@ public class StandardSearchCollector implements IInputFieldCollector{
         Property[] result = new Property[numberofProperties];
         result[0] = new Property( "origin",this.origin.getText());
         result[1] = new Property( "destination",this.destination.getText());
-        result[2] = new Property( "departing", getISO_LOCAL_DATE_TIME(this.departing,this.departTime));
+        result[2] = new Property( "departing", convertToIso_LocalL_Date_Time(this.departing,this.departTime));
         result[3] = new Property( "currencycode",ControllerBox.getBox().getCurrencyCont().getSelectedCurrencyCode());
         result[4] = new Property( "countrycode",ControllerBox.getBox().getCountryCont().getSelectedCountryCode());
 

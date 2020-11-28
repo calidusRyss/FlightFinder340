@@ -22,22 +22,29 @@ public class KeyInputUpdater {
 
     private final int updateDelaySeconds = 1;
     private final int maxSuguestions = 5;
-    private final String lable;
+    private final String identifier;
     private String inputFieldText;
     private final JList list;
     private Timer timer;
 
-    public KeyInputUpdater(JList _list, String _inputFieldText, String _lable)
-    {
+    /**
+     *Public Constructor.
+     * @param _list the list that will hold the Suggestions.
+     * @param _inputFieldText the inputField that provides the source for the Suggestions.
+     * @param _identifier the string to identify this instance of KeyInputUpdater.
+     */
+    public KeyInputUpdater(JList _list, String _inputFieldText, String _identifier) {
         list =_list;
         inputFieldText = _inputFieldText;
-        lable = _lable;
+        identifier = _identifier;
 
+        //creates a timer that updates the sugstions by calling
+        //"updateSugjustions()" after the specifed amount of time.
         timer = new Timer(updateDelaySeconds *1000, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-            updateSugjustions();
+            updateSuggestions();
             }
         } );
 
@@ -45,12 +52,19 @@ public class KeyInputUpdater {
         timer.start();
     }
 
+    /**
+     * Updates the input for the suggestions and resets the delay timer.
+     * @param _inputFieldText the source string for the suggestions.
+     */
     public void updateInput(String _inputFieldText) {
         inputFieldText = _inputFieldText;
         timer.restart();
     }
 
-    private void updateSugjustions() {
+    /**
+     * gets the new suggestions from the placeSuguestions Controller.
+     */
+    private void updateSuggestions() {
         PlaceSuggestionsController placeSug = ControllerBox.getBox().getPlaceSuggestionsCont();
 
         placeSug.setQuery(inputFieldText);
@@ -59,25 +73,19 @@ public class KeyInputUpdater {
 
         DefaultListModel listModel = new DefaultListModel();
 
-
+        // adds each suggestions tp the listModel.
         for (int i = 0 ; i < this.maxSuguestions; i++) {
             if (i < suggestions.length) {
                 listModel.addElement(suggestions[i]);
             }
         }
         listModel.addElement(" ");
-
-        try {
-            list.setModel(listModel);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.print("hey");
-        }
-
+        list.setModel(listModel);
     }
 
 //=================  GETTERS ===============
- public String getLable() {
-        return lable;
+ public String getIdentifier() {
+        return identifier;
     }
 
 }
