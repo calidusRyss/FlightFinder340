@@ -25,7 +25,9 @@ import org.json.JSONObject;
  */
 public class FileSystemTranslator implements IFileSystem {
 
-// Creates File to write data into. 
+/*
+  *  Creates File to write data into. 
+  */
     private static final String appdataPath = System.getenv("APPDATA") + "/Roaming/FlightFinder340";
     private static final String arrayMagicWord = "Array";
 
@@ -52,65 +54,69 @@ public class FileSystemTranslator implements IFileSystem {
     }
 
     @Override
+/*
+  *   Creates the objects to insert into the file.  
+  */
 
-    // Creates the objects to insert into the file. 
     public <T> int create(T _obj) {
 
-            Class klass = _obj.getClass();
+        Class klass = _obj.getClass();
 
-            String objectArrayName = klass.getName() + arrayMagicWord;
+        String objectArrayName = klass.getName() + arrayMagicWord;
 
-            ReflectionJsonHelper helper = new ReflectionJsonHelper(klass);
+        ReflectionJsonHelper helper = new ReflectionJsonHelper(klass);
 
-            JSONObject localObj = helper.toJSON(_obj);
+        JSONObject localObj = helper.toJSON(_obj);
 
         if (!jsonObject.has(objectArrayName)) {
-             jsonObject.put(objectArrayName, new JSONArray());
+            jsonObject.put(objectArrayName, new JSONArray());
         }
 
-            JSONArray arr = jsonObject.getJSONArray(objectArrayName);
+        JSONArray arr = jsonObject.getJSONArray(objectArrayName);
 
-           arr.put(localObj);
+        arr.put(localObj);
 
-              saveData();
+        saveData();
 
         return arr.length();
     }
 
     @Override
+/*
+  *   Reads the data in the file
+  */
 
-    // Reads the data in the file
     public <T> T[] load(Class<T> _klass) {
 
-             ReflectionJsonHelper helper = new ReflectionJsonHelper(_klass);
+        ReflectionJsonHelper helper = new ReflectionJsonHelper(_klass);
 
         if (_klass == null) {
-            
-                return null;
+
+            return null;
         }
 
-            String objectArrayName = _klass.getName() + arrayMagicWord;
+        String objectArrayName = _klass.getName() + arrayMagicWord;
 
         if (!jsonObject.has(objectArrayName)) {
-            
-                return null;
+
+            return null;
         }
 
         try {
-                JSONArray jsonArray = jsonObject.getJSONArray(objectArrayName);
-                
-                Object arr = Array.newInstance(_klass, jsonArray.length());
+            JSONArray jsonArray = jsonObject.getJSONArray(objectArrayName);
+
+            Object arr = Array.newInstance(_klass, jsonArray.length());
 
             for (int i = 0; i < jsonArray.length(); i++) {
-                
+
                 Object obj = helper.fromJson(jsonArray.getJSONObject(i));
-                
+
                 Array.set(arr, i, obj);
             }
 
-                 saveData();
+            saveData();
 
-                 return (T[]) arr;
+            return (T[]) arr;
 
         } catch (JSONException e) {
 
@@ -120,8 +126,10 @@ public class FileSystemTranslator implements IFileSystem {
     }
 
     @Override
+/*
+  *  Updates data in file at a particular index. 
+  */
 
-    // Updates data in file at a particular index. 
     public <T extends Object> void update(T _obj, int _index) {
 
         Class klass = _obj.getClass();
@@ -131,7 +139,7 @@ public class FileSystemTranslator implements IFileSystem {
         String objectArrayName = klass.getName() + arrayMagicWord;
 
         if (!jsonObject.has(objectArrayName)) {
-            
+
             return;
         }
 
@@ -148,17 +156,18 @@ public class FileSystemTranslator implements IFileSystem {
     }
 
     @Override
-    
-    //Deletes data  at a particular index. 
-    
+
+/*
+  *  Deletes data  at a particular index. 
+  */
     public <T extends Object> void delete(int _index, Class<T> _klass) {
 
         ReflectionJsonHelper helper = new ReflectionJsonHelper(_klass);
 
         String objectArrayName = _klass.getName() + arrayMagicWord;
 
-             if (!jsonObject.has(objectArrayName)) {
-            
+        if (!jsonObject.has(objectArrayName)) {
+
             return;
         }
 
@@ -174,8 +183,10 @@ public class FileSystemTranslator implements IFileSystem {
         }
 
     }
-    
-    // Method to save data to file. 
+
+/*
+  *   Creates the objects to insert into the file.  
+  */
 
     private void saveData() {
         try {
