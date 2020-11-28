@@ -1,7 +1,6 @@
 package main.java.controllers;
 
 import main.java.models.trips.collections.Trip;
-import main.java.models.trips.collections.TripBuilder;
 import main.java.models.trips.collections.TripsStore;
 import main.java.models.enums.SortMode;
 import main.java.models.flightapi.collections.CurrencySelector;
@@ -15,20 +14,18 @@ import main.java.models.flightapi.collections.CurrencySelector;
 public class TripController {
 
     private final TripsStore tripsStore;
-    private final TripBuilder tripBuilder;
     private final CurrencySelector currencySelector;
 
     public TripController(QuoteSearchController _quoteSearchController, CurrencyController _currencyController) {
-        tripsStore = new TripsStore();
-        tripBuilder = new TripBuilder(_quoteSearchController.getQuoteStore());
-        currencySelector = _currencyController.getCurrencySelector();
+        this.tripsStore = new TripsStore();
+        this.currencySelector = _currencyController.getCurrencySelector();
     }
 
     /**
      * Create a new empty trip using the currently selected currency from the currency selector
      */
     public void createNewTrip(String _tripName) {
-        tripsStore.addCollection(new Trip(currencySelector.getSelectedCurrency()), _tripName);
+        this.tripsStore.addCollection(new Trip(this.currencySelector.getSelectedCurrency()), _tripName);
     }
 
     /**
@@ -37,7 +34,7 @@ public class TripController {
      * @param _index The index of the trip to delete
      */
     public void deleteTrip(int _index) {
-        tripsStore.DeleteTrip(_index);
+        this.tripsStore.DeleteTrip(_index);
     }
 
     /**
@@ -46,7 +43,7 @@ public class TripController {
      * @param _sortMode The sorting mode
      */
     public void sortTrips(SortMode _sortMode) {
-        tripsStore.sort(_sortMode);
+        this.tripsStore.sort(_sortMode);
     }
 
     /**
@@ -56,7 +53,7 @@ public class TripController {
      * @return The trip at the index provided
      */
     public Trip getTripAtIndex(int _index) {
-        return tripsStore.getAtIndex(_index);
+        return this.tripsStore.getAtIndex(_index);
     }
 
     /**
@@ -65,7 +62,7 @@ public class TripController {
      * @return an array of all trips in the TripStore
      */
     public Trip[] getAllTrips() {
-        return tripsStore.getTrips();
+        return this.tripsStore.getTrips();
     }
 
     /**
@@ -74,7 +71,7 @@ public class TripController {
      * @return The TripStore associated to this controller
      */
     public TripsStore getTripsStore() {
-        return tripsStore;
+        return this.tripsStore;
     }
 
 }

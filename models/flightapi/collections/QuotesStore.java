@@ -26,24 +26,24 @@ public class QuotesStore implements IStore {
     private SortMode currentSortMode;
 
     public QuotesStore() {
-        sortedQuotes = new ArrayList<UniversalQuote>();
-        currentSortMode = SortMode.CHEAPEST;
+        this.sortedQuotes = new ArrayList<UniversalQuote>();
+        this.currentSortMode = SortMode.CHEAPEST;
     }
 
     /**
      * Add a collections of quotes to the quote store
      *
-     * @param objects The quotes to add to the store
+     * @param _objects The quotes to add to the store
      */
     @Override
-    public void addCollection(Object... objects) {
+    public void addCollection(Object... _objects) {
         //insert new objects into array
-        for (int j = 0; j < objects.length; j++) {
-            sortedQuotes.add((UniversalQuote) objects[j]);
+        for (int j = 0; j < _objects.length; j++) {
+            this.sortedQuotes.add((UniversalQuote) _objects[j]);
         }
 
         //Re-Sort the array
-        sort(currentSortMode);
+        sort(this.currentSortMode);
     }
 
     /**
@@ -51,7 +51,7 @@ public class QuotesStore implements IStore {
      */
     @Override
     public void clear() {
-        sortedQuotes.clear();
+        this.sortedQuotes.clear();
     }
 
     /**
@@ -63,27 +63,27 @@ public class QuotesStore implements IStore {
     public void sort(SortMode _sortMode) {
         switch (_sortMode) {
             case CHEAPEST:
-                Collections.sort(sortedQuotes, quoteCheapestComparator);
+                Collections.sort(this.sortedQuotes, quoteCheapestComparator);
                 break;
             case EXPENSIVE:
-                Collections.sort(sortedQuotes, quoteExpensiveComparator);
+                Collections.sort(this.sortedQuotes, quoteExpensiveComparator);
                 break;
         }
-        currentSortMode = _sortMode;
+        this.currentSortMode = _sortMode;
     }
 
     /**
      * Get a UniversalQuote from the desired index. (Mainly used for testing)
      *
-     * @param index The index to get the UniversalQuote from
+     * @param _index The index to get the UniversalQuote from
      * @return A UniversalQuote object from the desired index
      */
-    public UniversalQuote getAtIndex(int index) {
-        if (index < 0 || index > sortedQuotes.size() - 1) {
+    public UniversalQuote getAtIndex(int _index) {
+        if (_index < 0 || _index > this.sortedQuotes.size() - 1) {
             throw new IndexOutOfBoundsException();
         }
 
-        return sortedQuotes.get(index);
+        return this.sortedQuotes.get(_index);
     }
 
     /**
@@ -92,10 +92,10 @@ public class QuotesStore implements IStore {
      * @return A sorted array of QuoteStructs
      */
     public ArrayList<QuoteStruct> getSortedQuoteStructs() {
-        ArrayList<QuoteStruct> quoteStructs = new ArrayList<QuoteStruct>(sortedQuotes.size());
+        ArrayList<QuoteStruct> quoteStructs = new ArrayList<QuoteStruct>(this.sortedQuotes.size());
 
-        for (int i = 0; i < sortedQuotes.size(); i++) {
-            quoteStructs.add(i, QuoteStructConverter.convertQuoteToStruct(sortedQuotes.get(i)));
+        for (int i = 0; i < this.sortedQuotes.size(); i++) {
+            quoteStructs.add(i, QuoteStructConverter.convertQuoteToStruct(this.sortedQuotes.get(i)));
         }
 
         return quoteStructs;
@@ -107,6 +107,6 @@ public class QuotesStore implements IStore {
      * @return The current sort mode of the QuoteStore
      */
     public SortMode getCurrentSortMode() {
-        return currentSortMode;
+        return this.currentSortMode;
     }
 }

@@ -11,8 +11,8 @@ import main.java.models.trips.collections.Trip;
 public class TripCheapestComparator implements Comparator<Trip>{
 
     @Override
-    public int compare(Trip o1, Trip o2) {
-        return (o1.getTotalPrice()- o2.getTotalPrice());
+    public int compare(Trip _o1, Trip _o2) {
+        return (_o1.getTotalPrice()- _o2.getTotalPrice());
     }
 
 }

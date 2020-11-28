@@ -28,7 +28,7 @@ public class JourneyLeg {
      * @return An array of integers that represent the ID's of the carriers this JourneyLeg references
      */
     public int[] getCarrierIDs() {
-        return carrierIDs;
+        return this.carrierIDs;
     }
 
     /**
@@ -37,7 +37,7 @@ public class JourneyLeg {
      * @return An integer that represents the ID of the origin place of this JourneyLeg
      */
     public int getOriginID() {
-        return originID;
+        return this.originID;
     }
 
     /**
@@ -46,7 +46,7 @@ public class JourneyLeg {
      * @return An integer that represents the ID of the destination place of this JourneyLeg
      */
     public int getDestinationID() {
-        return destinationID;
+        return this.destinationID;
     }
 
     /**
@@ -55,7 +55,7 @@ public class JourneyLeg {
      * @return A string that represents the departure time of the flight this JourneyLeg represents
      */
     public String getDepartureTime() {
-        return departureTime;
+        return this.departureTime;
     }
 
 }

@@ -23,8 +23,8 @@ public class TripsStore implements IStore {
     private SortMode currentSortMode;
 
     public TripsStore() {
-        sortedTrips = new ArrayList<>();
-        currentSortMode = SortMode.CHEAPEST;
+        this.sortedTrips = new ArrayList<>();
+        this.currentSortMode = SortMode.CHEAPEST;
     }
 
     /**
@@ -36,10 +36,10 @@ public class TripsStore implements IStore {
     public void addCollection(Object... _objects) {
 
         for (int i = 0; i < _objects.length; i++) {
-            sortedTrips.add((Trip) _objects[i]);
+            this.sortedTrips.add((Trip) _objects[i]);
         }
 
-        sort(currentSortMode);
+        sort(this.currentSortMode);
     }
 
     /**
@@ -63,7 +63,7 @@ public class TripsStore implements IStore {
      * @param _index The index of the trip to delete
      */
     public void DeleteTrip(int _index) {
-        sortedTrips.remove(_index);
+        this.sortedTrips.remove(_index);
     }
 
     /**
@@ -71,7 +71,7 @@ public class TripsStore implements IStore {
      */
     @Override
     public void clear() {
-        sortedTrips.clear();
+        this.sortedTrips.clear();
     }
 
     /**
@@ -83,13 +83,13 @@ public class TripsStore implements IStore {
     public void sort(SortMode _sortMode) {
         switch (_sortMode) {
             case CHEAPEST:
-                Collections.sort(sortedTrips, tripCheapestComparator);
+                Collections.sort(this.sortedTrips, tripCheapestComparator);
                 break;
             case EXPENSIVE:
-                Collections.sort(sortedTrips, tripExpensiveComparator);
+                Collections.sort(this.sortedTrips, tripExpensiveComparator);
                 break;
         }
-        currentSortMode = _sortMode;
+        this.currentSortMode = _sortMode;
     }
 
     /**
@@ -99,11 +99,11 @@ public class TripsStore implements IStore {
      * @return The quote stored at the provided index
      */
     public Trip getAtIndex(int _index) {
-        if (_index < 0 || _index > sortedTrips.size() - 1) {
+        if (_index < 0 || _index > this.sortedTrips.size() - 1) {
             throw new IndexOutOfBoundsException();
         }
 
-        return sortedTrips.get(_index);
+        return this.sortedTrips.get(_index);
     }
 
     /**
@@ -112,10 +112,10 @@ public class TripsStore implements IStore {
      * @return An array of all Trips in the store
      */
     public Trip[] getTrips() {
-        Trip[] allTrips = new Trip[sortedTrips.size()];
+        Trip[] allTrips = new Trip[this.sortedTrips.size()];
 
         for (int i = 0; i < allTrips.length; i++) {
-            allTrips[i] = sortedTrips.get(i);
+            allTrips[i] = this.sortedTrips.get(i);
         }
 
         return allTrips;

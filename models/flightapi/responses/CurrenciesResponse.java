@@ -24,15 +24,15 @@ public class CurrenciesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return responseCode;
+        return this.responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return httpResponseMessage;
+        return this.httpResponseMessage;
     }
 
     public Currency[] getCurrencies() {
-        return currencies;
+        return this.currencies;
     }
 
 }

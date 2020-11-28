@@ -17,7 +17,7 @@ public class CountryController {
     private CountrySelector countrySelector;
 
     public CountryController() throws ApiFailedToLoadException {
-        countrySelector = new CountrySelector();
+        this.countrySelector = new CountrySelector();
         loadCountries();
     }
 
@@ -29,7 +29,7 @@ public class CountryController {
 
         switch (currencyResponse.getResponseCode()) {
             case OK:
-                countrySelector.setCountryData(currencyResponse.getCountries());
+                this.countrySelector.setCountryData(currencyResponse.getCountries());
                 break;
 
             default:
@@ -47,7 +47,7 @@ public class CountryController {
      * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
      */
     public void selectCountry(int _index) {
-        countrySelector.selectCountry(_index);
+        this.countrySelector.selectCountry(_index);
     }
 
     /**
@@ -56,7 +56,7 @@ public class CountryController {
      * @return An array list of all country codes
      */
     public ArrayList<String> getAllCountryCodes() {
-        return countrySelector.getAllCountryCodes();
+        return this.countrySelector.getAllCountryCodes();
     }
 
     /**
@@ -65,7 +65,7 @@ public class CountryController {
      * @return An array list of all country names
      */
     public ArrayList<String> getAllCountryNames() {
-        return countrySelector.getAllCountryNames();
+        return this.countrySelector.getAllCountryNames();
     }
 
     /**
@@ -74,7 +74,7 @@ public class CountryController {
      * @return The code of the selected country
      */
     public String getSelectedCountryCode() {
-        return countrySelector.getSelectedCountryCode();
+        return this.countrySelector.getSelectedCountryCode();
     }
 
     /**
@@ -83,7 +83,7 @@ public class CountryController {
      * @return The name of the selected country
      */
     public String getSelectedCountryName() {
-        return countrySelector.getSelectedCountryName();
+        return this.countrySelector.getSelectedCountryName();
     }
 
     /**
@@ -93,7 +93,7 @@ public class CountryController {
      * @return The index of this country within the selector. Returns -1 if the country or code was not found
      */
     public int getIndexOf(String _countryNameOrCode) {
-        return countrySelector.getIndexOf(_countryNameOrCode);
+        return this.countrySelector.getIndexOf(_countryNameOrCode);
     }
 
 }

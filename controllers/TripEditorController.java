@@ -16,8 +16,8 @@ public class TripEditorController {
     private final TripBuilder tripBuilder;
 
     public TripEditorController(QuoteSearchController _quoteSearchController, TripController _tripController) {
-        tripBuilder = new TripBuilder(_quoteSearchController.getQuoteStore());
-        tripsStore = _tripController.getTripsStore();
+        this.tripBuilder = new TripBuilder(_quoteSearchController.getQuoteStore());
+        this.tripsStore = _tripController.getTripsStore();
     }
 
     /**
@@ -26,7 +26,7 @@ public class TripEditorController {
      * @param _index The index of the trip within the trip store
      */
     public void setSelectedTrip(int _index) {
-        tripBuilder.setSelectedTrip(tripsStore.getAtIndex(_index));
+        this.tripBuilder.setSelectedTrip(this.tripsStore.getAtIndex(_index));
     }
 
     /**
@@ -35,7 +35,7 @@ public class TripEditorController {
      * @param _index The index of the Quote within the Quote Store
      */
     public void addQuoteAtIndexToSelectedTrip(int _index) {
-        tripBuilder.addQuoteAtIndexToTrip(_index);
+        this.tripBuilder.addQuoteAtIndexToTrip(_index);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TripEditorController {
      * @param _newIndex The new index of this quote after moving it
      */
     public void moveQuoteInSelectedTrip(int _oldIndex, int _newIndex) {
-        tripBuilder.moveQuote(_oldIndex, _newIndex);
+        this.tripBuilder.moveQuote(_oldIndex, _newIndex);
     }
 
     /**
@@ -54,7 +54,7 @@ public class TripEditorController {
      * @param _index The index of the quote to remove within the Trip
      */
     public void removeQuoteAtIndexFromSelectedTrip(int _index) {
-        tripBuilder.removeQuoteAtIndexFromTrip(_index);
+        this.tripBuilder.removeQuoteAtIndexFromTrip(_index);
     }
 
     /**
@@ -63,8 +63,8 @@ public class TripEditorController {
      * @param _newName The new name for the Trip
      */
     public void renameSelectedTrip(String _newName) {
-        tripBuilder.renameSelectedTrip(
-                tripsStore.getNextFreeName(_newName)
+        this.tripBuilder.renameSelectedTrip(
+                this.tripsStore.getNextFreeName(_newName)
         );
     }
 
@@ -74,7 +74,7 @@ public class TripEditorController {
      * @return The selected Trip
      */
     public Trip getSelectedTrip() {
-        return tripBuilder.getSelectedTrip();
+        return this.tripBuilder.getSelectedTrip();
     }
 
 }

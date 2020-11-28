@@ -35,7 +35,7 @@ public class UniversalQuote {
      * @return The raw price of this quote
      */
     public int getPrice() {
-        return price;
+        return this.price;
     }
 
     /**
@@ -44,7 +44,7 @@ public class UniversalQuote {
      * @return The Currency object used by this quote
      */
     public Currency getCurrency() {
-        return currency;
+        return this.currency;
     }
 
     /**
@@ -53,7 +53,7 @@ public class UniversalQuote {
      * @return The outbound JourneyLeg of this quote
      */
     public UniversalJourneyLeg getOutboundLeg() {
-        return outboundLeg;
+        return this.outboundLeg;
     }
 
     /**
@@ -62,7 +62,7 @@ public class UniversalQuote {
      * @return The inbound JourneyLeg of this quote
      */
     public UniversalJourneyLeg getInboundLeg() {
-        return inboundLeg;
+        return this.inboundLeg;
     }
 
     /**
@@ -71,7 +71,7 @@ public class UniversalQuote {
      * @return Whether this flight is a direct flight or not
      */
     public boolean isDirectFlight() {
-        return directFlight;
+        return this.directFlight;
     }
 
     /**
@@ -80,12 +80,12 @@ public class UniversalQuote {
      * @return The price of this Quote Formatted into a string
      */
     public String getPriceFormatted() {
-        return currency.getFormattedValue(price);
+        return this.currency.getFormattedValue(this.price);
     }
 
     @Override
     public String toString() {
-        return "UniversalQuote{" + "price=" + price + ", currency=" + currency + ", outboundLeg=" + outboundLeg + ", inboundLeg=" + inboundLeg + ", directFlight=" + directFlight + '}';
+        return "UniversalQuote{" + "price=" + this.price + ", currency=" + this.currency + ", outboundLeg=" + this.outboundLeg + ", inboundLeg=" + this.inboundLeg + ", directFlight=" + this.directFlight + '}';
     }
 
 }

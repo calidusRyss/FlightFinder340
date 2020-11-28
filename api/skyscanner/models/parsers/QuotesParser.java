@@ -46,10 +46,6 @@ public class QuotesParser {
         int quotesMinPrice = _jsonObject.getInt("MinPrice");
         boolean quotesDirect = _jsonObject.getBoolean("Direct");
         JourneyLeg quotesOutboundLeg = parseJourneyLeg(_jsonObject.getJSONObject("OutboundLeg"));
-        //int quotesCarrierIds = _jsonObject.getInt("CarrierIds");
-        //int quotesOriginId = _jsonObject.getInt("OriginId");
-        //int quotesDestinationId = _jsonObject.getInt("DestinationId");
-        //String quotesDepartureDate = _jsonObject.getString("DepartureDate");
         JourneyLeg quotesInboundLeg = null;
         if (_jsonObject.has("InboundLeg")) {
             quotesInboundLeg = parseJourneyLeg(_jsonObject.getJSONObject("InboundLeg"));
@@ -57,14 +53,15 @@ public class QuotesParser {
         String quotesQuoteDateTime = _jsonObject.getString("QuoteDateTime");
 
         //Construct result
-        Quote result = new Quote(quotesQuoteId, quotesMinPrice, quotesDirect, quotesOutboundLeg, /*quotesCarrierIds,
-                quotesOriginId, quotesDestinationId,*/ /*quotesDepartureDate,*/ quotesInboundLeg, quotesQuoteDateTime);
+        Quote result = new Quote(quotesQuoteId, quotesMinPrice, quotesDirect, quotesOutboundLeg,
+                quotesInboundLeg, quotesQuoteDateTime);
 
         return result;
     }
 
     /**
      * Parse a JourneyLeg object from within a Quote JSON
+     *
      * @param journeyLeg The JSONObject to parse
      * @return The JourneyLeg parsed from the JSONObject
      */

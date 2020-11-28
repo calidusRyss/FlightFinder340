@@ -8,25 +8,25 @@ package main.java.models.flightapi.structures;
  */
 public class Country {
 
-    private String Code;
-    private String Name;
+    private String code;
+    private String name;
 
     /**
      * Construct a Countries object
      *
-     * @param _CarrierId The Country code Example: "AD"
+     * @param _Code The Country code Example: "AD"
      * @param _Name The Name of the carrier. Example: 'Andorra'
      *
      */
     public Country(String _Code, String _Name) {
-        this.Code = _Code;
-        this.Name = _Name;
+        this.code = _Code;
+        this.name = _Name;
 
     }
 
     @Override
     public String toString() {
-        return "Countries [Code=" + Code + ", Name=" + Name + "]";
+        return "Countries [Code=" + this.code + ", Name=" + this.name + "]";
     }
 
     //=================  GETTERS ===============
@@ -35,7 +35,7 @@ public class Country {
      * @return The Country code
      */
     public String getCode() {
-        return Code;
+        return this.code;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Country {
      * @return The Name of the Country
      */
     public String getName() {
-        return Name;
+        return this.name;
     }
 
 }

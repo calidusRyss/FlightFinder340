@@ -8,12 +8,12 @@ package main.java.api.skyscanner.models.structures;
  */
 public class Quote {
 
-    private int QuoteId;
-    private int MinPrice;
-    private boolean Direct;
-    private JourneyLeg OutboundLeg;
-    private JourneyLeg InboundLeg;
-    private String QuoteDateTime;
+    private int quoteId;
+    private int minPrice;
+    private boolean direct;
+    private JourneyLeg outboundLeg;
+    private JourneyLeg inboundLeg;
+    private String quoteDateTime;
 
     /**
      * Construct a Quotes object
@@ -26,20 +26,20 @@ public class Quote {
      * @param _QuoteDateTime The date and time quote was received. Example '"2016-11-09T21:20:00"'
      */
     public Quote(int _QuoteId, int _MinPrice, boolean _Direct, JourneyLeg _OutboundLeg, JourneyLeg _InboundLeg, String _QuoteDateTime) {
-        this.QuoteId = _QuoteId;
-        this.MinPrice = _MinPrice;
-        this.Direct = _Direct;
-        this.OutboundLeg = _OutboundLeg;
-        this.InboundLeg = _InboundLeg;
-        this.QuoteDateTime = _QuoteDateTime;
+        this.quoteId = _QuoteId;
+        this.minPrice = _MinPrice;
+        this.direct = _Direct;
+        this.outboundLeg = _OutboundLeg;
+        this.inboundLeg = _InboundLeg;
+        this.quoteDateTime = _QuoteDateTime;
 
     }
 
     @Override
     public String toString() {
-        return "Quotes [QuoteId=" + QuoteId + ", MinPrice=" + MinPrice + ",  Direct=" + Direct
-                + ", OutboundLeg=" + OutboundLeg + ", CarrierIds="
-                + ", InboundLeg=" + InboundLeg + ",QuoteDateTime=" + QuoteDateTime + "]";
+        return "Quotes [QuoteId=" + this.quoteId + ", MinPrice=" + this.minPrice + ",  Direct=" + this.direct
+                + ", OutboundLeg=" + this.outboundLeg + ", CarrierIds="
+                + ", InboundLeg=" + this.inboundLeg + ",QuoteDateTime=" + this.quoteDateTime + "]";
     }
 
     //=================  GETTERS ===============
@@ -49,7 +49,7 @@ public class Quote {
      * @return An integer that represents the ID of this quote
      */
     public int getQuoteId() {
-        return QuoteId;
+        return this.quoteId;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Quote {
      * @return The minimum price of this quote in the form of an integer
      */
     public int getMinPrice() {
-        return MinPrice;
+        return this.minPrice;
     }
 
     /**
@@ -67,7 +67,7 @@ public class Quote {
      * @return A Boolean that describes whether the quote is a direct flight or not
      */
     public boolean isDirect() {
-        return Direct;
+        return this.direct;
     }
 
     /**
@@ -76,7 +76,7 @@ public class Quote {
      * @return The outbound JourneyLeg of this quote
      */
     public JourneyLeg getOutboundLeg() {
-        return OutboundLeg;
+        return this.outboundLeg;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Quote {
      * @return The inbound JourneyLeg of this quote
      */
     public JourneyLeg getInboundLeg() {
-        return InboundLeg;
+        return this.inboundLeg;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Quote {
      * @return The time this quote was requested at
      */
     public String getQuoteDateTime() {
-        return QuoteDateTime;
+        return this.quoteDateTime;
     }
 
 }

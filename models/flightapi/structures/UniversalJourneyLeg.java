@@ -35,7 +35,7 @@ public class UniversalJourneyLeg {
 
     @Override
     public String toString() {
-        return "UniversalJourneyLeg{" + "carrierNames=" + carrierNames + ", originLocation=" + originLocation + ", destinationLocation=" + destinationLocation + ", departureDateTime=" + departureDateTime + '}';
+        return "UniversalJourneyLeg{" + "carrierNames=" + this.carrierNames + ", originLocation=" + this.originLocation + ", destinationLocation=" + this.destinationLocation + ", departureDateTime=" + this.departureDateTime + '}';
     }
 
     //=================  GETTERS ===============
@@ -45,7 +45,7 @@ public class UniversalJourneyLeg {
      * @return An array of carrier names associated to this JourneyLeg
      */
     public String[] getCarrierNames() {
-        return carrierNames;
+        return this.carrierNames;
     }
 
     /**
@@ -53,7 +53,7 @@ public class UniversalJourneyLeg {
      * @return The origin location of this JourneyLeg
      */
     public Location getOriginLocation() {
-        return originLocation;
+        return this.originLocation;
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniversalJourneyLeg {
      * @return The destination location of this JourneyLeg
      */
     public Location getDestinationLocation() {
-        return destinationLocation;
+        return this.destinationLocation;
     }
 
     /**
@@ -69,7 +69,7 @@ public class UniversalJourneyLeg {
      * @return The departure date and time of this JourneyLeg
      */
     public String getDepartureDateTime() {
-        return departureDateTime;
+        return this.departureDateTime;
     }
 
 }

@@ -24,13 +24,13 @@ public class Trip {
     private String name;
 
     public Trip() {
-        currency = null;
+        this.currency = null;
     }
 
     public Trip(Currency _currency) {
-        currency = _currency;
-        quotes = new UniversalQuote[0];
-        name = "New Trip";
+        this.currency = _currency;
+        this.quotes = new UniversalQuote[0];
+        this.name = "New Trip";
     }
 
     /**
@@ -39,13 +39,13 @@ public class Trip {
      * @param _quote The quote to add. Must be of the same currency type as the Trip
      */
     public void addQuote(UniversalQuote _quote) {
-        if (!_quote.getCurrency().getCode().equals(currency.getCode())) {
-            throw new IllegalArgumentException("You can only add quotes with the same currency type to the Trip. This trip's currency is: " + currency.getCode());
+        if (!_quote.getCurrency().getCode().equals(this.currency.getCode())) {
+            throw new IllegalArgumentException("You can only add quotes with the same currency type to the Trip. This trip's currency is: " + this.currency.getCode());
         }
 
-        quotes = Arrays.copyOfRange(quotes, 0, quotes.length + 1);
-        quotes[quotes.length - 1] = _quote;
-        totalPrice += _quote.getPrice();
+        this.quotes = Arrays.copyOfRange(this.quotes, 0, this.quotes.length + 1);
+        this.quotes[this.quotes.length - 1] = _quote;
+        this.totalPrice += _quote.getPrice();
     }
 
     /**
@@ -55,10 +55,10 @@ public class Trip {
      * @param _newIndex The index to move the quote to
      */
     public void moveQuote(int _oldIndex, int _newIndex) {
-        if (_oldIndex < 0 || _oldIndex >= quotes.length) {
+        if (_oldIndex < 0 || _oldIndex >= this.quotes.length) {
             throw new IndexOutOfBoundsException();
         }
-        if (_newIndex < 0 || _newIndex >= quotes.length) {
+        if (_newIndex < 0 || _newIndex >= this.quotes.length) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -67,19 +67,19 @@ public class Trip {
         }
 
         if (_oldIndex < _newIndex) {
-            UniversalQuote temp = quotes[_oldIndex];
+            UniversalQuote temp = this.quotes[_oldIndex];
 
             for (int i = _oldIndex; i < _newIndex; i++) {
-                quotes[i] = quotes[i + 1];
+                this.quotes[i] = this.quotes[i + 1];
             }
-            quotes[_newIndex] = temp;
+            this.quotes[_newIndex] = temp;
         } else {
-            UniversalQuote temp = quotes[_newIndex];
+            UniversalQuote temp = this.quotes[_newIndex];
 
             for (int i = _newIndex; i > _oldIndex; i--) {
-                quotes[i] = quotes[i - 1];
+                this.quotes[i] = this.quotes[i - 1];
             }
-            quotes[_oldIndex] = temp;
+            this.quotes[_oldIndex] = temp;
         }
 
     }
@@ -90,31 +90,31 @@ public class Trip {
      * @param _index The index of the quote to remove
      */
     public void removeQuote(int _index) {
-        if (_index < 0 || _index >= quotes.length) {
+        if (_index < 0 || _index >= this.quotes.length) {
             throw new IndexOutOfBoundsException();
         }
 
-        if (quotes.length == 1) {
-            totalPrice = 0;
-            quotes = new UniversalQuote[0];
+        if (this.quotes.length == 1) {
+            this.totalPrice = 0;
+            this.quotes = new UniversalQuote[0];
             return;
         }
 
-        UniversalQuote[] newQuotes = new UniversalQuote[quotes.length - 1];
+        UniversalQuote[] newQuotes = new UniversalQuote[this.quotes.length - 1];
 
         for (int i = 0; i < _index; i++) {
-            newQuotes[i] = quotes[i];
+            newQuotes[i] = this.quotes[i];
         }
 
-        for (int i = _index + 1; i < quotes.length; i++) {
-            newQuotes[i - 1] = quotes[i];
+        for (int i = _index + 1; i < this.quotes.length; i++) {
+            newQuotes[i - 1] = this.quotes[i];
         }
 
-        if (quotes[_index] != null) {
-            totalPrice -= quotes[_index].getPrice();
+        if (this.quotes[_index] != null) {
+            this.totalPrice -= this.quotes[_index].getPrice();
         }
 
-        quotes = newQuotes;
+        this.quotes = newQuotes;
     }
 
     /**
@@ -123,7 +123,7 @@ public class Trip {
      * @return The total number of Quotes in this Trip
      */
     public int getNumberOfQuotes() {
-        return quotes.length;
+        return this.quotes.length;
     }
 
     /**
@@ -133,11 +133,11 @@ public class Trip {
      * @return A QuoteStruct object made from the Quote at the index
      */
     public QuoteStruct getQuoteStructAtIndex(int _index) {
-        if (_index < 0 || _index >= quotes.length) {
+        if (_index < 0 || _index >= this.quotes.length) {
             throw new IndexOutOfBoundsException();
         }
 
-        return QuoteStructConverter.convertQuoteToStruct(quotes[_index]);
+        return QuoteStructConverter.convertQuoteToStruct(this.quotes[_index]);
     }
 
     /**
@@ -148,8 +148,8 @@ public class Trip {
     public ArrayList<QuoteStruct> getQuoteStructArrayList() {
         ArrayList<QuoteStruct> arr = new ArrayList<QuoteStruct>();
 
-        for (int i = 0; i < quotes.length; i++) {
-            arr.add(QuoteStructConverter.convertQuoteToStruct(quotes[i]));
+        for (int i = 0; i < this.quotes.length; i++) {
+            arr.add(QuoteStructConverter.convertQuoteToStruct(this.quotes[i]));
         }
 
         return arr;
@@ -157,7 +157,7 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "Trip{" + "quotes=" + quotes + ", currency=" + currency + ", totalPrice=" + totalPrice + ", name=" + name + '}';
+        return "Trip{" + "quotes=" + this.quotes + ", currency=" + this.currency + ", totalPrice=" + this.totalPrice + ", name=" + this.name + '}';
     }
 
     //=================  SETTERS ===============
@@ -167,7 +167,7 @@ public class Trip {
      * @param _newName The new name for the Trip
      */
     public void setName(String _newName) {
-        name = _newName;
+        this.name = _newName;
     }
 
     //=================  GETTERS ===============
@@ -177,7 +177,7 @@ public class Trip {
      * @return The total price of the Trip
      */
     public int getTotalPrice() {
-        return totalPrice;
+        return this.totalPrice;
     }
 
     /**
@@ -186,7 +186,7 @@ public class Trip {
      * @return The currency object used by this Trip
      */
     public Currency getCurrency() {
-        return currency;
+        return this.currency;
     }
 
     /**
@@ -195,7 +195,7 @@ public class Trip {
      * @return The name of this Trip
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
 }

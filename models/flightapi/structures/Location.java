@@ -29,10 +29,10 @@ public class Location {
      * @return The country, if one exists
      */
     public String getCountry() {
-        if (country == null) {
+        if (this.country == null) {
             return "";
         }
-        return country;
+        return this.country;
     }
 
     /**
@@ -41,10 +41,10 @@ public class Location {
      * @return The city, if one exists
      */
     public String getCity() {
-        if (city == null) {
+        if (this.city == null) {
             return "";
         }
-        return city;
+        return this.city;
     }
 
     /**
@@ -53,10 +53,10 @@ public class Location {
      * @return The airport, if one exists
      */
     public String getAirport() {
-        if (airport == null) {
+        if (this.airport == null) {
             return "";
         }
-        return airport;
+        return this.airport;
     }
 
     /**
@@ -65,18 +65,18 @@ public class Location {
      * @return The most accurate location
      */
     public String getMostAccurateLocation() {
-        if (airport != null) {
-            return airport;
+        if (this.airport != null) {
+            return this.airport;
         }
-        if (city != null) {
-            return city;
+        if (this.city != null) {
+            return this.city;
         }
-        return country;
+        return this.country;
     }
 
     @Override
     public String toString() {
-        return "Location{" + "country=" + country + ", city=" + city + ", airport=" + airport + '}';
+        return "Location{" + "country=" + this.country + ", city=" + this.city + ", airport=" + this.airport + '}';
     }
 
 }

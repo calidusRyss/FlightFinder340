@@ -16,7 +16,7 @@ public class TripBuilder {
     private final QuotesStore quoteStore;
 
     public TripBuilder(QuotesStore _quoteStore) {
-        quoteStore = _quoteStore;
+        this.quoteStore = _quoteStore;
     }
 
     /**
@@ -25,12 +25,12 @@ public class TripBuilder {
      * @param _index The index of the Quote within the Quote Store
      */
     public void addQuoteAtIndexToTrip(int _index) {
-        if (selectedTrip == null) {
+        if (this.selectedTrip == null) {
             throw new IllegalStateException("A trip has not yet been selected to modify.");
         }
 
-        UniversalQuote quote = quoteStore.getAtIndex(_index);
-        selectedTrip.addQuote(quote);
+        UniversalQuote quote = this.quoteStore.getAtIndex(_index);
+        this.selectedTrip.addQuote(quote);
     }
 
     /**
@@ -39,11 +39,11 @@ public class TripBuilder {
      * @param _index The index of the quote to remove within the Trip
      */
     public void removeQuoteAtIndexFromTrip(int _index) {
-        if (selectedTrip == null) {
+        if (this.selectedTrip == null) {
             throw new IllegalStateException("A trip has not yet been selected to modify.");
         }
 
-        selectedTrip.removeQuote(_index);
+        this.selectedTrip.removeQuote(_index);
     }
 
     /**
@@ -53,11 +53,11 @@ public class TripBuilder {
      * @param _newIndex The new index of this quote after moving it
      */
     public void moveQuote(int _oldIndex, int _newIndex) {
-        if (selectedTrip == null) {
+        if (this.selectedTrip == null) {
             throw new IllegalStateException("A trip has not yet been selected to modify.");
         }
 
-        selectedTrip.moveQuote(_oldIndex, _newIndex);
+        this.selectedTrip.moveQuote(_oldIndex, _newIndex);
     }
 
     /**
@@ -66,11 +66,11 @@ public class TripBuilder {
      * @param _newName The new name for the Trip
      */
     public void renameSelectedTrip(String _newName) {
-        if (selectedTrip == null) {
+        if (this.selectedTrip == null) {
             throw new IllegalStateException("A trip has not yet been selected to modify.");
         }
 
-        selectedTrip.setName(_newName);
+        this.selectedTrip.setName(_newName);
     }
 
     //=================  SETTERS ===============
@@ -80,7 +80,7 @@ public class TripBuilder {
      * @param _selection The trip to set the selection to.
      */
     public void setSelectedTrip(Trip _selection) {
-        selectedTrip = _selection;
+        this.selectedTrip = _selection;
     }
 
     //=================  GETTERS ===============
@@ -90,7 +90,7 @@ public class TripBuilder {
      * @return The selected Trip
      */
     public Trip getSelectedTrip() {
-        return selectedTrip;
+        return this.selectedTrip;
     }
 
 }

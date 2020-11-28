@@ -20,7 +20,7 @@ public class PlaceSuggestionsController {
             throw new IllegalArgumentException("Currency controller cannot be null!");
         }
 
-        placeSuggester = new PlaceSuggester(_countryController, _currencyController);
+        this.placeSuggester = new PlaceSuggester(_countryController, _currencyController);
     }
 
     /**
@@ -29,21 +29,21 @@ public class PlaceSuggestionsController {
      * @param _query The query
      */
     public void setQuery(String _query) {
-        placeSuggester.setQuery(_query);
+        this.placeSuggester.setQuery(_query);
     }
 
     /**
      * Clear the current query in the place suggester. Use this instead of send a null or blank string through setQuery.
      */
     public void clearQuery() {
-        placeSuggester.clearQuery();
+        this.placeSuggester.clearQuery();
     }
 
     /**
      * Get the current query in the place suggester.
      */
     public void getQuery() {
-        placeSuggester.getQuery();
+        this.placeSuggester.getQuery();
     }
 
     /**
@@ -52,7 +52,7 @@ public class PlaceSuggestionsController {
      * @return
      */
     public String[] getSuggestions() {
-        return placeSuggester.getSuggestions();
+        return this.placeSuggester.getSuggestions();
     }
 
     /**
@@ -62,14 +62,14 @@ public class PlaceSuggestionsController {
      * @return A suggestion code, used for making quote search calls.
      */
     public String getSuggestionCode(String _suggestionString) {
-        return placeSuggester.getSuggestionCode(_suggestionString);
+        return this.placeSuggester.getSuggestionCode(_suggestionString);
     }
 
     /**
      * Refresh the suggestions (Makes an API call to find new suggestions using the query)
      */
     public void refreshSuggestions() {
-        placeSuggester.refreshSuggestions();
+        this.placeSuggester.refreshSuggestions();
     }
 
 }

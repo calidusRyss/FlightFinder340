@@ -10,9 +10,9 @@ import main.java.models.enums.SortMode;
  */
 public interface IStore {
 
-    public void addCollection(Object... objects);
+    public void addCollection(Object... _objects);
 
     public void clear();
 
-    public void sort(SortMode sortMode);
+    public void sort(SortMode _sortMode);
 }

@@ -25,15 +25,15 @@ public class QuotesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return responseCode;
+        return this.responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return httpResponseMessage;
+        return this.httpResponseMessage;
     }
 
     public UniversalQuote[] getQuotes() {
-        return quotes;
+        return this.quotes;
     }
 
 }

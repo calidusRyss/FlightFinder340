@@ -53,7 +53,6 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     private final String fetchCurrenciesEndpoint = "/reference/v1.0/currencies";
     private final String fetchMarketsEndpoint = "/reference/v1.0/countries/en-US";
     private final String fetchPlacesEndpoint = "/autosuggest/v1.0/%s/%s/en-US/?query=%s";
-    private final String fetchRoutesEndpoint = "/browseroutes/v1.0/%s/%s/en-US/%s/%s/%s?inboundpartialdate=%s";
     private final String fetchQuotesEndpoint = "/browsequotes/v1.0/%s/%s/en-US/%s/%s/%s?inboundpartialdate=%s";
 
     /**
@@ -65,7 +64,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public CountriesResponse fetchAvaliableCountries() {
 
         //Make request
-        Request countryRequest = new Request(baseApiEndpoint + fetchMarketsEndpoint, RequestMethod.GET);
+        Request countryRequest = new Request(this.baseApiEndpoint + this.fetchMarketsEndpoint, RequestMethod.GET);
 
         Response countryResponse = makeAPICall(countryRequest);
 
@@ -97,7 +96,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public CurrenciesResponse fetchAvaliableCurrencies() {
 
         //Make request
-        Request currencyRequest = new Request(baseApiEndpoint + fetchCurrenciesEndpoint, RequestMethod.GET);
+        Request currencyRequest = new Request(this.baseApiEndpoint + this.fetchCurrenciesEndpoint, RequestMethod.GET);
 
         Response currencyResponse = makeAPICall(currencyRequest);
 
@@ -133,7 +132,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public PlacesResponse fetchAvaliablePlaces(String _country, String _currency, String _query) {
 
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchPlacesEndpoint, _country, _currency, _query);
+        String formattedEndpoint = this.baseApiEndpoint + String.format(this.fetchPlacesEndpoint, _country, _currency, _query);
 
         //Make request
         Request placesRequest = new Request(formattedEndpoint, RequestMethod.GET);
@@ -194,7 +193,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         //Format endpoint string
-        String formattedEndpoint = baseApiEndpoint + String.format(fetchQuotesEndpoint, _country, _currency, _origin, _destination, outboundTimeString, inboundTimeString);
+        String formattedEndpoint = this.baseApiEndpoint + String.format(this.fetchQuotesEndpoint, _country, _currency, _origin, _destination, outboundTimeString, inboundTimeString);
 
         //Make request
         Request quoteRequest = new Request(formattedEndpoint, RequestMethod.GET);
@@ -240,7 +239,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     private Response makeAPICall(Request _request) {
 
         //Prepare request headers
-        _request.addHeaders(new Header(rapidAPIHostHeaderKey, rapidAPIHostHeaderValue), new Header(apiKeyHeaderKey, apiKeyHeaderValue));
+        _request.addHeaders(new Header(this.rapidAPIHostHeaderKey, this.rapidAPIHostHeaderValue), new Header(this.apiKeyHeaderKey, this.apiKeyHeaderValue));
 
         try {
             Response response = HttpAdapter.makeRequest(_request);

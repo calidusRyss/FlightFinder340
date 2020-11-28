@@ -8,10 +8,10 @@ package main.java.api.skyscanner.models.structures;
  */
 public class QuotePlace {
 
-    private int PlaceId;
-    private String Name;
-    private String Type;
-    private String SkyscannerCode;
+    private int placeId;
+    private String name;
+    private String type;
+    private String skyscannerCode;
 
     /**
      * Construct a Places object
@@ -22,15 +22,15 @@ public class QuotePlace {
      * @param _SkyscannerCode Example 'AE'
      */
     public QuotePlace(int _PlaceId, String _Name, String _Type, String _SkyscannerCode) {
-        this.PlaceId = _PlaceId;
-        this.Name = _Name;
-        this.Type = _Type;
-        this.SkyscannerCode = _SkyscannerCode;
+        this.placeId = _PlaceId;
+        this.name = _Name;
+        this.type = _Type;
+        this.skyscannerCode = _SkyscannerCode;
     }
 
     @Override
     public String toString() {
-        return "QuotePlace{" + "PlaceId=" + PlaceId + ", Name=" + Name + ", Type=" + Type + ", SkyscannerCode=" + SkyscannerCode + '}';
+        return "QuotePlace{" + "PlaceId=" + this.placeId + ", Name=" + this.name + ", Type=" + this.type + ", SkyscannerCode=" + this.skyscannerCode + '}';
     }
 
     //=================  GETTERS ===============
@@ -40,7 +40,7 @@ public class QuotePlace {
      * @return An integer that represents the ID of the QuotePlace
      */
     public int getPlaceId() {
-        return PlaceId;
+        return this.placeId;
     }
 
     /**
@@ -49,7 +49,7 @@ public class QuotePlace {
      * @return The name of the country this QuotePlace holds
      */
     public String getName() {
-        return Name;
+        return this.name;
     }
 
     /**
@@ -58,7 +58,7 @@ public class QuotePlace {
      * @return The type of this QuotePlace object
      */
     public String getType() {
-        return Type;
+        return this.type;
     }
 
     /**
@@ -67,7 +67,7 @@ public class QuotePlace {
      * @return The SkyScanner API code that this QuotePlace represents
      */
     public String getSkyscannerCode() {
-        return SkyscannerCode;
+        return this.skyscannerCode;
     }
 
 }

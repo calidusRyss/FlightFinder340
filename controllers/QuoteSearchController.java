@@ -23,8 +23,8 @@ public class QuoteSearchController {
     private final PlaceSuggestionsController placeSuggestionsController;
 
     public QuoteSearchController(PlaceSuggestionsController _placeSuggestionsController) {
-        quotesStore = new QuotesStore();
-        placeSuggestionsController = _placeSuggestionsController;
+        this.quotesStore = new QuotesStore();
+        this.placeSuggestionsController = _placeSuggestionsController;
     }
 
     /**
@@ -65,13 +65,13 @@ public class QuoteSearchController {
         }
 
         //Convert Query in Code
-        placeSuggestionsController.setQuery(originString);
-        placeSuggestionsController.refreshSuggestions();
-        originString = placeSuggestionsController.getSuggestionCode(originString);
+        this.placeSuggestionsController.setQuery(originString);
+        this.placeSuggestionsController.refreshSuggestions();
+        originString = this.placeSuggestionsController.getSuggestionCode(originString);
 
-        placeSuggestionsController.setQuery(destinationString);
-        placeSuggestionsController.refreshSuggestions();
-        destinationString = placeSuggestionsController.getSuggestionCode(destinationString);
+        this.placeSuggestionsController.setQuery(destinationString);
+        this.placeSuggestionsController.refreshSuggestions();
+        destinationString = this.placeSuggestionsController.getSuggestionCode(destinationString);
 
         if (destinationString.equals("")) {
             destinationString = "Anywhere";
@@ -82,8 +82,8 @@ public class QuoteSearchController {
 
         switch (response.getResponseCode()) {
             case OK:
-                quotesStore.clear();
-                quotesStore.addCollection(response.getQuotes());
+                this.quotesStore.clear();
+                this.quotesStore.addCollection(response.getQuotes());
                 break;
             default:
                 throw new QuoteRequestException(response.getResponseCode().toString());
@@ -99,7 +99,7 @@ public class QuoteSearchController {
      * @return An ArrayList of sorted QuoteStruct objects
      */
     public ArrayList<QuoteStruct> sortQuotesBy(SortMode _sortMode) {
-        quotesStore.sort(_sortMode);
+        this.quotesStore.sort(_sortMode);
         return getSortedQuotes();
     }
 
@@ -109,7 +109,7 @@ public class QuoteSearchController {
      * @return An ArrayList of sorted QuoteStruct objects
      */
     public ArrayList<QuoteStruct> getSortedQuotes() {
-        return quotesStore.getSortedQuoteStructs();
+        return this.quotesStore.getSortedQuoteStructs();
     }
 
     /**
@@ -118,7 +118,7 @@ public class QuoteSearchController {
      * @return The QuoteStore object used by this controller
      */
     public QuotesStore getQuoteStore() {
-        return quotesStore;
+        return this.quotesStore;
     }
 
     /**
@@ -127,7 +127,7 @@ public class QuoteSearchController {
      * @return The current sort mode of the QuoteStore
      */
     public SortMode getCurrentSortMode() {
-        return quotesStore.getCurrentSortMode();
+        return this.quotesStore.getCurrentSortMode();
     }
 
 }

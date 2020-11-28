@@ -24,15 +24,15 @@ public class PlacesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return responseCode;
+        return this.responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return httpResponseMessage;
+        return this.httpResponseMessage;
     }
 
     public Place[] getPlaces() {
-        return places;
+        return this.places;
     }
 
 }

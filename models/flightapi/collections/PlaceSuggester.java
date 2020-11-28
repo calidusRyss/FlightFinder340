@@ -15,8 +15,6 @@ import main.java.models.flightapi.responses.PlacesResponse;
  */
 public class PlaceSuggester {
 
-    private final int countdownRefreshTiming = 2;
-
     private String queryString = "";
     private Suggestion[] suggestions;
 
@@ -25,38 +23,36 @@ public class PlaceSuggester {
 
     public PlaceSuggester(CountryController _countryController, CurrencyController _currencyController) {
 
-        countryController = _countryController;
-        currencyController = _currencyController;
+        this.countryController = _countryController;
+        this.currencyController = _currencyController;
 
-        suggestions = new Suggestion[0];
+        this.suggestions = new Suggestion[0];
     }
 
     /**
      * Refresh the suggestions by making an API call using the current query string
      */
     public void refreshSuggestions() {
-        String country = countryController.getSelectedCountryCode();
-        String currency = currencyController.getSelectedCurrencyCode();
+        String country = this.countryController.getSelectedCountryCode();
+        String currency = this.currencyController.getSelectedCurrencyCode();
 
-        PlacesResponse response = FlightAPIAdapter.flightAPI.fetchAvaliablePlaces(country, currency, queryString);
+        PlacesResponse response = FlightAPIAdapter.flightAPI.fetchAvaliablePlaces(country, currency, this.queryString);
 
         if (response.getResponseCode() != ResponseCode.OK) {
-            synchronized (suggestions) {
-                suggestions = new Suggestion[0];
-            }
+            this.suggestions = new Suggestion[0];
+
             return;
         }
 
         Place[] places = response.getPlaces();
 
         //synchronize the suggestions array (prevents race conditions)
-        synchronized (suggestions) {
-            suggestions = new Suggestion[places.length];
+        this.suggestions = new Suggestion[places.length];
 
-            for (int i = 0; i < places.length; i++) {
-                suggestions[i] = new Suggestion(places[i].getPlaceName(), places[i].getPlaceID());
-            }
+        for (int i = 0; i < places.length; i++) {
+            this.suggestions[i] = new Suggestion(places[i].getPlaceName(), places[i].getPlaceID());
         }
+
     }
 
     //=================  SETTERS ===============
@@ -70,15 +66,15 @@ public class PlaceSuggester {
             throw new IllegalArgumentException("Query value cannot be null!");
         }
 
-        queryString = _value;
+        this.queryString = _value;
     }
 
     /**
      * Clear the query, reset the countdown and clear all suggestions
      */
     public void clearQuery() {
-        queryString = "";
-        suggestions = new Suggestion[0];
+        this.queryString = "";
+        this.suggestions = new Suggestion[0];
     }
 
     //=================  GETTERS ===============
@@ -88,7 +84,7 @@ public class PlaceSuggester {
      * @return
      */
     public String getQuery() {
-        return queryString;
+        return this.queryString;
     }
 
     /**
@@ -97,10 +93,10 @@ public class PlaceSuggester {
      * @return An array of strings
      */
     public String[] getSuggestions() {
-        String[] names = new String[suggestions.length];
+        String[] names = new String[this.suggestions.length];
 
-        for (int i = 0; i < suggestions.length; i++) {
-            names[i] = suggestions[i].name;
+        for (int i = 0; i < this.suggestions.length; i++) {
+            names[i] = this.suggestions[i].name;
         }
 
         return names;
@@ -113,12 +109,12 @@ public class PlaceSuggester {
      * @return A string representing a suggestion code. If the suggestion isn't found, returns a blank string
      */
     public String getSuggestionCode(String _suggestionString) {
-        for (int i = 0; i < suggestions.length; i++) {
-            if (suggestions[i].name.toLowerCase().equals(_suggestionString.toLowerCase())) {
-                return suggestions[i].code;
+        for (int i = 0; i < this.suggestions.length; i++) {
+            if (this.suggestions[i].name.toLowerCase().equals(_suggestionString.toLowerCase())) {
+                return this.suggestions[i].code;
             }
         }
-        return (suggestions.length > 0 ? suggestions[0].code : "");
+        return (this.suggestions.length > 0 ? this.suggestions[0].code : "");
     }
 
     /**
@@ -130,22 +126,22 @@ public class PlaceSuggester {
         private String code;
 
         public Suggestion(String _name, String _code) {
-            name = _name;
-            code = _code;
+            this.name = _name;
+            this.code = _code;
         }
 
         @Override
         public String toString() {
-            return "Suggestion{" + "name=" + name + ", code=" + code + '}';
+            return "Suggestion{" + "name=" + this.name + ", code=" + this.code + '}';
         }
 
         //=================  GETTERS ===============
         public String getName() {
-            return name;
+            return this.name;
         }
 
         public String getCode() {
-            return code;
+            return this.code;
         }
 
     }

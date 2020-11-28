@@ -12,8 +12,8 @@ import main.java.models.flightapi.structures.UniversalQuote;
 public class QuoteExpensiveComparator implements Comparator<UniversalQuote> {
 
     @Override
-    public int compare(UniversalQuote o1, UniversalQuote o2) {
-        return -(o1.getPrice() - o2.getPrice());
+    public int compare(UniversalQuote _o1, UniversalQuote _o2) {
+        return -(_o1.getPrice() - _o2.getPrice());
     }
 
 }

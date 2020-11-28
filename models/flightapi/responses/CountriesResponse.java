@@ -24,15 +24,15 @@ public class CountriesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return responseCode;
+        return this.responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return httpResponseMessage;
+        return this.httpResponseMessage;
     }
 
     public Country[] getCountries() {
-        return countries;
+        return this.countries;
     }
 
 }
