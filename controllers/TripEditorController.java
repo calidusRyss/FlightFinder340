@@ -63,7 +63,9 @@ public class TripEditorController {
      * @param _newName The new name for the Trip
      */
     public void renameSelectedTrip(String _newName){
-        tripBuilder.renameSelectedTrip(_newName);
+        tripBuilder.renameSelectedTrip(
+        tripsStore.getNextFreeName(_newName)
+        );
     }
 
     /**

@@ -27,10 +27,11 @@ public class TripController {
     /**
      * Create a new empty trip using the currently selected currency from the currency selector
      */
-    public void createNewTrip()
+    public void createNewTrip(String _tripName)
     {
-        tripsStore.addCollection(new Trip(currencySelector.getSelectedCurrency()));
+        tripsStore.addCollection(new Trip(currencySelector.getSelectedCurrency()),_tripName);
     }
+    
 
     /**
      * Delete a specified trip at the given index
