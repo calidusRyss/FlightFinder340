@@ -46,6 +46,7 @@ public class TripController {
         this.tripsStore.sort(_sortMode);
     }
 
+    //=================  GETTERS ===============
     /**
      * Get a specified trip at the given index
      *

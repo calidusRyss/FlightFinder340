@@ -22,6 +22,16 @@ public class CurrencyController {
     }
 
     /**
+     * Set the currency selection using the index of the currency
+     *
+     * @param _index The index of the currency to set the selection to
+     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
+     */
+    public void selectCurrency(int _index) {
+        this.currencySelector.selectCurrency(_index);
+    }
+
+    /**
      * Load all currencies into the selector
      */
     private void loadCurrencies() throws ApiFailedToLoadException {
@@ -40,16 +50,7 @@ public class CurrencyController {
         }
     }
 
-    /**
-     * Set the currency selection using the index of the currency
-     *
-     * @param _index The index of the currency to set the selection to
-     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
-     */
-    public void selectCurrency(int _index) {
-        this.currencySelector.selectCurrency(_index);
-    }
-
+    //=================  GETTERS ===============
     /**
      * Get an array list of all currency codes
      *
@@ -88,6 +89,7 @@ public class CurrencyController {
 
     /**
      * Get the CurrencySelector object used by this Controller. (Used for Testing and Debugging)
+     *
      * @return The CurrencySelector object used by this Controller. (Used for Testing and Debugging)
      */
     public CurrencySelector getCurrencySelector() {

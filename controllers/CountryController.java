@@ -22,6 +22,16 @@ public class CountryController {
     }
 
     /**
+     * Set the country selection using the index of the country
+     *
+     * @param _index The index of the country to set the selection to
+     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
+     */
+    public void selectCountry(int _index) {
+        this.countrySelector.selectCountry(_index);
+    }
+
+    /**
      * Load all currencies into the selector
      */
     private void loadCountries() throws ApiFailedToLoadException {
@@ -40,16 +50,7 @@ public class CountryController {
         }
     }
 
-    /**
-     * Set the country selection using the index of the country
-     *
-     * @param _index The index of the country to set the selection to
-     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
-     */
-    public void selectCountry(int _index) {
-        this.countrySelector.selectCountry(_index);
-    }
-
+    //=================  GETTERS ===============
     /**
      * Get an array list of all country codes
      *

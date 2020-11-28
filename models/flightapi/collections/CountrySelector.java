@@ -20,6 +20,7 @@ public class CountrySelector {
         this.selectedCountry = null;
     }
 
+    //=================  SETTERS ===============
     /**
      * Set the country data contained in the selector
      *
@@ -48,6 +49,7 @@ public class CountrySelector {
         this.selectedCountry = this.allCountries.get(_index);
     }
 
+    //=================  GETTERS ===============
     /**
      * Get an array list of all country codes
      *

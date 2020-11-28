@@ -103,6 +103,7 @@ public class QuoteSearchController {
         return getSortedQuotes();
     }
 
+    //=================  GETTERS ===============
     /**
      * Get an ArrayList of sorted QuoteStruct objects
      *

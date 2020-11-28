@@ -21,15 +21,6 @@ public class TripEditorController {
     }
 
     /**
-     * Set the selected trip within the trip builder
-     *
-     * @param _index The index of the trip within the trip store
-     */
-    public void setSelectedTrip(int _index) {
-        this.tripBuilder.setSelectedTrip(this.tripsStore.getAtIndex(_index));
-    }
-
-    /**
      * Add a quote from the Quote Store at the given index to the selected trip
      *
      * @param _index The index of the Quote within the Quote Store
@@ -68,6 +59,17 @@ public class TripEditorController {
         );
     }
 
+    //=================  SETTERS ===============
+    /**
+     * Set the selected trip within the trip builder
+     *
+     * @param _index The index of the trip within the trip store
+     */
+    public void setSelectedTrip(int _index) {
+        this.tripBuilder.setSelectedTrip(this.tripsStore.getAtIndex(_index));
+    }
+
+    //=================  GETTERS ===============
     /**
      * Gets the selected Trip
      *

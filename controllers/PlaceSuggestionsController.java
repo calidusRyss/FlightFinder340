@@ -24,6 +24,14 @@ public class PlaceSuggestionsController {
     }
 
     /**
+     * Refresh the suggestions (Makes an API call to find new suggestions using the query)
+     */
+    public void refreshSuggestions() {
+        this.placeSuggester.refreshSuggestions();
+    }
+
+    //=================  SETTERS ===============
+    /**
      * Set the current query of the place suggester
      *
      * @param _query The query
@@ -39,6 +47,7 @@ public class PlaceSuggestionsController {
         this.placeSuggester.clearQuery();
     }
 
+    //=================  GETTERS ===============
     /**
      * Get the current query in the place suggester.
      */
@@ -63,13 +72,6 @@ public class PlaceSuggestionsController {
      */
     public String getSuggestionCode(String _suggestionString) {
         return this.placeSuggester.getSuggestionCode(_suggestionString);
-    }
-
-    /**
-     * Refresh the suggestions (Makes an API call to find new suggestions using the query)
-     */
-    public void refreshSuggestions() {
-        this.placeSuggester.refreshSuggestions();
     }
 
 }

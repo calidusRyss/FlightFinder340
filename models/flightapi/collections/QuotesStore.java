@@ -72,6 +72,7 @@ public class QuotesStore implements IStore {
         this.currentSortMode = _sortMode;
     }
 
+    //=================  GETTERS ===============
     /**
      * Get a UniversalQuote from the desired index. (Mainly used for testing)
      *

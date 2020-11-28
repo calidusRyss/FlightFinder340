@@ -20,6 +20,7 @@ public class CurrencySelector {
         this.selectedCurrency = null;
     }
 
+    //=================  SETTERS ===============
     /**
      * Set the currency data contained in the selector
      *
@@ -48,6 +49,7 @@ public class CurrencySelector {
         this.selectedCurrency = this.allCurrencies.get(_index);
     }
 
+    //=================  GETTERS ===============
     /**
      * Get an array list of all currency codes
      *
