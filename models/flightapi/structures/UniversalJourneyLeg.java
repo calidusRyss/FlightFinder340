@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Contains origin and destination locations, as well as carrier names and departure time
  *
  * @author Teegan Krieger
- * @LastUpdate 10/22/2020
+ * @LastModified 10/22/2020
  */
 public class UniversalJourneyLeg {
 
@@ -23,7 +23,7 @@ public class UniversalJourneyLeg {
 
     public UniversalJourneyLeg()
     {
-
+        //Empty Default constructor left in for reflection.
     }
 
     public UniversalJourneyLeg(String[] _carrierNames, Location _originLocation, Location _destinationLocation, LocalDateTime _departureDateTime) {
@@ -40,18 +40,34 @@ public class UniversalJourneyLeg {
 
     //=================  GETTERS ===============
 
+    /**
+     * Get an array of carrier names associated to this JourneyLeg
+     * @return An array of carrier names associated to this JourneyLeg
+     */
     public String[] getCarrierNames() {
         return carrierNames;
     }
 
+    /**
+     * Get the origin location of this JourneyLeg
+     * @return The origin location of this JourneyLeg
+     */
     public Location getOriginLocation() {
         return originLocation;
     }
 
+    /**
+     * Get the destination location of this JourneyLeg
+     * @return The destination location of this JourneyLeg
+     */
     public Location getDestinationLocation() {
         return destinationLocation;
     }
 
+    /**
+     * Get the departure date and time of this JourneyLeg
+     * @return The departure date and time of this JourneyLeg
+     */
     public String getDepartureDateTime() {
         return departureDateTime;
     }

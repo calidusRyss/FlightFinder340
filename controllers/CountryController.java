@@ -10,7 +10,7 @@ import main.java.models.flightapi.collections.CountrySelector;
  * A controller that handles loading all country data and selecting an active country
  *
  * @author Teegan Krieger
- * @LastUpdate 10/28/2020
+ * @LastModified 10/28/2020
  */
 public class CountryController {
 
@@ -88,11 +88,11 @@ public class CountryController {
 
     /**
      * Get the index of either a country name or country code
+     *
      * @param _countryNameOrCode The country name or code
      * @return The index of this country within the selector. Returns -1 if the country or code was not found
      */
-    public int getIndexOf(String _countryNameOrCode)
-    {
+    public int getIndexOf(String _countryNameOrCode) {
         return countrySelector.getIndexOf(_countryNameOrCode);
     }
 

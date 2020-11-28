@@ -4,7 +4,7 @@ package main.java.models.flightapi.structures;
  * A class representing quote data not relying on any specific API
  *
  * @author Teegan Krieger
- * @LastUpdate 10/22/2020
+ * @LastModified 10/22/2020
  */
 public class UniversalQuote {
 
@@ -16,9 +16,8 @@ public class UniversalQuote {
 
     private boolean directFlight;
 
-    public UniversalQuote()
-    {
-        
+    public UniversalQuote() {
+        //Empty Default constructor left in for reflection.
     }
 
     public UniversalQuote(int _price, Currency _currency, UniversalJourneyLeg _outboundLeg, UniversalJourneyLeg _inboundLeg, boolean _directFlight) {
@@ -30,29 +29,57 @@ public class UniversalQuote {
     }
 
     //=================  GETTERS ===============
-
+    /**
+     * Get the raw price of this quote
+     *
+     * @return The raw price of this quote
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * Get the Currency object used by this quote
+     *
+     * @return The Currency object used by this quote
+     */
     public Currency getCurrency() {
         return currency;
     }
 
+    /**
+     * Get the outbound JourneyLeg of this quote
+     *
+     * @return The outbound JourneyLeg of this quote
+     */
     public UniversalJourneyLeg getOutboundLeg() {
         return outboundLeg;
     }
 
+    /**
+     * Get the inbound JourneyLeg of this quote
+     *
+     * @return The inbound JourneyLeg of this quote
+     */
     public UniversalJourneyLeg getInboundLeg() {
         return inboundLeg;
     }
 
+    /**
+     * Get whether this flight is a direct flight or not
+     *
+     * @return Whether this flight is a direct flight or not
+     */
     public boolean isDirectFlight() {
         return directFlight;
     }
 
-    public String getPriceFormatted()
-    {
+    /**
+     * Get the price of this Quote Formatted into a string
+     *
+     * @return The price of this Quote Formatted into a string
+     */
+    public String getPriceFormatted() {
         return currency.getFormattedValue(price);
     }
 

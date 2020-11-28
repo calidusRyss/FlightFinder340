@@ -34,11 +34,11 @@ import org.json.JSONObject;
 
 /**
  * A translator used for making calls to and parsing data from the SkyScanner API
- * https://rapidapi.com/skyscanner/api/skyscanner-flight-search/details  FREE VERSION (Which is used here)
- * https://skyscanner.github.io/slate/#api-documentation   ENTERPRISE VERSION (Useful documentation but not all features are available in the free version)
+ * https://rapidapi.com/skyscanner/api/skyscanner-flight-search/details FREE VERSION (Which is used here)
+ * https://skyscanner.github.io/slate/#api-documentation ENTERPRISE VERSION (Useful documentation but not all features are available in the free version)
  *
  * @author Teegan Krieger
- * @LastUpdate 10/28/2020
+ * @LastModified 10/28/2020
  */
 public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
@@ -69,14 +69,12 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
         Response countryResponse = makeAPICall(countryRequest);
 
-        if (!countryResponse.isSuccessful())
-        {
+        if (!countryResponse.isSuccessful()) {
             CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[0]);
             return finalResponse;
         }
 
         //Parse and Organize data since Country Request succeeded
-
         try {
             JSONObject countriesJson = new JSONObject(countryResponse.getBody());
             JSONArray countriesArray = countriesJson.getJSONArray("Countries");
@@ -85,7 +83,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
             CountriesResponse finalResponse = new CountriesResponse(countryResponse, countries);
             return finalResponse;
         } catch (Exception e) {
-             CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[0]);
+            CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[0]);
             return finalResponse;
         }
     }
@@ -103,8 +101,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
         Response currencyResponse = makeAPICall(currencyRequest);
 
-        if (!currencyResponse.isSuccessful())
-        {
+        if (!currencyResponse.isSuccessful()) {
             CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, new Currency[0]);
             return finalResponse;
         }
@@ -117,8 +114,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
             CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, currencies);
             return finalResponse;
-        }
-        catch (Exception e) //Json Parsing Failed
+        } catch (Exception e) //Json Parsing Failed
         {
             CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, new Currency[0]);
             return finalResponse;
@@ -144,14 +140,12 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
         Response placesResponse = makeAPICall(placesRequest);
 
-        if (!placesResponse.isSuccessful())
-        {
+        if (!placesResponse.isSuccessful()) {
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[0]);
             return finalResponse;
         }
 
         //Parse and Organize data since Places Request succeeded
-
         try {
             JSONObject placesJson = new JSONObject(placesResponse.getBody());
             JSONArray placesArray = placesJson.getJSONArray("Places");
@@ -159,8 +153,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, places);
             return finalResponse;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[0]);
             return finalResponse;
         }
@@ -182,7 +175,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         return fetchQuotes(_country, _currency, _origin, _destination, _outboundTime, null);
     }
 
-     /**
+    /**
      * Make a call with the SkyScanner API to fetch all quotes within the constraints provided
      *
      * @param _country The country the user is in
@@ -208,8 +201,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
         Response quoteResponse = makeAPICall(quoteRequest);
 
-        if (!quoteResponse.isSuccessful())
-        {
+        if (!quoteResponse.isSuccessful()) {
             //Quote Request failed. Pass back an empty quote response with error code
             QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new UniversalQuote[0]);
             return finalResponse;
@@ -233,8 +225,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
             QuotesResponse finalResponse = new QuotesResponse(quoteResponse, universalQuotes);
             return finalResponse;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new UniversalQuote[0]);
             return finalResponse;
         }
@@ -242,6 +233,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
     /**
      * Helper method for making API calls using the HTTP adapter
+     *
      * @param _request The request to make
      * @return A response object. Response can contain error codes
      */
@@ -251,7 +243,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         _request.addHeaders(new Header(rapidAPIHostHeaderKey, rapidAPIHostHeaderValue), new Header(apiKeyHeaderKey, apiKeyHeaderValue));
 
         try {
-            Response response = HttpAdapter.callRequest(_request);
+            Response response = HttpAdapter.makeRequest(_request);
             return response;
         } catch (InvalidUrlException e) {
             //Note: If this error is caught, something VERY VERY wrong happened. This could only happen if the url for the request changed.

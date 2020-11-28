@@ -4,7 +4,7 @@ package main.java.models.flightapi.structures;
  * A class holding location data with varying accuracy
  *
  * @author Teegan Krieger
- * @LastUpdated 10/22/2020
+ * @LastModified 10/22/2020
  */
 public class Location {
 
@@ -12,9 +12,8 @@ public class Location {
     private String city;
     private String airport;
 
-    public Location()
-    {
-        
+    public Location() {
+
     }
 
     public Location(String _country, String _city, String _airport) {
@@ -24,25 +23,54 @@ public class Location {
     }
 
     //=================  GETTERS ===============
-
+    /**
+     * Get the country, if one exists
+     *
+     * @return The country, if one exists
+     */
     public String getCountry() {
+        if (country == null) {
+            return "";
+        }
         return country;
     }
 
+    /**
+     * Get the city, if one exists
+     *
+     * @return The city, if one exists
+     */
     public String getCity() {
+        if (city == null) {
+            return "";
+        }
         return city;
     }
 
+    /**
+     * Get the airport, if one exists
+     *
+     * @return The airport, if one exists
+     */
     public String getAirport() {
+        if (airport == null) {
+            return "";
+        }
         return airport;
     }
 
-    public String getMostAccurateLocation()
-    {
-        if (airport != null)
+    /**
+     * Get the most accurate location Accuracy is determined in this order: Airport -> City -> Country
+     *
+     * @return The most accurate location
+     */
+    public String getMostAccurateLocation() {
+        if (airport != null) {
             return airport;
-        if (city != null)
+        }
+        if (city != null) {
             return city;
+        }
         return country;
     }
 

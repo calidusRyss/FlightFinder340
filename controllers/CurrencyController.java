@@ -10,7 +10,7 @@ import main.java.models.flightapi.collections.CurrencySelector;
  * A controller that handles loading currency data and selecting an active currency
  *
  * @author Teegan Krieger
- * @LastUpdate 10/28/2020
+ * @LastModified 10/28/2020
  */
 public class CurrencyController {
 
@@ -86,18 +86,21 @@ public class CurrencyController {
         return currencySelector.getSelectedCurrencySymbol();
     }
 
-    public CurrencySelector getCurrencySelector()
-    {
+    /**
+     * Get the CurrencySelector object used by this Controller. (Used for Testing and Debugging)
+     * @return The CurrencySelector object used by this Controller. (Used for Testing and Debugging)
+     */
+    public CurrencySelector getCurrencySelector() {
         return currencySelector;
     }
 
     /**
      * Get the index of either a currency symbol or currency code
+     *
      * @param _currencySymbolOrCode The currency symbol or code
      * @return The index of this currency within the selector. Returns -1 if the currency or code was not found
      */
-    public int getIndexOf(String _currencySymbolOrCode)
-    {
+    public int getIndexOf(String _currencySymbolOrCode) {
         return currencySelector.getIndexOf(_currencySymbolOrCode);
     }
 

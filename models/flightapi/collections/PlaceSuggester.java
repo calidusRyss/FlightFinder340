@@ -11,7 +11,7 @@ import main.java.models.flightapi.responses.PlacesResponse;
  * A class that helps make suggestions about places based on user input
  *
  * @author Teegan Krieger
- * @LastUpdate 11/25/2020
+ * @LastModified 11/25/2020
  */
 public class PlaceSuggester {
 

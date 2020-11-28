@@ -6,6 +6,7 @@ import main.java.models.trips.collections.Trip;
 /**
  * A comparator used for sorting trips from cheapest to most expensive
  * @author Teegan Krieger
+ * @LastModified 11/9/2020
  */
 public class TripCheapestComparator implements Comparator<Trip>{
 

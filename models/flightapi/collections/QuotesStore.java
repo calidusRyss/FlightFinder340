@@ -14,7 +14,7 @@ import main.java.models.flightapi.structures.QuoteStruct;
  * A data store designed to hold and sort quotes
  *
  * @author Teegan Krieger
- * @LastUpdate 10/22/2020
+ * @LastModified 10/22/2020
  */
 public class QuotesStore implements IStore {
 
@@ -32,15 +32,14 @@ public class QuotesStore implements IStore {
 
     /**
      * Add a collections of quotes to the quote store
+     *
      * @param objects The quotes to add to the store
      */
     @Override
-    public void addCollection(Object... objects)
-    {
+    public void addCollection(Object... objects) {
         //insert new objects into array
-        for (int j = 0;j < objects.length; j++)
-        {
-            sortedQuotes.add((UniversalQuote)objects[j]);
+        for (int j = 0; j < objects.length; j++) {
+            sortedQuotes.add((UniversalQuote) objects[j]);
         }
 
         //Re-Sort the array
@@ -51,13 +50,13 @@ public class QuotesStore implements IStore {
      * Clear the stores contents
      */
     @Override
-    public void clear()
-    {
+    public void clear() {
         sortedQuotes.clear();
     }
 
     /**
      * Sort the contents of the store using the selected sorting method
+     *
      * @param _sortMode The method by which to sort the contents of the store
      */
     @Override
@@ -74,29 +73,28 @@ public class QuotesStore implements IStore {
     }
 
     /**
-     * Get a UniversalQuote from the desired index.
-     * (Mainly used for testing)
+     * Get a UniversalQuote from the desired index. (Mainly used for testing)
+     *
      * @param index The index to get the UniversalQuote from
      * @return A UniversalQuote object from the desired index
      */
-    public UniversalQuote getAtIndex(int index)
-    {
-        if (index < 0 || index > sortedQuotes.size() - 1)
+    public UniversalQuote getAtIndex(int index) {
+        if (index < 0 || index > sortedQuotes.size() - 1) {
             throw new IndexOutOfBoundsException();
+        }
 
         return sortedQuotes.get(index);
     }
 
     /**
      * Get an array of sorted QuoteStructs
+     *
      * @return A sorted array of QuoteStructs
      */
-    public ArrayList<QuoteStruct> getSortedQuoteStructs()
-    {
+    public ArrayList<QuoteStruct> getSortedQuoteStructs() {
         ArrayList<QuoteStruct> quoteStructs = new ArrayList<QuoteStruct>(sortedQuotes.size());
 
-        for (int i = 0; i < sortedQuotes.size(); i++)
-        {
+        for (int i = 0; i < sortedQuotes.size(); i++) {
             quoteStructs.add(i, QuoteStructConverter.convertQuoteToStruct(sortedQuotes.get(i)));
         }
 
@@ -105,10 +103,10 @@ public class QuotesStore implements IStore {
 
     /**
      * Get the current sort mode of the QuoteStore
+     *
      * @return The current sort mode of the QuoteStore
      */
-    public SortMode getCurrentSortMode()
-    {
+    public SortMode getCurrentSortMode() {
         return currentSortMode;
     }
 }

@@ -7,7 +7,7 @@ import main.java.models.flightapi.structures.Currency;
  * A class that manages all currencies
  *
  * @author Teegan Krieger
- * @LastUpdate 10/28/2020
+ * @LastModified 10/28/2020
  */
 public class CurrencySelector {
 
@@ -97,26 +97,26 @@ public class CurrencySelector {
     }
 
     /**
-    * Get the selected Currency object
-    * @return The selected currency object
-    */
-    public Currency getSelectedCurrency()
-    {
+     * Get the selected Currency object
+     *
+     * @return The selected currency object
+     */
+    public Currency getSelectedCurrency() {
         return selectedCurrency;
     }
 
     /**
      * Get the index of either a currency symbol or currency code
+     *
      * @param _currencySymbolOrCode The currency symbol or code
      * @return The index of this currency within the selector. Returns -1 if the currency or code was not found
      */
-    public int getIndexOf(String _currencySymbolOrCode)
-    {
-        for (int i = 0; i < allCurrencies.size(); i++)
-        {
+    public int getIndexOf(String _currencySymbolOrCode) {
+        for (int i = 0; i < allCurrencies.size(); i++) {
             Currency c = allCurrencies.get(i);
-            if (c.getCode().equals(_currencySymbolOrCode) || c.getSymbol().equals(_currencySymbolOrCode))
+            if (c.getCode().equals(_currencySymbolOrCode) || c.getSymbol().equals(_currencySymbolOrCode)) {
                 return i;
+            }
         }
         return -1;
     }
