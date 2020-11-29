@@ -8,7 +8,7 @@ import main.java.models.http.ResponseCode;
  * A class containing response data from a places request
  *
  * @author Teegan Krieger
- * @LastModified 10/5/2020
+ * @LastUpdate 10/5/2020
  */
 public class PlacesResponse {
 
@@ -24,15 +24,15 @@ public class PlacesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return this.responseCode;
+        return responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return this.httpResponseMessage;
+        return httpResponseMessage;
     }
 
     public Place[] getPlaces() {
-        return this.places;
+        return places;
     }
 
 }

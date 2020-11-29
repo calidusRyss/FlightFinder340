@@ -16,7 +16,7 @@ import okhttp3.Response;
  * A class that wraps HTTP request functionality using the OKHTTP library.
  *
  * @author Teegan Krieger
- * @LastModified 9/30/2020
+ * @LastUpdate 9/30/2020
  */
 public class OkHttpWrapper implements IHttpWrapper {
 

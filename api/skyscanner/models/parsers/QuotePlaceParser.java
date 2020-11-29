@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package main.java.api.skyscanner.models.parsers;
 
 import org.json.JSONArray;
@@ -6,20 +11,11 @@ import org.json.JSONObject;
 import main.java.api.skyscanner.models.structures.QuotePlace;
 
 /**
- * A class that parses a SkyScanner QuotePlaces JSON into QuotePlace objects
  *
  * @author Willie Holmes
- * @LastModified 11/15/2020
  */
 public class QuotePlaceParser {
 
-    /**
-     * Parse a JSONArray object into an array of QuotePlace objects
-     *
-     * @param _placesArray The JSONArray object to parse
-     * @return An array of QuotePlace objects
-     * @throws JSONException
-     */
     public static QuotePlace[] createPlacesArrayFromJsonArray(JSONArray _placesArray) throws JSONException {
         QuotePlace[] results = new QuotePlace[_placesArray.length()];
 
@@ -32,8 +28,7 @@ public class QuotePlaceParser {
     }
 
     /**
-     * Parse a Places object from a JSONObject
-     *
+     * Parse a Places  object from a JSONObject
      * @param _jsonObject The JSONObject to parse
      * @return A Places object parsed from the JSONObject
      * @throws JSONException
@@ -55,3 +50,8 @@ public class QuotePlaceParser {
         return result;
     }
 }
+
+
+
+
+

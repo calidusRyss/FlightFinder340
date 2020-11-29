@@ -16,7 +16,7 @@ import main.java.models.flightapi.structures.UniversalQuote;
  * A class that will take an array of Quotes, Carriers, Places and Currencies and convert them all into an array of UniversalQuote objects.
  *
  * @author Teegan Krieger
- * @LastModified 10/28/2020
+ * @LastUpdate 10/28/2020
  */
 public class UniversalQuoteFactory {
 
@@ -42,7 +42,6 @@ public class UniversalQuoteFactory {
             carriersHashMap.put(carrier.getCarrierId(), carrier);
         }
 
-        //Create Universal Quotes
         UniversalQuote[] universalQuotes = new UniversalQuote[_quotes.length];
 
         for (int i = 0; i < _quotes.length; i++) {

@@ -8,7 +8,7 @@ import main.java.models.flightapi.structures.Currency;
  * A class containing response data from a currencies request
  *
  * @author Teegan Krieger
- * @LastModified 10/5/2020
+ * @LastUpdate 10/5/2020
  */
 public class CurrenciesResponse {
 
@@ -24,15 +24,15 @@ public class CurrenciesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return this.responseCode;
+        return responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return this.httpResponseMessage;
+        return httpResponseMessage;
     }
 
     public Currency[] getCurrencies() {
-        return this.currencies;
+        return currencies;
     }
 
 }

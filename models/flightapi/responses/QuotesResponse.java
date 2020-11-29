@@ -8,7 +8,7 @@ import main.java.models.flightapi.structures.UniversalQuote;
  * A class containing response data from a quotes request
  *
  * @author Teegan Krieger
- * @LastModified 10/8/2020
+ * @LastUpdate 10/8/2020
  */
 public class QuotesResponse {
 
@@ -25,15 +25,15 @@ public class QuotesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return this.responseCode;
+        return responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return this.httpResponseMessage;
+        return httpResponseMessage;
     }
 
     public UniversalQuote[] getQuotes() {
-        return this.quotes;
+        return quotes;
     }
 
 }

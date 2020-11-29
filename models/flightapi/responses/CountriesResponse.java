@@ -8,7 +8,7 @@ import main.java.models.flightapi.structures.Country;
  * A class containing response data from a countries request
  *
  * @author Teegan Krieger
- * @LastModified 10/5/2020
+ * @LastUpdate 10/5/2020
  */
 public class CountriesResponse {
 
@@ -24,15 +24,15 @@ public class CountriesResponse {
 
     //=================  GETTERS ===============
     public ResponseCode getResponseCode() {
-        return this.responseCode;
+        return responseCode;
     }
 
     public String getHttpResponseMessage() {
-        return this.httpResponseMessage;
+        return httpResponseMessage;
     }
 
     public Country[] getCountries() {
-        return this.countries;
+        return countries;
     }
 
 }

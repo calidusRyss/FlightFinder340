@@ -15,25 +15,26 @@ import main.java.models.flightapi.structures.QuoteStruct;
  * A controller that handles searching for quotes and manipulating the views using it
  *
  * @author Teegan Krieger
- * @LastModified 10/28/2020
+ * @LastUpdate 10/28/2020
  */
 public class QuoteSearchController {
 
     private final QuotesStore quotesStore;
     private final PlaceSuggestionsController placeSuggestionsController;
 
-    public QuoteSearchController(PlaceSuggestionsController _placeSuggestionsController) {
-        this.quotesStore = new QuotesStore();
-        this.placeSuggestionsController = _placeSuggestionsController;
+    public QuoteSearchController(PlaceSuggestionsController _placeSuggestionsController)
+    {
+        quotesStore = new QuotesStore();
+        placeSuggestionsController = _placeSuggestionsController;
     }
 
     /**
      * Searches for quotes using the given properties
-     *
      * @param _searchFields The properties to search with
      * @return An array list of QuoteStructs
      */
-    public ArrayList<QuoteStruct> searchQuotes(Property[] _searchFields) throws QuoteRequestException {
+    public ArrayList<QuoteStruct> searchQuotes(Property[] _searchFields) throws QuoteRequestException
+    {
         String currencyCode = "";
         String countryCode = "";
         String originString = "";
@@ -41,8 +42,10 @@ public class QuoteSearchController {
         LocalDateTime originDepartureDate = LocalDateTime.now();
         LocalDateTime destinationDepartureDate = null;
 
-        for (Property p : _searchFields) {
-            switch (p.name) {
+        for (Property p : _searchFields)
+        {
+            switch (p.name)
+            {
                 case "currencycode":
                     currencyCode = p.content;
                     break;
@@ -65,70 +68,58 @@ public class QuoteSearchController {
         }
 
         //Convert Query in Code
-        this.placeSuggestionsController.setQuery(originString);
-        this.placeSuggestionsController.refreshSuggestions();
-        originString = this.placeSuggestionsController.getSuggestionCode(originString);
+        placeSuggestionsController.setQuery(originString);
+        placeSuggestionsController.refreshSuggestions();
+        originString = placeSuggestionsController.getSuggestionCode(originString);
 
-        this.placeSuggestionsController.setQuery(destinationString);
-        this.placeSuggestionsController.refreshSuggestions();
-        destinationString = this.placeSuggestionsController.getSuggestionCode(destinationString);
+        placeSuggestionsController.setQuery(destinationString);
+        placeSuggestionsController.refreshSuggestions();
+        destinationString = placeSuggestionsController.getSuggestionCode(destinationString);
 
-        if (destinationString.equals("")) {
+        if (destinationString.equals(""))
             destinationString = "Anywhere";
-        }
 
         //Run the request
         QuotesResponse response = FlightAPIAdapter.flightAPI.fetchQuotes(countryCode, currencyCode, originString, destinationString, originDepartureDate, destinationDepartureDate);
 
-        switch (response.getResponseCode()) {
+        switch(response.getResponseCode())
+        {
             case OK:
-                this.quotesStore.clear();
-                this.quotesStore.addCollection(response.getQuotes());
+                quotesStore.clear();
+                quotesStore.addCollection(response.getQuotes());
                 break;
             default:
+                //System.out.println("Params:\n" + "Country Code: " + countryCode + "\nCurrency Code: " + currencyCode + "\nOrigin: " + originString + "\nDestination: " + destinationString + "\nDepartureTime: " + originDepartureDate.toString()); //"\nReturningTime: " + destinationDepartureDate.toString()
+                //System.out.println("MISC. ERROR: " + response.getResponseCode().toString() + "\n" + response.getHttpResponseMessage());
                 throw new QuoteRequestException(response.getResponseCode().toString());
         }
 
         return getSortedQuotes();
     }
 
-    /**
-     * Sort the contents of the store using the selected sorting method
-     *
-     * @param _sortMode The method by which to sort the contents of the store
-     * @return An ArrayList of sorted QuoteStruct objects
-     */
-    public ArrayList<QuoteStruct> sortQuotesBy(SortMode _sortMode) {
-        this.quotesStore.sort(_sortMode);
+    public ArrayList<QuoteStruct> sortQuotesBy(SortMode _sortMode)
+    {
+        quotesStore.sort(_sortMode);
         return getSortedQuotes();
     }
 
-    //=================  GETTERS ===============
-    /**
-     * Get an ArrayList of sorted QuoteStruct objects
-     *
-     * @return An ArrayList of sorted QuoteStruct objects
-     */
-    public ArrayList<QuoteStruct> getSortedQuotes() {
-        return this.quotesStore.getSortedQuoteStructs();
+    public ArrayList<QuoteStruct> getSortedQuotes()
+    {
+        return quotesStore.getSortedQuoteStructs();
     }
 
-    /**
-     * Get the QuoteStore object used by this controller (Used for testing and Debugging)
-     *
-     * @return The QuoteStore object used by this controller
-     */
-    public QuotesStore getQuoteStore() {
-        return this.quotesStore;
+    public QuotesStore getQuoteStore()
+    {
+        return quotesStore;
     }
 
     /**
      * Get the current sort mode of the QuoteStore
-     *
      * @return The current sort mode of the QuoteStore
      */
-    public SortMode getCurrentSortMode() {
-        return this.quotesStore.getCurrentSortMode();
+    public SortMode getCurrentSortMode()
+    {
+        return quotesStore.getCurrentSortMode();
     }
 
 }

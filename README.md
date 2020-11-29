@@ -13,5 +13,3 @@
 > <a href="https://repo1.maven.org/maven2/org/json/json/20140107/json-20140107.jar" target="">**Org.Json 20140107**</a>
 
 > <a href="https://github.com/LGoodDatePicker/LGoodDatePicker/releases/download/v11.1.0-Standard/LGoodDatePicker-11.1.0.jar" target="">**LGood Date Picker 11.1.0**</a>
-
-- If you encounter the error `package org.netbeans.lib.awtextra.AbsoluteLayout could not be located`, this is caused by NetBeans failing to include a default library. You can add this library manually by adding the jar file `AbsoluteLayout.jar` from the filepath `C:\Program Files\YOUR NETBEANS INSTALLATION\netbeans\java\modules\ext`.

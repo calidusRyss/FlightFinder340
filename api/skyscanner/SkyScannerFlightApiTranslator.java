@@ -34,11 +34,11 @@ import org.json.JSONObject;
 
 /**
  * A translator used for making calls to and parsing data from the SkyScanner API
- * https://rapidapi.com/skyscanner/api/skyscanner-flight-search/details FREE VERSION (Which is used here)
- * https://skyscanner.github.io/slate/#api-documentation ENTERPRISE VERSION (Useful documentation but not all features are available in the free version)
+ * https://rapidapi.com/skyscanner/api/skyscanner-flight-search/details  FREE VERSION (Which is used here)
+ * https://skyscanner.github.io/slate/#api-documentation   ENTERPRISE VERSION (Useful documentation but not all features are available in the free version)
  *
  * @author Teegan Krieger
- * @LastModified 10/28/2020
+ * @LastUpdate 10/28/2020
  */
 public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
@@ -53,6 +53,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     private final String fetchCurrenciesEndpoint = "/reference/v1.0/currencies";
     private final String fetchMarketsEndpoint = "/reference/v1.0/countries/en-US";
     private final String fetchPlacesEndpoint = "/autosuggest/v1.0/%s/%s/en-US/?query=%s";
+    private final String fetchRoutesEndpoint = "/browseroutes/v1.0/%s/%s/en-US/%s/%s/%s?inboundpartialdate=%s";
     private final String fetchQuotesEndpoint = "/browsequotes/v1.0/%s/%s/en-US/%s/%s/%s?inboundpartialdate=%s";
 
     /**
@@ -64,16 +65,18 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public CountriesResponse fetchAvaliableCountries() {
 
         //Make request
-        Request countryRequest = new Request(this.baseApiEndpoint + this.fetchMarketsEndpoint, RequestMethod.GET);
+        Request countryRequest = new Request(baseApiEndpoint + fetchMarketsEndpoint, RequestMethod.GET);
 
         Response countryResponse = makeAPICall(countryRequest);
 
-        if (!countryResponse.isSuccessful()) {
+        if (!countryResponse.isSuccessful())
+        {
             CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[0]);
             return finalResponse;
         }
 
         //Parse and Organize data since Country Request succeeded
+
         try {
             JSONObject countriesJson = new JSONObject(countryResponse.getBody());
             JSONArray countriesArray = countriesJson.getJSONArray("Countries");
@@ -82,7 +85,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
             CountriesResponse finalResponse = new CountriesResponse(countryResponse, countries);
             return finalResponse;
         } catch (Exception e) {
-            CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[0]);
+             CountriesResponse finalResponse = new CountriesResponse(countryResponse, new Country[0]);
             return finalResponse;
         }
     }
@@ -96,11 +99,12 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public CurrenciesResponse fetchAvaliableCurrencies() {
 
         //Make request
-        Request currencyRequest = new Request(this.baseApiEndpoint + this.fetchCurrenciesEndpoint, RequestMethod.GET);
+        Request currencyRequest = new Request(baseApiEndpoint + fetchCurrenciesEndpoint, RequestMethod.GET);
 
         Response currencyResponse = makeAPICall(currencyRequest);
 
-        if (!currencyResponse.isSuccessful()) {
+        if (!currencyResponse.isSuccessful())
+        {
             CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, new Currency[0]);
             return finalResponse;
         }
@@ -113,7 +117,8 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
             CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, currencies);
             return finalResponse;
-        } catch (Exception e) //Json Parsing Failed
+        }
+        catch (Exception e) //Json Parsing Failed
         {
             CurrenciesResponse finalResponse = new CurrenciesResponse(currencyResponse, new Currency[0]);
             return finalResponse;
@@ -132,19 +137,21 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
     public PlacesResponse fetchAvaliablePlaces(String _country, String _currency, String _query) {
 
         //Format endpoint string
-        String formattedEndpoint = this.baseApiEndpoint + String.format(this.fetchPlacesEndpoint, _country, _currency, _query);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchPlacesEndpoint, _country, _currency, _query);
 
         //Make request
         Request placesRequest = new Request(formattedEndpoint, RequestMethod.GET);
 
         Response placesResponse = makeAPICall(placesRequest);
 
-        if (!placesResponse.isSuccessful()) {
+        if (!placesResponse.isSuccessful())
+        {
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[0]);
             return finalResponse;
         }
 
         //Parse and Organize data since Places Request succeeded
+
         try {
             JSONObject placesJson = new JSONObject(placesResponse.getBody());
             JSONArray placesArray = placesJson.getJSONArray("Places");
@@ -152,7 +159,8 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, places);
             return finalResponse;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             PlacesResponse finalResponse = new PlacesResponse(placesResponse, new Place[0]);
             return finalResponse;
         }
@@ -174,7 +182,7 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         return fetchQuotes(_country, _currency, _origin, _destination, _outboundTime, null);
     }
 
-    /**
+     /**
      * Make a call with the SkyScanner API to fetch all quotes within the constraints provided
      *
      * @param _country The country the user is in
@@ -193,14 +201,15 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
         String inboundTimeString = _inboundTime == null ? "" : _inboundTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         //Format endpoint string
-        String formattedEndpoint = this.baseApiEndpoint + String.format(this.fetchQuotesEndpoint, _country, _currency, _origin, _destination, outboundTimeString, inboundTimeString);
+        String formattedEndpoint = baseApiEndpoint + String.format(fetchQuotesEndpoint, _country, _currency, _origin, _destination, outboundTimeString, inboundTimeString);
 
         //Make request
         Request quoteRequest = new Request(formattedEndpoint, RequestMethod.GET);
 
         Response quoteResponse = makeAPICall(quoteRequest);
 
-        if (!quoteResponse.isSuccessful()) {
+        if (!quoteResponse.isSuccessful())
+        {
             //Quote Request failed. Pass back an empty quote response with error code
             QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new UniversalQuote[0]);
             return finalResponse;
@@ -224,7 +233,8 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
             QuotesResponse finalResponse = new QuotesResponse(quoteResponse, universalQuotes);
             return finalResponse;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             QuotesResponse finalResponse = new QuotesResponse(quoteResponse, new UniversalQuote[0]);
             return finalResponse;
         }
@@ -232,17 +242,16 @@ public class SkyScannerFlightApiTranslator implements IFlightApiTranslator {
 
     /**
      * Helper method for making API calls using the HTTP adapter
-     *
      * @param _request The request to make
      * @return A response object. Response can contain error codes
      */
     private Response makeAPICall(Request _request) {
 
         //Prepare request headers
-        _request.addHeaders(new Header(this.rapidAPIHostHeaderKey, this.rapidAPIHostHeaderValue), new Header(this.apiKeyHeaderKey, this.apiKeyHeaderValue));
+        _request.addHeaders(new Header(rapidAPIHostHeaderKey, rapidAPIHostHeaderValue), new Header(apiKeyHeaderKey, apiKeyHeaderValue));
 
         try {
-            Response response = HttpAdapter.makeRequest(_request);
+            Response response = HttpAdapter.callRequest(_request);
             return response;
         } catch (InvalidUrlException e) {
             //Note: If this error is caught, something VERY VERY wrong happened. This could only happen if the url for the request changed.

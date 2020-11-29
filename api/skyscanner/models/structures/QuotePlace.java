@@ -1,73 +1,84 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package main.java.api.skyscanner.models.structures;
 
 /**
- * A class that holds information about a QuotePlace from the SkyScanner API
  *
  * @author Willie Holmes
- * @LastModified 11/15/2020
  */
 public class QuotePlace {
 
-    private int placeId;
-    private String name;
-    private String type;
-    private String skyscannerCode;
+    private int PlaceId;
+    private String Name;
+    //private String PlaceName;
+    private String Type;
+   // private String CountryId;
+  //  private String RegionId;
+  //  private String CityId;
+    private String SkyscannerCode;
 
-    /**
+
+       /**
      * Construct a Places object
-     *
      * @param _PlaceId. Example: '837
      * @param _Name. Example 'United Arab Emirates'
-     * @param _Type Example: 'Country'
+     * @param _PlaceName. . Example: 'Paris'
+     * @param _Type  Example: 'Country'
+     * @param _CountryId. Example 'FR-sky'.
+     * @param _RegionId
+     * @param _CityId  Example 'PARI-sky'
+     * @param _CountryName  Example 'France'
      * @param _SkyscannerCode Example 'AE'
      */
-    public QuotePlace(int _PlaceId, String _Name, String _Type, String _SkyscannerCode) {
-        this.placeId = _PlaceId;
-        this.name = _Name;
-        this.type = _Type;
-        this.skyscannerCode = _SkyscannerCode;
+     public QuotePlace (int _PlaceId, String _Name, String _Type, String _SkyscannerCode) {
+        this.PlaceId = _PlaceId;
+        this.Name = _Name;
+        this.Type = _Type;
+        this.SkyscannerCode = _SkyscannerCode;
     }
 
     @Override
     public String toString() {
-        return "QuotePlace{" + "PlaceId=" + this.placeId + ", Name=" + this.name + ", Type=" + this.type + ", SkyscannerCode=" + this.skyscannerCode + '}';
+        return "QuotePlace{" + "PlaceId=" + PlaceId + ", Name=" + Name + ", Type=" + Type + ", SkyscannerCode=" + SkyscannerCode + '}';
     }
 
     //=================  GETTERS ===============
+
     /**
-     * Get an integer that represents the ID of the QuotePlace
      *
-     * @return An integer that represents the ID of the QuotePlace
+     * @return Place Id
      */
-    public int getPlaceId() {
-        return this.placeId;
+    public int  getPlaceId() {
+        return PlaceId;
     }
 
     /**
-     * Get the name of the country this QuotePlace holds
      *
-     * @return The name of the country this QuotePlace holds
+     * @return Name of country
      */
     public String getName() {
-        return this.name;
+        return Name;
     }
 
     /**
-     * Get the type of this QuotePlace object
      *
-     * @return The type of this QuotePlace object
+     * @return Type of place
      */
-    public String getType() {
-        return this.type;
+    public String  getType() {
+        return Type;
     }
 
     /**
-     * Get the SkyScanner API code that this QuotePlace represents
      *
-     * @return The SkyScanner API code that this QuotePlace represents
+     * @return The OutboundLeg of the trip
      */
     public String getSkyscannerCode() {
-        return this.skyscannerCode;
+        return SkyscannerCode;
     }
 
 }
+
+

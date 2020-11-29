@@ -9,7 +9,7 @@ import main.java.models.http.Response;
  * An interface that dictates HTTP wrapper functionality.
  *
  * @author Teegan Krieger
- * @LastModified 9/29/2020
+ * @LastUpdate 9/29/2020
  */
 public interface IHttpWrapper {
 

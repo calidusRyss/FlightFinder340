@@ -2,9 +2,8 @@ package main.java.models.http;
 
 /**
  * An ENUM with all HTTP response codes
- *
  * @author Teegan Krieger
- * @LastModified 10/5/2020
+ * @LastUpdate 10/5/2020
  */
 public enum ResponseCode {
     No_Code(0), //Not a real HTTP code. Used when an exception occurs and no code is returned
@@ -75,27 +74,24 @@ public enum ResponseCode {
 
     private final int value;
 
-    ResponseCode(int _value) {
+    ResponseCode(int _value)
+    {
         this.value = _value;
         ResponseCodeMapper.put(_value, this);
     }
 
-    /**
-     * Get the value of the response code
-     *
-     * @return The value of the response code
-     */
-    public int getValue() {
+    public int getValue()
+    {
         return value;
     }
 
     /**
      * Get the response code associated to an integer value.
-     *
      * @param codeValue The integer value to get the response code from.
      * @return The response code associated to the integer.
      */
-    public static ResponseCode getResponseCode(int codeValue) {
+    public static ResponseCode getResponseCode(int codeValue)
+    {
         return ResponseCodeMapper.get(codeValue);
     }
 }

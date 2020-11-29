@@ -6,7 +6,7 @@ import main.java.models.http.Request;
  * Exception that is thrown when a Request is invalid.
  *
  * @author Teegan Krieger
- * @LastModified 9/29/2020
+ * @LastUpdate 9/29/2020
  */
 public class InvalidUrlException extends RuntimeException {
 
