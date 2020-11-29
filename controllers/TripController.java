@@ -67,6 +67,15 @@ public class TripController {
     }
 
     /**
+     * Get the number of Trips in the TripStore
+     * @return The number of Trips in the TripStore
+     */
+    public int getTripsCount()
+    {
+        return this.tripsStore.getTripsCount();
+    }
+
+    /**
      * Get the TripStore itself. Mostly used to pass the TripStore to other controllers.
      *
      * @return The TripStore associated to this controller

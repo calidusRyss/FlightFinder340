@@ -2,6 +2,7 @@ package main.java.models.trips.collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import main.java.adapters.DataStoreAdapter;
 import main.java.models.trips.comparators.TripCheapestComparator;
 import main.java.models.trips.comparators.TripExpensiveComparator;
 import main.java.models.enums.SortMode;
@@ -25,6 +26,14 @@ public class TripsStore implements IStore {
     public TripsStore() {
         this.sortedTrips = new ArrayList<>();
         this.currentSortMode = SortMode.CHEAPEST;
+
+        Object[] existingTrips = DataStoreAdapter.translator.load(Trip.class);
+        if (existingTrips != null) {
+            for (int i = 0; i < existingTrips.length; i++) {
+                this.sortedTrips.add((Trip) existingTrips[i]);
+            }
+        }
+        sort(this.currentSortMode);
     }
 
     /**
@@ -37,6 +46,7 @@ public class TripsStore implements IStore {
 
         for (int i = 0; i < _objects.length; i++) {
             this.sortedTrips.add((Trip) _objects[i]);
+            DataStoreAdapter.translator.create((Trip) _objects[i]);
         }
 
         sort(this.currentSortMode);
@@ -53,6 +63,7 @@ public class TripsStore implements IStore {
         _t.setName(this.getNextFreeName(_tripName));
 
         this.sortedTrips.add(_t);
+        DataStoreAdapter.translator.create(_t);
 
         this.sort(this.currentSortMode);
     }
@@ -64,6 +75,7 @@ public class TripsStore implements IStore {
      */
     public void DeleteTrip(int _index) {
         this.sortedTrips.remove(_index);
+        DataStoreAdapter.translator.delete(_index, Trip.class);
     }
 
     /**
@@ -89,6 +101,12 @@ public class TripsStore implements IStore {
                 Collections.sort(this.sortedTrips, tripExpensiveComparator);
                 break;
         }
+
+        for (int i = 0; i < sortedTrips.size(); i++) {
+            //Update each object in the Persistent Data Store, only saving on the last object
+            DataStoreAdapter.translator.update(sortedTrips.get(i), i, (i == sortedTrips.size() - 1));
+        }
+
         this.currentSortMode = _sortMode;
     }
 
@@ -119,6 +137,15 @@ public class TripsStore implements IStore {
         }
 
         return allTrips;
+    }
+
+    /**
+     * Get the number of trips currently in the store
+     * @return The number of trips currently in the store
+     */
+    public int getTripsCount()
+    {
+        return sortedTrips.size();
     }
 
     /**

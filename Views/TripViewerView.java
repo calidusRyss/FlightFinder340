@@ -1,10 +1,11 @@
 package main.java.Views;
+
 /*
 Last updated 11-27-2020.
 Contributors-Michael
 This is the main View file for Trip viewer.
 The main feature is updateing a Fligtbox panel. with saved search results.
-*/
+ */
 
 import main.java.Views.JPanels.TripFlightBoxJPanel;
 import java.lang.reflect.Array;
@@ -24,23 +25,26 @@ import main.java.models.trips.collections.Trip;
  */
 public class TripViewerView extends StandardSearchView {
 
-    private  TripController tc;
+    private TripController tc;
     private int SelectedTripIndex = 0;
     private JLabel totalPriceLabel;
 
-    public TripViewerView( JPanel _fBoxPanel, JLabel _totalPriceLabel) {
-       super(null,_fBoxPanel);
-       tc = ControllerBox.getBox().getTripCont();
-       tc.createNewTrip("MyFirstTrip");
-       totalPriceLabel = _totalPriceLabel;
+    public TripViewerView(JPanel _fBoxPanel, JLabel _totalPriceLabel) {
+        super(null, _fBoxPanel);
+        tc = ControllerBox.getBox().getTripCont();
+        if (tc.getTripsCount() == 0) {
+            tc.createNewTrip("MyFirstTrip");
+        }
+        totalPriceLabel = _totalPriceLabel;
     }
 
     public void setSelectedTripIndex(int _SelectedTripIndex) {
         this.SelectedTripIndex = _SelectedTripIndex;
         ControllerBox.getBox().getTripEditCont().setSelectedTrip(_SelectedTripIndex);
 
-        if (this.SelectedTripIndex <0)
+        if (this.SelectedTripIndex < 0) {
             this.SelectedTripIndex = 0;
+        }
     }
 
     public void createNewTrip(String _tripName) {
@@ -63,14 +67,14 @@ public class TripViewerView extends StandardSearchView {
     @Override
     protected void addFlightBoxPanels() {
         for (int i = 0; i < numberOfFlightBoxes; i++) {
-            JPanel fbox = new  TripFlightBoxJPanel(this);
-              this.flightBoxPanel.add(fbox);
-             flightBoxs[i] = fbox;
+            JPanel fbox = new TripFlightBoxJPanel(this);
+            this.flightBoxPanel.add(fbox);
+            flightBoxs[i] = fbox;
         }
     }
 
     private void updateTotalPriceLable() {
-        totalPriceLabel.setText( ControllerBox.getBox().getTripEditCont().getSelectedTrip().getCurrency().getSymbol() +
-        ControllerBox.getBox().getTripEditCont().getSelectedTrip().getTotalPrice());
+        totalPriceLabel.setText(ControllerBox.getBox().getTripEditCont().getSelectedTrip().getCurrency().getSymbol()
+                + ControllerBox.getBox().getTripEditCont().getSelectedTrip().getTotalPrice());
     }
 }

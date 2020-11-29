@@ -1,5 +1,6 @@
 package main.java.models.trips.collections;
 
+import main.java.adapters.DataStoreAdapter;
 import main.java.models.flightapi.collections.QuotesStore;
 import main.java.models.flightapi.structures.UniversalQuote;
 
@@ -11,6 +12,7 @@ import main.java.models.flightapi.structures.UniversalQuote;
  */
 public class TripBuilder {
 
+    private int tripIndex;
     private Trip selectedTrip;
 
     private final QuotesStore quoteStore;
@@ -31,6 +33,7 @@ public class TripBuilder {
 
         UniversalQuote quote = this.quoteStore.getAtIndex(_index);
         this.selectedTrip.addQuote(quote);
+        DataStoreAdapter.translator.update(selectedTrip, tripIndex, true);
     }
 
     /**
@@ -44,6 +47,7 @@ public class TripBuilder {
         }
 
         this.selectedTrip.removeQuote(_index);
+        DataStoreAdapter.translator.update(selectedTrip, tripIndex, true);
     }
 
     /**
@@ -58,6 +62,7 @@ public class TripBuilder {
         }
 
         this.selectedTrip.moveQuote(_oldIndex, _newIndex);
+        DataStoreAdapter.translator.update(selectedTrip, tripIndex, true);
     }
 
     /**
@@ -71,6 +76,7 @@ public class TripBuilder {
         }
 
         this.selectedTrip.setName(_newName);
+        DataStoreAdapter.translator.update(selectedTrip, tripIndex, true);
     }
 
     //=================  SETTERS ===============
@@ -78,8 +84,9 @@ public class TripBuilder {
      * Set the selected trip.
      *
      * @param _selection The trip to set the selection to.
+     * @param _index The index of the tip in the TripStore.
      */
-    public void setSelectedTrip(Trip _selection) {
+    public void setSelectedTrip(Trip _selection, int _index) {
         this.selectedTrip = _selection;
     }
 
