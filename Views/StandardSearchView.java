@@ -6,6 +6,7 @@ This is the main View file for Standard Search function it is passed the needed 
 The main feature is updateing a Fligtbox panel. with search results.
 */
 
+import main.java.FlightFinder340.Views.interfaces.IInputFieldCollector;
 import main.java.Views.JPanels.FlightBoxJPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import main.java.Views.KeyInputUpdater;
+import main.java.FlightFinder340.Views.helpers.KeyInputUpdater;
 import main.java.controllers.ControllerBox;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;

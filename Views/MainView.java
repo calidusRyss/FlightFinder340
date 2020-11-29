@@ -5,6 +5,7 @@ Contributors-Michael
 This is the Main view. Handdles Switching between sub views.
 */
 
+import main.java.FlightFinder340.Views.interfaces.IRefreshable;
 import main.java.Views.JPanels.CheapestToAnywhereSearchJPanel;
 import main.java.Views.JPanels.SettingsJPanel;
 import main.java.Views.JPanels.TripViewerJPanel;

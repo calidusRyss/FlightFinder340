@@ -1,9 +1,10 @@
-package main.java.Views;
+package main.java.FlightFinder340.Views.helpers;
 /*
 Last updated 11-27-2020.
 This is an implementation of a input Collector for the standard search view.
 Contributors-Michael
 */
+import main.java.FlightFinder340.Views.interfaces.IInputFieldCollector;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import main.java.models.general.Property;

@@ -1,4 +1,4 @@
-package main.java.Views;
+package main.java.FlightFinder340.Views.interfaces;
 /*
 Last updated 10-28-2020.
 This is an interface for getting data from from some source. Itended use is input fields in a JFrame.

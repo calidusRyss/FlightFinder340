@@ -58,7 +58,7 @@ public class TripsStore implements IStore {
      * @param _t the tip.
      * @param _tripName the name to use.
      */
-    public void addCollection(Trip _t, String _tripName) {
+    public void addTrip(Trip _t, String _tripName) {
 
         _t.setName(this.getNextFreeName(_tripName));
 
