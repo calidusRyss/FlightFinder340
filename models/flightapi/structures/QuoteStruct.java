@@ -4,37 +4,37 @@ package main.java.models.flightapi.structures;
  * A class containing quote data in formatted strings.
  *
  * @author Teegan Krieger
- * @LastUpdated 10/22/2020
+ * @LastModified 10/22/2020
  */
 public class QuoteStruct {
-    public final String outboundOrigin;                 //The origin destination
+
+    public final String outboundOrigin;
     public final String outboundDestination;
-    public final String outboundDepartureTime;    //The 1st flights departure time
-    public final String[] outboundFlightCarriers;    //The 1st flights carrier
+    public final String outboundDepartureTime;
+    public final String[] outboundFlightCarriers;
 
     public final String inboundOrigin;
-    public final String inboundDestination;            //The destination
-    public final String inboundDepartureTime;   //The departure time of the 1st inbound flight
-    public final String[] inboundFlightCarriers;   //The carrier of the 1st inbound flight
+    public final String inboundDestination;
+    public final String inboundDepartureTime;
+    public final String[] inboundFlightCarriers;
 
     public final String price;  //The minimum starting price of the entire trip
 
-    public QuoteStruct(String outboundOrigin, String outboundDestination, String outboundDepartureTime, String[] outboundFlightCarriers, String inboundOrigin, String inboundDestination, String inboundDepartureTime, String[] inboundFlightCarriers, String price) {
-        this.outboundOrigin = outboundOrigin;
-        this.outboundDestination = outboundDestination;
-        this.outboundDepartureTime = outboundDepartureTime;
-        this.outboundFlightCarriers = outboundFlightCarriers;
-        this.inboundOrigin = inboundOrigin;
-        this.inboundDestination = inboundDestination;
-        this.inboundDepartureTime = inboundDepartureTime;
-        this.inboundFlightCarriers = inboundFlightCarriers;
-        this.price = price;
+    public QuoteStruct(String _outboundOrigin, String _outboundDestination, String _outboundDepartureTime, String[] _outboundFlightCarriers, String _inboundOrigin, String _inboundDestination, String _inboundDepartureTime, String[] _inboundFlightCarriers, String _price) {
+        this.outboundOrigin = _outboundOrigin;
+        this.outboundDestination = _outboundDestination;
+        this.outboundDepartureTime = _outboundDepartureTime;
+        this.outboundFlightCarriers = _outboundFlightCarriers;
+        this.inboundOrigin = _inboundOrigin;
+        this.inboundDestination = _inboundDestination;
+        this.inboundDepartureTime = _inboundDepartureTime;
+        this.inboundFlightCarriers = _inboundFlightCarriers;
+        this.price = _price;
     }
 
     @Override
     public String toString() {
-        return "QuoteStruct{" + "outboundOrigin=" + outboundOrigin + ", outboundDestination=" + outboundDestination + ", outboundDepartureTime=" + outboundDepartureTime + ", outboundFlightCarriers=" + outboundFlightCarriers + ", inboundOrigin=" + inboundOrigin + ", inboundDestination=" + inboundDestination + ", inboundDepartureTime=" + inboundDepartureTime + ", inboundFlightCarriers=" + inboundFlightCarriers + ", price=" + price + '}';
+        return "QuoteStruct{" + "outboundOrigin=" + this.outboundOrigin + ", outboundDestination=" + this.outboundDestination + ", outboundDepartureTime=" + this.outboundDepartureTime + ", outboundFlightCarriers=" + this.outboundFlightCarriers + ", inboundOrigin=" + this.inboundOrigin + ", inboundDestination=" + this.inboundDestination + ", inboundDepartureTime=" + this.inboundDepartureTime + ", inboundFlightCarriers=" + this.inboundFlightCarriers + ", price=" + this.price + '}';
     }
 
-    
 }

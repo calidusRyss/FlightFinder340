@@ -10,15 +10,25 @@ import main.java.models.flightapi.collections.CountrySelector;
  * A controller that handles loading all country data and selecting an active country
  *
  * @author Teegan Krieger
- * @LastUpdate 10/28/2020
+ * @LastModified 10/28/2020
  */
 public class CountryController {
 
     private CountrySelector countrySelector;
 
     public CountryController() throws ApiFailedToLoadException {
-        countrySelector = new CountrySelector();
+        this.countrySelector = new CountrySelector();
         loadCountries();
+    }
+
+    /**
+     * Set the country selection using the index of the country
+     *
+     * @param _index The index of the country to set the selection to
+     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
+     */
+    public void selectCountry(int _index) {
+        this.countrySelector.selectCountry(_index);
     }
 
     /**
@@ -29,7 +39,7 @@ public class CountryController {
 
         switch (currencyResponse.getResponseCode()) {
             case OK:
-                countrySelector.setCountryData(currencyResponse.getCountries());
+                this.countrySelector.setCountryData(currencyResponse.getCountries());
                 break;
 
             default:
@@ -40,23 +50,14 @@ public class CountryController {
         }
     }
 
-    /**
-     * Set the country selection using the index of the country
-     *
-     * @param _index The index of the country to set the selection to
-     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
-     */
-    public void selectCountry(int _index) {
-        countrySelector.selectCountry(_index);
-    }
-
+    //=================  GETTERS ===============
     /**
      * Get an array list of all country codes
      *
      * @return An array list of all country codes
      */
     public ArrayList<String> getAllCountryCodes() {
-        return countrySelector.getAllCountryCodes();
+        return this.countrySelector.getAllCountryCodes();
     }
 
     /**
@@ -65,7 +66,7 @@ public class CountryController {
      * @return An array list of all country names
      */
     public ArrayList<String> getAllCountryNames() {
-        return countrySelector.getAllCountryNames();
+        return this.countrySelector.getAllCountryNames();
     }
 
     /**
@@ -74,7 +75,7 @@ public class CountryController {
      * @return The code of the selected country
      */
     public String getSelectedCountryCode() {
-        return countrySelector.getSelectedCountryCode();
+        return this.countrySelector.getSelectedCountryCode();
     }
 
     /**
@@ -83,17 +84,17 @@ public class CountryController {
      * @return The name of the selected country
      */
     public String getSelectedCountryName() {
-        return countrySelector.getSelectedCountryName();
+        return this.countrySelector.getSelectedCountryName();
     }
 
     /**
      * Get the index of either a country name or country code
+     *
      * @param _countryNameOrCode The country name or code
      * @return The index of this country within the selector. Returns -1 if the country or code was not found
      */
-    public int getIndexOf(String _countryNameOrCode)
-    {
-        return countrySelector.getIndexOf(_countryNameOrCode);
+    public int getIndexOf(String _countryNameOrCode) {
+        return this.countrySelector.getIndexOf(_countryNameOrCode);
     }
 
 }

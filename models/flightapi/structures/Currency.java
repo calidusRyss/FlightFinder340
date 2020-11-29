@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.models.flightapi.structures;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import main.java.api.skyscanner.models.parsers.CurrencyParser;
 
 /**
+ * A class that contains currency formatting information
  *
- * @author lavon
+ * @author Willie Holmes
+ * @LastModified 10/22/2020
  */
 public class Currency {
+
     private String code;
     private String symbol;
     private String thousandsSeparator;
@@ -23,13 +17,13 @@ public class Currency {
     private int roundingCoefficient;
     private int decimalDigits;
 
-    public Currency()
-    {
-        
+    public Currency() {
+
     }
 
     /**
      * Construct a Currency object
+     *
      * @param _code The Currency Code. Example: "USD"
      * @param _symbol The Currency Symbol. Example: '$'
      * @param _thousandsSeparator The character to separate thousands positions. Example: ','
@@ -50,23 +44,21 @@ public class Currency {
         this.decimalDigits = _decimalDigits;
     }
 
-
     @Override
     public String toString() {
-        return "Currency [code=" + code + ", decimalDigits=" + decimalDigits + ", decimalSeparator=" + decimalSeparator
-                + ", roundingCoefficient=" + roundingCoefficient + ", spaceBetweenAmountAndSymbol="
-                + spaceBetweenAmountAndSymbol + ", symbol=" + symbol + ", symbolOnLeft=" + symbolOnLeft
-                + ", thousandsSeparator=" + thousandsSeparator + "]";
+        return "Currency [code=" + this.code + ", decimalDigits=" + this.decimalDigits + ", decimalSeparator=" + this.decimalSeparator
+                + ", roundingCoefficient=" + this.roundingCoefficient + ", spaceBetweenAmountAndSymbol="
+                + this.spaceBetweenAmountAndSymbol + ", symbol=" + this.symbol + ", symbolOnLeft=" + this.symbolOnLeft
+                + ", thousandsSeparator=" + this.thousandsSeparator + "]";
     }
 
     //=================  GETTERS ===============
-
     /**
      *
      * @return The Currency Code
      */
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     /**
@@ -74,7 +66,7 @@ public class Currency {
      * @return The Currency Symbol
      */
     public String getSymbol() {
-        return symbol;
+        return this.symbol;
     }
 
     /**
@@ -82,7 +74,7 @@ public class Currency {
      * @return The Thousands Separator String
      */
     public String getThousandsSeparator() {
-        return thousandsSeparator;
+        return this.thousandsSeparator;
     }
 
     /**
@@ -90,7 +82,7 @@ public class Currency {
      * @return The Decimal Separator String
      */
     public String getDecimalSeparator() {
-        return decimalSeparator;
+        return this.decimalSeparator;
     }
 
     /**
@@ -98,7 +90,7 @@ public class Currency {
      * @return Whether the currency symbol should be displayed on the left or right
      */
     public boolean isSymbolOnLeft() {
-        return symbolOnLeft;
+        return this.symbolOnLeft;
     }
 
     /**
@@ -106,7 +98,7 @@ public class Currency {
      * @return Whether to include a space between the currency symbol and currency value
      */
     public boolean isSpaceBetweenAmountAndSymbol() {
-        return spaceBetweenAmountAndSymbol;
+        return this.spaceBetweenAmountAndSymbol;
     }
 
     /**
@@ -114,7 +106,7 @@ public class Currency {
      * @return The coefficient used to round the currency value
      */
     public int getRoundingCoefficient() {
-        return roundingCoefficient;
+        return this.roundingCoefficient;
     }
 
     /**
@@ -122,34 +114,31 @@ public class Currency {
      * @return The number of digits allowed after the decimal place
      */
     public int getDecimalDigits() {
-        return decimalDigits;
+        return this.decimalDigits;
     }
 
     /**
      * Formats a value using this currency's formatting.
+     *
      * @param dollarValue The value to format
      * @return A formatted string of the dollarValue
      */
-    public String getFormattedValue(int dollarValue)
-    {
+    public String getFormattedValue(int dollarValue) {
         String tempThousands = dollarValue + "";
         String formatted = "";
 
-        for (int i = tempThousands.length() - 1, j = 1; i > -1; i--, j++)
-        {
+        for (int i = tempThousands.length() - 1, j = 1; i > -1; i--, j++) {
             formatted = tempThousands.charAt(i) + formatted;
-            if (j%3 == 0 && i - 1 > -1)
-            {
-                formatted = thousandsSeparator + formatted;
+            if (j % 3 == 0 && i - 1 > -1) {
+                formatted = this.thousandsSeparator + formatted;
             }
 
         }
 
-        if (symbolOnLeft)
-            return symbol + (spaceBetweenAmountAndSymbol ? " " : "") + formatted;
-        return formatted + (spaceBetweenAmountAndSymbol ? " " : "") + symbol;
+        if (this.symbolOnLeft) {
+            return this.symbol + (this.spaceBetweenAmountAndSymbol ? " " : "") + formatted;
+        }
+        return formatted + (this.spaceBetweenAmountAndSymbol ? " " : "") + this.symbol;
     }
 
 }
-
-

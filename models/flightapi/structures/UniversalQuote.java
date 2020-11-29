@@ -4,7 +4,7 @@ package main.java.models.flightapi.structures;
  * A class representing quote data not relying on any specific API
  *
  * @author Teegan Krieger
- * @LastUpdate 10/22/2020
+ * @LastModified 10/22/2020
  */
 public class UniversalQuote {
 
@@ -16,9 +16,8 @@ public class UniversalQuote {
 
     private boolean directFlight;
 
-    public UniversalQuote()
-    {
-        
+    public UniversalQuote() {
+        //Empty Default constructor left in for reflection.
     }
 
     public UniversalQuote(int _price, Currency _currency, UniversalJourneyLeg _outboundLeg, UniversalJourneyLeg _inboundLeg, boolean _directFlight) {
@@ -30,35 +29,63 @@ public class UniversalQuote {
     }
 
     //=================  GETTERS ===============
-
+    /**
+     * Get the raw price of this quote
+     *
+     * @return The raw price of this quote
+     */
     public int getPrice() {
-        return price;
+        return this.price;
     }
 
+    /**
+     * Get the Currency object used by this quote
+     *
+     * @return The Currency object used by this quote
+     */
     public Currency getCurrency() {
-        return currency;
+        return this.currency;
     }
 
+    /**
+     * Get the outbound JourneyLeg of this quote
+     *
+     * @return The outbound JourneyLeg of this quote
+     */
     public UniversalJourneyLeg getOutboundLeg() {
-        return outboundLeg;
+        return this.outboundLeg;
     }
 
+    /**
+     * Get the inbound JourneyLeg of this quote
+     *
+     * @return The inbound JourneyLeg of this quote
+     */
     public UniversalJourneyLeg getInboundLeg() {
-        return inboundLeg;
+        return this.inboundLeg;
     }
 
+    /**
+     * Get whether this flight is a direct flight or not
+     *
+     * @return Whether this flight is a direct flight or not
+     */
     public boolean isDirectFlight() {
-        return directFlight;
+        return this.directFlight;
     }
 
-    public String getPriceFormatted()
-    {
-        return currency.getFormattedValue(price);
+    /**
+     * Get the price of this Quote Formatted into a string
+     *
+     * @return The price of this Quote Formatted into a string
+     */
+    public String getPriceFormatted() {
+        return this.currency.getFormattedValue(this.price);
     }
 
     @Override
     public String toString() {
-        return "UniversalQuote{" + "price=" + price + ", currency=" + currency + ", outboundLeg=" + outboundLeg + ", inboundLeg=" + inboundLeg + ", directFlight=" + directFlight + '}';
+        return "UniversalQuote{" + "price=" + this.price + ", currency=" + this.currency + ", outboundLeg=" + this.outboundLeg + ", inboundLeg=" + this.inboundLeg + ", directFlight=" + this.directFlight + '}';
     }
 
 }
