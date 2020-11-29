@@ -29,6 +29,11 @@ public class TripViewerView extends StandardSearchView {
     private int SelectedTripIndex = 0;
     private JLabel totalPriceLabel;
 
+    /**
+     * Public constructor.
+     * @param _fBoxPanel the panel FightBoxes will be added to
+     * @param _totalPriceLabel The label to display the total trip price.
+     */
     public TripViewerView(JPanel _fBoxPanel, JLabel _totalPriceLabel) {
         super(null, _fBoxPanel);
         tc = ControllerBox.getBox().getTripCont();
@@ -38,7 +43,17 @@ public class TripViewerView extends StandardSearchView {
         totalPriceLabel = _totalPriceLabel;
     }
 
+    /**
+     * Sets the selected Trip Index.
+     * @param _SelectedTripIndex
+     */
     public void setSelectedTripIndex(int _SelectedTripIndex) {
+        if (_SelectedTripIndex < 0) {
+            _SelectedTripIndex = 0;
+        }else if (_SelectedTripIndex >= ControllerBox.getBox().getTripCont().getTripsCount()){
+            _SelectedTripIndex =  ControllerBox.getBox().getTripCont().getTripsCount();
+        }
+
         this.SelectedTripIndex = _SelectedTripIndex;
         ControllerBox.getBox().getTripEditCont().setSelectedTrip(_SelectedTripIndex);
 
@@ -47,16 +62,35 @@ public class TripViewerView extends StandardSearchView {
         }
     }
 
+    /**
+     * Creates a new Trip.
+     * @param _tripName 
+     */
     public void createNewTrip(String _tripName) {
         tc.createNewTrip(_tripName);
     }
 
+    /**
+     * deletes the currently selected trip.
+     */
+    public void deleteTrip()
+    {
+        ControllerBox.getBox().getTripCont().deleteTrip(this.SelectedTripIndex);
+    }
+
+    /**
+     * setFlightResults by getting the flight data for the currently selected trip.
+     */
     @Override
     public void setFlightResults() {
         setFlightResults(tc.getTripAtIndex(SelectedTripIndex).getQuoteStructArrayList());
         updateTotalPriceLable();
     }
 
+    /**
+     * Updates the TripList Combobox, should be called when a trip is added or deleted.
+     * @param _combo 
+     */
     public void updateTripListCombobox(JComboBox _combo) {
         _combo.removeAllItems();
         for (Trip t : tc.getAllTrips()) {

@@ -55,7 +55,11 @@ public class StandardSearchView {
     private ArrayList<KeyInputUpdater> kIUpdaterList;
 
 
-
+    /**
+     * Public Constructor.
+     * @param _collector This is a helper class to collect inputs from user fields.
+     * @param _fBoxPanel This is the JPanel that the flight boxes will be added to.
+     */
     public StandardSearchView(IInputFieldCollector _collector, JPanel _fBoxPanel) {
 
         kIUpdaterList = new ArrayList<KeyInputUpdater>();
@@ -77,6 +81,12 @@ public class StandardSearchView {
         }
     }
 
+    /**
+     * Updates the Suggestions.
+     * @param _jList The Jlist where Suggestions will be displayed.
+     * @param _inputFieldText The Inputfield used to query for Suggestions.
+     * @param _identifier a unique identifier for the Suggestion field.
+     */
     public void updateSugjustions(JList _jList, String _inputFieldText, String _identifier) {
 
         boolean kiuExsists = false;
@@ -93,6 +103,11 @@ public class StandardSearchView {
         }
     }
 
+    /**
+     *  Populates a ComboBox with SortMode enums.
+     * @param _combo
+     * @param _defaultMode
+     */
     public void loadSortModes(JComboBox _combo, SortMode _defaultMode) {
         _combo.removeAllItems();
 
@@ -109,6 +124,10 @@ public class StandardSearchView {
         _combo.setSelectedIndex(index);
     }
 
+    /**
+     * sets the sort mode from the index provided.
+     * @param _index
+     */
     public void setSortMode(int _index) {
         if (_index >= 0)
             ControllerBox.getBox().getQuoteSearchCont().sortQuotesBy(SortMode.values()[_index]);
@@ -137,35 +156,16 @@ public class StandardSearchView {
         }
     }
 
+    /**
+     * sets FlightResults by querying the API.
+     */
     public void setFlightResults() {
         setFlightResults(QuoteRetriever.searchQuotes(searchCollector.getFields()));
     }
 
-    public void setFlightResults(ArrayList<QuoteStruct> _qsarr) {
-
-        Property[][] results = new  Property[_qsarr.size()] [numberOfProps +1];
-
-
-        for (int i = 0; i < _qsarr.size(); i++) {
-            QuoteStruct qs = _qsarr.get(i);
-
-            Property[] quoteProps = ConvertQuoteToPropertyArr(qs) ;
-
-
-
-            Property index = new Property("index","" +(i+1) );
-            quoteProps[numberOfProps] = index;
-
-            results[i] = quoteProps;
-        }
-
-        flightResuts = results;
-        currentfilghtIndex = 0;
-        inilized = false;
-        setAllFlightBoxsNext();
-
-    }
-
+    /**
+     * shows the next set of results on the flightboxes.
+     */
     public void setAllFlightBoxsNext() {
 
         if (inilized == false)
@@ -191,6 +191,38 @@ public class StandardSearchView {
         }
     }
 
+    /**
+     * setFlightResults by using the provided  ArrayList.
+     * @param _qsarr the Array list to display each quote will be displayed on it's own flight box.
+     */
+    public void setFlightResults(ArrayList<QuoteStruct> _qsarr) {
+
+        Property[][] results = new  Property[_qsarr.size()] [numberOfProps +1];
+
+
+        for (int i = 0; i < _qsarr.size(); i++) {
+            QuoteStruct qs = _qsarr.get(i);
+
+            Property[] quoteProps = ConvertQuoteToPropertyArr(qs) ;
+
+
+
+            Property index = new Property("index","" +(i+1) );
+            quoteProps[numberOfProps] = index;
+
+            results[i] = quoteProps;
+        }
+
+        flightResuts = results;
+        currentfilghtIndex = 0;
+        inilized = false;
+        setAllFlightBoxsNext();
+
+    }
+
+    /**
+     * shows the previous set of results on the flightboxes.
+     */
     public void setAllFlightBoxsBack() {
         if (flightResuts == null)
             return;
@@ -220,6 +252,11 @@ public class StandardSearchView {
         }
     }
 
+    /**
+     * Converts a QuoteStruct to an array of properties intended to be used to set the values of labels in a flight box.
+     * @param qs
+     * @return
+     */
     public Property[] ConvertQuoteToPropertyArr(QuoteStruct qs) {
         LocalDateTime outldt = LocalDateTime.parse(qs.outboundDepartureTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String outDepartureTime = outldt.format(DateTimeFormatter.ISO_DATE) + " " + outldt.format(DateTimeFormatter.ofPattern("HH:MM"));
@@ -240,6 +277,8 @@ public class StandardSearchView {
 
         return parr;
     }
+
+
 
     protected void addFlightBoxPanels() {
         for (int i = 0; i < numberOfFlightBoxes; i++) {
