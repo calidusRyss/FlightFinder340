@@ -66,7 +66,7 @@ public class TripEditorController {
      * @param _index The index of the trip within the trip store
      */
     public void setSelectedTrip(int _index) {
-        this.tripBuilder.setSelectedTrip(this.tripsStore.getAtIndex(_index));
+        this.tripBuilder.setSelectedTrip(this.tripsStore.getAtIndex(_index), _index);
     }
 
     //=================  GETTERS ===============

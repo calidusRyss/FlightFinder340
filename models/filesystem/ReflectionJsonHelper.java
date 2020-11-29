@@ -7,8 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
+ * A helper class for converting objects to and from JSONObjects using reflection
  *
- * @author teega
+ * @author Teegan Krieger
+ * @LastModified 11/22/2020
  */
 public class ReflectionJsonHelper {
 
@@ -16,15 +18,6 @@ public class ReflectionJsonHelper {
 
     public ReflectionJsonHelper(Class klass) {
         this.klass = klass;
-    }
-
-    /**
-     * Get all fields of the type T
-     *
-     * @return
-     */
-    public Field[] getAllFields() {
-        return klass.getDeclaredFields();
     }
 
     /**
@@ -221,6 +214,15 @@ public class ReflectionJsonHelper {
 
         //Return the new object
         return newObj;
+    }
+
+    /**
+     * Get all fields of the type T
+     *
+     * @return
+     */
+    private Field[] getAllFields() {
+        return klass.getDeclaredFields();
     }
 
 }

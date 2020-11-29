@@ -1,10 +1,3 @@
-/*
-* Program That follows the CRUD method
-* Create
-* Read
-* Update
-* Delete
- */
 package main.java.models.filesystem;
 
 import java.io.File;
@@ -12,52 +5,78 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.nio.CharBuffer;
-import main.java.models.Trips.ReflectionJsonHelper;
-import main.java.models.interfaces.IFileSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import main.java.models.interfaces.IDataStore;
 
 /**
+ * Translator for performing CRUD operations on the local FileSystem
  *
  * @author Teegan Krieger & Willie Holmes
  */
-public class FileSystemTranslator implements IFileSystem {
+public class FileSystemTranslator implements IDataStore {
 
-/*
-  *  Creates File to write data into. 
-  */
-    private static final String appdataPath = System.getenv("APPDATA") + "/Roaming/FlightFinder340";
+    private static final String appdataPath = System.getenv("APPDATA") + "\\FlightFinder340";
+    private static final String appdataFilePath = System.getenv("APPDATA") + "\\FlightFinder340\\Data.dat";
     private static final String arrayMagicWord = "Array";
 
-    private File dataFile = new File(appdataPath);
+    private File dataFile;
     private JSONObject jsonObject;
 
     public FileSystemTranslator() throws JSONException {
+
         try {
-            if (!dataFile.exists()) {
-                dataFile.createNewFile();
+            Path directory = Paths.get(appdataPath);
 
-                FileReader reader = new FileReader(dataFile);
-
-                CharBuffer buffer = CharBuffer.allocate((int) dataFile.length());
-
-                reader.read(buffer);
-
-                jsonObject = new JSONObject(buffer.toString());
-
+            if (!Files.exists(directory)) {
+                Files.createDirectory(directory);
             }
+
+            Path file = Paths.get(appdataFilePath);
+
+            if (!Files.exists(file)) {
+                Files.createFile(file);
+
+                dataFile = new File(appdataFilePath);
+
+                FileWriter writer = new FileWriter(dataFile);
+                writer.write("{}");
+                writer.close();
+            }
+
+            dataFile = new File(appdataFilePath);
+
+            FileReader reader = new FileReader(dataFile);
+            char[] characters = new char[(int) dataFile.length()];
+            reader.read(characters);
+
+            reader.close();
+
+            try {
+                jsonObject = new JSONObject(new String(characters));
+            } catch (JSONException e) {
+                jsonObject = new JSONObject();
+            }
+
         } catch (IOException e) {
-            System.out.println("Error occured: " + e.getMessage());
         }
+
     }
 
     @Override
-/*
-  *   Creates the objects to insert into the file.  
-  */
+    /*
+  *   Creates the objects to insert into the file.
+     */
 
+    /**
+     * Creates and inserts a new entry into the DataStore
+     *
+     * @param _obj The object to insert into the DataStore
+     */
     public <T> int create(T _obj) {
 
         Class klass = _obj.getClass();
@@ -65,8 +84,7 @@ public class FileSystemTranslator implements IFileSystem {
         String objectArrayName = klass.getName() + arrayMagicWord;
 
         ReflectionJsonHelper helper = new ReflectionJsonHelper(klass);
-
-        JSONObject localObj = helper.toJSON(_obj);
+        JSONObject localObj = helper.toJSON((Object) _obj);
 
         if (!jsonObject.has(objectArrayName)) {
             jsonObject.put(objectArrayName, new JSONArray());
@@ -81,11 +99,12 @@ public class FileSystemTranslator implements IFileSystem {
         return arr.length();
     }
 
+    /**
+     * Loads all objects of a specified type from the DataStore
+     *
+     * @param _klass The class object of the type to delete. (Needed to work around a java generics limitation)
+     */
     @Override
-/*
-  *   Reads the data in the file
-  */
-
     public <T> T[] load(Class<T> _klass) {
 
         ReflectionJsonHelper helper = new ReflectionJsonHelper(_klass);
@@ -125,12 +144,15 @@ public class FileSystemTranslator implements IFileSystem {
 
     }
 
+    /**
+     * Update a specific object within the DataStore
+     *
+     * @param _obj The object to replace the old object with
+     * @param _index The index of the object to replace
+     * @param _save Should the DataStore save after updating this object
+     */
     @Override
-/*
-  *  Updates data in file at a particular index. 
-  */
-
-    public <T extends Object> void update(T _obj, int _index) {
+    public <T extends Object> void update(T _obj, int _index, boolean _save) {
 
         Class klass = _obj.getClass();
 
@@ -146,20 +168,24 @@ public class FileSystemTranslator implements IFileSystem {
         try {
             JSONArray jsonArray = jsonObject.getJSONArray(objectArrayName);
 
-            jsonArray.put(_index, _obj);
+            jsonArray.put(_index, helper.toJSON(_obj));
 
-            saveData();
+            if (_save) {
+                saveData();
+            }
 
         } catch (JSONException e) {
-
+            System.out.println("Error Occured during Update: " + e.getMessage());
         }
     }
 
+    /**
+     * Delete an entry from the DataStore
+     *
+     * @param _index The index of the item to delete
+     * @param _klass The class object of the type to delete. (Needed to work around a java generics limitation)
+     */
     @Override
-
-/*
-  *  Deletes data  at a particular index. 
-  */
     public <T extends Object> void delete(int _index, Class<T> _klass) {
 
         ReflectionJsonHelper helper = new ReflectionJsonHelper(_klass);
@@ -184,10 +210,9 @@ public class FileSystemTranslator implements IFileSystem {
 
     }
 
-/*
-  *   Creates the objects to insert into the file.  
-  */
-
+    /**
+     * Saves the instance of jsonObject to a file
+     */
     private void saveData() {
         try {
             dataFile.delete();
@@ -195,6 +220,8 @@ public class FileSystemTranslator implements IFileSystem {
 
             FileWriter writer = new FileWriter(dataFile);
             writer.write(jsonObject.toString());
+            writer.close();
+
         } catch (IOException e) {
             System.out.println("IO Exception: " + e.getMessage());
         }
