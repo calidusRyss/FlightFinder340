@@ -6,7 +6,7 @@ import java.util.Arrays;
  * A class representing an HTTP request.
  *
  * @author Teegan Krieger
- * @LastUpdate 9/29/2020
+ * @LastModified 9/29/2020
  */
 public class Request {
 
@@ -52,6 +52,8 @@ public class Request {
         }
     }
 
+    //=================  SETTERS ===============
+
     /**
      * Set the request body for this request. Request body is only used if
      * RequestMethod is PUT, PATCH, POST or DELETE.
@@ -65,26 +67,51 @@ public class Request {
     }
 
     //=================  GETTERS ===============
+
+    /**
+     * Get the URL of the request
+     * @return The URL of the request
+     */
     public String getUrl() {
         return this.url;
     }
 
+    /**
+     * Get the RequestMethod of the request
+     * @return The RequestMethod of the request
+     */
     public RequestMethod getRequestMethod() {
         return this.requestMethod;
     }
 
+    /**
+     * Get an array of all headers in this request
+     * @return An array of all headers in this request
+     */
     public Header[] getHeaders() {
         return this.headers;
     }
 
+    /**
+     * Get an array of all queries in this request
+     * @return An array of all queries in this request
+     */
     public Query[] getQueries() {
         return this.queries;
     }
 
+    /**
+     * Get the RequestBodyFormat of this request
+     * @return The RequestBodyFormat of this request
+     */
     public RequestBodyFormat getRequestBodyType() {
         return this.requestBodyFormat;
     }
 
+    /**
+     * Get the request body of this request
+     * @return The request body of this request
+     */
     public String getRequestBody() {
         return this.requestBody;
     }

@@ -1,21 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.api.skyscanner.models.parsers;
 
-/**
- *
- * @author lavon
- */
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import main.java.models.flightapi.structures.Currency;
 
-
+/**
+ * A class that parses a SkyScanner Currencies JSON into Currency objects
+ *
+ * @author Willie Holmes
+ * @LastModified 11/15/2020
+ */
 public class CurrencyParser {
+
+    /**
+     * Parse a JSONArray object into an array of Currency objects
+     *
+     * @param _currencyArray The JSONArray object to parse
+     * @return An array of Currency objects
+     * @throws JSONException
+     */
     public static Currency[] createCurrencyArrayFromJsonArray(JSONArray _currencyArray) throws JSONException {
         Currency[] results = new Currency[_currencyArray.length()];
 
@@ -29,6 +33,7 @@ public class CurrencyParser {
 
     /**
      * Parse a Currency object from a JSONObject
+     *
      * @param _jsonObject The JSONObject to parse
      * @return A Currency object parsed from the JSONObject
      * @throws JSONException
@@ -52,5 +57,3 @@ public class CurrencyParser {
         return result;
     }
 }
-
-

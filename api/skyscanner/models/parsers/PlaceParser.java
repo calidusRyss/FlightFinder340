@@ -6,13 +6,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * A class that parses Place objects
+ * A class that parses a SkyScanner Places JSON into Place objects
+ *
  * @author Teegan Krieger
+ * @LastModified 11/15/2020
  */
 public class PlaceParser {
 
     /**
      * Parse an array of Place objects from a JSONArray
+     *
      * @param _placesArray The JSONArray to parse
      * @return An array of place objects
      * @throws JSONException
@@ -30,6 +33,7 @@ public class PlaceParser {
 
     /**
      * Parse a Place object from a JSONObject
+     *
      * @param _jsonObject The JSONObject to parse
      * @return A Place object parsed from the JSONObject
      * @throws JSONException

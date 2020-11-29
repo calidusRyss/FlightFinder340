@@ -8,10 +8,9 @@ import main.java.models.flightapi.structures.UniversalQuote;
  * A class that holds functionality to convert a UniversalQuote into a QuoteStruct
  *
  * @author Teegan Krieger
+ * @LastModified 10/29/2020
  */
 public class QuoteStructConverter {
-
-
 
     /**
      * Helper method that converts a Quote object into a QuoteStruct object and formats strings
@@ -20,7 +19,6 @@ public class QuoteStructConverter {
      * @return A QuoteStruct object containing formatted strings to represent all relevant quote data
      */
     public static QuoteStruct convertQuoteToStruct(UniversalQuote _quote) {
-        //Note: This method will change based on Willie's handling of the Quote object
 
         if (_quote == null) {
             throw new IllegalArgumentException("The provided quote object was null.");

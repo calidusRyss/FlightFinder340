@@ -4,7 +4,7 @@ package main.java.models.http;
  * An enum with all valid HTTP request body formats.
  *
  * @author Teegan Krieger
- * @LastUpdate 9/29/2020
+ * @LastModified 9/29/2020
  */
 public enum RequestBodyFormat {
     JSON,
