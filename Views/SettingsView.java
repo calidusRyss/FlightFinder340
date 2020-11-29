@@ -23,6 +23,11 @@ public class SettingsView {
     private final JComboBox comboCounty;
     private final JComboBox comboCurrency;
 
+    /**
+     * public Constructor.
+     * @param _comboCounty The JCombox to list the Countries.
+     * @param _comboCurrency  The JCombox to list the currencies.
+     */
     public SettingsView(JComboBox _comboCounty, JComboBox _comboCurrency) {
         comboCounty = _comboCounty;
         comboCounty.removeAllItems();
@@ -31,7 +36,7 @@ public class SettingsView {
         inilize();
     }
 
-    public void inilize() {
+    private void inilize() {
         this.countryCont = ControllerBox.getBox().getCountryCont();
 
         for (String s : this.countryCont.getAllCountryNames()) {
@@ -58,11 +63,19 @@ public class SettingsView {
     }
 
     //=================  SETTERS ===============
+    /**
+     * sets the Country assumes the Combo box index matches the country Controller Index.
+     * @param _index the Combo box Index, ( same as the country Controller Index.)
+     */
     public void setCountry(int _index) {
         comboCounty.setSelectedIndex(_index);
         countryCont.selectCountry(_index);
     }
 
+    /**
+     * sets the Currency assumes the Combo box index matches the Currency Controller Index.
+     * @param _index the Combo box Index, ( same as the Currency Controller Index.)
+     */
     public void setCurrency(int _index) {
         comboCurrency.setSelectedIndex(_index);
         CurrencyCont.selectCurrency(_index);

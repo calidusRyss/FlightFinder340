@@ -30,7 +30,6 @@ public class MainView {
     private  JPanel[] viewPanels;
     private  IRefreshable CurrentRefreshablePanel;
 
-
     /**
      *  Public Constructor.
      * @param _frame The JFrame that calls the methods in this view.
@@ -39,7 +38,7 @@ public class MainView {
         LoadedViews = new ArrayList<JPanel>();
         frame = _frame;
 
-        tryLoadPanelsWithDialogue();
+        tryLoadPanelsWithDialog();
 
         for (int i = 0; i < viewPanels.length; i++) {
            load(viewPanels[i]);
@@ -48,37 +47,18 @@ public class MainView {
         setView(viewPanels[0].getClass());
     }
 
-    public void setView(Class<?> _view) {
-        JPanel p = (JPanel) GetLoadedPanel(_view);
 
-        p.setSize(frame.getSize());
-        frame.setContentPane(p);
-        frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
-        frame.revalidate();
-
-        if (p instanceof IRefreshable) {
-            CurrentRefreshablePanel = (IRefreshable) p;
-            CurrentRefreshablePanel.refresh();
-        }
-    }
-
-    private void tryLoadPanelsWithDialogue()
+    private void tryLoadPanelsWithDialog()
     {
-        boolean t = true;
-
         try {
             loadJPanels();
-
-            if (t) {
-                t = false;
-                throw  main.java.exceptions.controllers.ApiFailedToLoadException;
-            }
         }
         catch  (main.java.exceptions.controllers.ApiFailedToLoadException  e) {
+           // Creates a Dialog to ask if the user wants to try and load the dialog again.
            int userChoice = JOptionPane.showConfirmDialog(frame, "Api Failed To Load would you like to  retry?","error", JOptionPane.YES_NO_OPTION);
 
-           if (userChoice == 1) {
-               tryLoadPanelsWithDialogue();
+           if (userChoice == 0) {
+               tryLoadPanelsWithDialog();
            }
            else {
                System.exit(0);
@@ -95,7 +75,7 @@ public class MainView {
         };
     }
 
-    private JPanel GetLoadedPanel(Class<?> _view) {
+    private JPanel findLoadedPanel(Class<?> _view) {
         if (LoadedViews == null)
             return null;
         else {
@@ -111,5 +91,28 @@ public class MainView {
         LoadedViews.add(_p);
 
         frame.add(_p);
+    }
+
+    //=================  GETTERS ===============
+
+
+    //=================  SETTERS ===============
+
+    /**
+     * Sets the current View and refreshes it.
+     * @param _view the class of the view you want to add
+     */
+    public void setView(Class<?> _view) {
+        JPanel p = (JPanel) findLoadedPanel(_view);
+
+        p.setSize(frame.getSize());
+        frame.setContentPane(p);
+        frame.repaint();             //Ensures that the frame swaps to the next panel and doesn't get stuck.
+        frame.revalidate();
+
+        if (p instanceof IRefreshable) {
+            CurrentRefreshablePanel = (IRefreshable) p;
+            CurrentRefreshablePanel.refresh();
+        }
     }
 }

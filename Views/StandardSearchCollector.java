@@ -27,6 +27,13 @@ public class StandardSearchCollector implements IInputFieldCollector{
     protected  TimePicker departTime;
 
 
+    /**
+     * public Constructor.
+     * @param _origin
+     * @param _destination
+     * @param _departing
+     * @param _departTime 
+     */
     public StandardSearchCollector(JTextField _origin, JTextField _destination, DatePicker _departing, TimePicker _departTime) {
         this.origin = _origin;
         this.destination = _destination;
@@ -37,6 +44,13 @@ public class StandardSearchCollector implements IInputFieldCollector{
     }
 
 
+    /**
+     * grabs the date time from a date picker and a time picker and
+     * converts it to ISO_LOCAL_DATE_TIME format.
+     * @param _DatePicker
+     * @param _tPick
+     * @return ISO_LOCAL_DATE_TIME from the pickers.
+     */
     public String convertToIso_LocalL_Date_Time(DatePicker _DatePicker , TimePicker _tPick) {
 
       LocalDate d = _DatePicker.getDate();
@@ -45,7 +59,7 @@ public class StandardSearchCollector implements IInputFieldCollector{
 
       LocalTime t;
       if (_tPick == null) {
-            t = LocalTime.now();
+            t = LocalTime.MIN;
       }else {
             t = _tPick.getTime();
       }
@@ -62,6 +76,7 @@ public class StandardSearchCollector implements IInputFieldCollector{
 
     }
 
+    //=================  GETTERS ===============
     public Property[] getFields() {
 
         Property[] result = new Property[numberofProperties];
