@@ -10,15 +10,25 @@ import main.java.models.flightapi.collections.CurrencySelector;
  * A controller that handles loading currency data and selecting an active currency
  *
  * @author Teegan Krieger
- * @LastUpdate 10/28/2020
+ * @LastModified 10/28/2020
  */
 public class CurrencyController {
 
     private CurrencySelector currencySelector;
 
     public CurrencyController() throws ApiFailedToLoadException {
-        currencySelector = new CurrencySelector();
+        this.currencySelector = new CurrencySelector();
         loadCurrencies();
+    }
+
+    /**
+     * Set the currency selection using the index of the currency
+     *
+     * @param _index The index of the currency to set the selection to
+     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
+     */
+    public void selectCurrency(int _index) {
+        this.currencySelector.selectCurrency(_index);
     }
 
     /**
@@ -29,7 +39,7 @@ public class CurrencyController {
 
         switch (currencyResponse.getResponseCode()) {
             case OK:
-                currencySelector.setCurrencyData(currencyResponse.getCurrencies());
+                this.currencySelector.setCurrencyData(currencyResponse.getCurrencies());
                 break;
 
             default:
@@ -40,23 +50,14 @@ public class CurrencyController {
         }
     }
 
-    /**
-     * Set the currency selection using the index of the currency
-     *
-     * @param _index The index of the currency to set the selection to
-     * @throws IndexOutOfBoundsException thrown if the provided index is out of bounds for the data currently in the selector
-     */
-    public void selectCurrency(int _index) {
-        currencySelector.selectCurrency(_index);
-    }
-
+    //=================  GETTERS ===============
     /**
      * Get an array list of all currency codes
      *
      * @return An array list of all currency codes
      */
     public ArrayList<String> getAllCurrencyCodes() {
-        return currencySelector.getAllCurrencyCodes();
+        return this.currencySelector.getAllCurrencyCodes();
     }
 
     /**
@@ -65,7 +66,7 @@ public class CurrencyController {
      * @return An array list of all currency symbols
      */
     public ArrayList<String> getAllCurrencySymbols() {
-        return currencySelector.getAllCurrencySymbols();
+        return this.currencySelector.getAllCurrencySymbols();
     }
 
     /**
@@ -74,7 +75,7 @@ public class CurrencyController {
      * @return The currency code of the selected currency
      */
     public String getSelectedCurrencyCode() {
-        return currencySelector.getSelectedCurrencyCode();
+        return this.currencySelector.getSelectedCurrencyCode();
     }
 
     /**
@@ -83,22 +84,26 @@ public class CurrencyController {
      * @return The currency symbol of the selected currency
      */
     public String getSelectedCurrencySymbol() {
-        return currencySelector.getSelectedCurrencySymbol();
+        return this.currencySelector.getSelectedCurrencySymbol();
     }
 
-    public CurrencySelector getCurrencySelector()
-    {
-        return currencySelector;
+    /**
+     * Get the CurrencySelector object used by this Controller. (Used for Testing and Debugging)
+     *
+     * @return The CurrencySelector object used by this Controller. (Used for Testing and Debugging)
+     */
+    public CurrencySelector getCurrencySelector() {
+        return this.currencySelector;
     }
 
     /**
      * Get the index of either a currency symbol or currency code
+     *
      * @param _currencySymbolOrCode The currency symbol or code
      * @return The index of this currency within the selector. Returns -1 if the currency or code was not found
      */
-    public int getIndexOf(String _currencySymbolOrCode)
-    {
-        return currencySelector.getIndexOf(_currencySymbolOrCode);
+    public int getIndexOf(String _currencySymbolOrCode) {
+        return this.currencySelector.getIndexOf(_currencySymbolOrCode);
     }
 
 }

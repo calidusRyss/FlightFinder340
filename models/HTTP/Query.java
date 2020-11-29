@@ -4,7 +4,7 @@ package main.java.models.http;
  * A class that represents a Query used in HTTP requests.
  *
  * @author Teegan Krieger
- * @LastUpdate 9/29/2020
+ * @LastModified 9/29/2020
  */
 public class Query {
 
@@ -17,10 +17,20 @@ public class Query {
     }
 
     //=================  GETTERS ===============
+    /**
+     * Get the name of the query
+     *
+     * @return The name of the query
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Get the value of the query
+     *
+     * @return The value of the query
+     */
     public String getValue() {
         return this.value;
     }
