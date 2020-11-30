@@ -1,6 +1,6 @@
 package main.java.models.flightapi.responses;
 
-import main.java.api.skyscanner.models.structures.Place;
+import main.java.models.flightapi.structures.Place;
 import main.java.models.http.Response;
 import main.java.models.http.ResponseCode;
 

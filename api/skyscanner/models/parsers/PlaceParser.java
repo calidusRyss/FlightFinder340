@@ -1,6 +1,6 @@
 package main.java.api.skyscanner.models.parsers;
 
-import main.java.api.skyscanner.models.structures.Place;
+import main.java.models.flightapi.structures.Place;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
