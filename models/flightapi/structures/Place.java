@@ -1,4 +1,4 @@
-package main.java.api.skyscanner.models.structures;
+package main.java.models.flightapi.structures;
 
 /**
  * A class the represents a place obtained via a places request

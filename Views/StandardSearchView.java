@@ -16,13 +16,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import main.java.FlightFinder340.Views.helpers.KeyInputUpdater;
 import main.java.controllers.ControllerBox;
 import main.java.controllers.PlaceSuggestionsController;
 import main.java.controllers.QuoteSearchController;
+import main.java.exceptions.controllers.QuoteRequestException;
 import main.java.models.trips.collections.Trip;
 import main.java.models.enums.SortMode;
 import main.java.models.general.Property;
@@ -160,7 +164,16 @@ public class StandardSearchView {
      * sets FlightResults by querying the API.
      */
     public void setFlightResults() {
-        setFlightResults(QuoteRetriever.searchQuotes(searchCollector.getFields()));
+        try{
+            setFlightResults(QuoteRetriever.searchQuotes(searchCollector.getFields()));
+        } catch (QuoteRequestException e)
+        {
+             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(flightBoxPanel);
+
+            JOptionPane.showMessageDialog( frame,
+                "Your search parameters were invalid!\nPlease try different parameters!"
+                );
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 package main.java.models.flightapi.collections;
 
 import main.java.adapters.FlightAPIAdapter;
-import main.java.api.skyscanner.models.structures.Place;
+import main.java.models.flightapi.structures.Place;
 import main.java.controllers.CountryController;
 import main.java.controllers.CurrencyController;
 import main.java.models.http.ResponseCode;

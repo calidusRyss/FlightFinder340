@@ -18,7 +18,7 @@ import main.java.api.skyscanner.models.parsers.PlaceParser;
 import main.java.api.skyscanner.models.parsers.QuotePlaceParser;
 import main.java.api.skyscanner.models.parsers.QuotesParser;
 import main.java.api.skyscanner.models.structures.Carrier;
-import main.java.api.skyscanner.models.structures.Place;
+import main.java.models.flightapi.structures.Place;
 import main.java.api.skyscanner.models.structures.Quote;
 import main.java.models.flightapi.structures.Country;
 import main.java.models.flightapi.structures.Currency;
