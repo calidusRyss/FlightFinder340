@@ -40,7 +40,7 @@ public class Trip {
      */
     public void addQuote(UniversalQuote _quote) {
         if (!_quote.getCurrency().getCode().equals(this.currency.getCode())) {
-            throw new IllegalArgumentException("You can only add quotes with the same currency type to the Trip. This trip's currency is: " + this.currency.getCode());
+            throw new IllegalArgumentException("You can only add quotes to trips of the same currency type.\nThis trip's currency is: " + this.currency.getCode() + "\nYour current currency setting is: " + _quote.getCurrency().getCode());
         }
 
         this.quotes = Arrays.copyOfRange(this.quotes, 0, this.quotes.length + 1);
